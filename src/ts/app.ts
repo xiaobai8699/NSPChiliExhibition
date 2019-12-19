@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
-import {FirstPersonControls} from 'three/examples/jsm/controls/FirstPersonControls';
+ import {FirstPersonControls} from 'three/examples/jsm/controls/FirstPersonControls';
+import {PlayerContol} from './PlayerControl';
 
 class App {
 
@@ -16,6 +17,8 @@ class App {
 
     loader: GLTFLoader;
 
+    pControl: PlayerContol;
+
     public constructor() {
 
         let canvas: HTMLCanvasElement = document.querySelector("#c");
@@ -28,19 +31,19 @@ class App {
         this.scene.background = new THREE.Color(0x000000);
 
         this.camera = new THREE.PerspectiveCamera();
-        this.camera.fov = 75;
+        this.camera.fov = 65;
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.scene.add(this.camera);
 
-        this.scene.add(new THREE.AxesHelper(10000));
+        // this.fpControls = new FirstPersonControls(this.camera,document.body);
+        // this.fpControls.movementSpeed  = 3500;
+        // this.fpControls.lookSpeed = 0.2;
+        // this.fpControls.lookVertical  = false;
+        // this.fpControls.constrainVertical = true;
+        // this.fpControls.verticalMin = 1.0;
+        // this.fpControls.verticalMax = 1.8;
 
-        this.fpControls = new FirstPersonControls(this.camera,document.body);
-        this.fpControls.movementSpeed  = 3500;
-        this.fpControls.lookSpeed = 0.2;
-        this.fpControls.lookVertical  = false;
-        this.fpControls.constrainVertical = true;
-        this.fpControls.verticalMin = 1.0;
-        this.fpControls.verticalMax = 1.8;
+        this.pControl = new PlayerContol(this.camera,document);
 
         this.clock = new THREE.Clock();
 
@@ -57,8 +60,9 @@ class App {
     renderLoop = () => {
         this.renderer.render(this.scene, this.camera);
         requestAnimationFrame(this.renderLoop);
-        this.fpControls.update(this.clock.getDelta());
-        this.fpControls.activeLook  = this.fpControls.mouseDragOn;
+        // this.fpControls.update(this.clock.getDelta());
+        // this.fpControls.activeLook  = this.fpControls.mouseDragOn;
+        this.pControl.update(this.clock.getDelta());
     }
 
     addLights = () => {
@@ -91,8 +95,9 @@ class App {
         const length = box.getSize(new THREE.Vector3()).length();
         const center = box.getCenter(new THREE.Vector3());
         
-        const pos = center.clone().setY(1730).setZ(center.z+12000);
-        const cen = center.clone().setY(1130).setZ(center.z-4000);
+        const y = 2500;
+        const pos = center.clone().setY(y).setZ(18700);
+        const cen = center.clone().setY(y).setZ(center.z-4000);
 
         this.camera.near = 0.1;
         this.camera.far = length * 100;

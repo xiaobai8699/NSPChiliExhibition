@@ -25,6 +25,34 @@
     <canvas id="c"></canvas>
     <script src="./app.js"></script>
 
+    <script>
+       //  document.addEventListener('mousemove', onMouseMove, false);
+        // document.addEventListener('mousedown', _onMouseDown, false);
+        // document.addEventListener('mouseup', _onMouseUp, false);
+
+        function onMouseMove(event) {
+
+                var mouseX = event.pageX - window.innerWidth/2;
+                var mouseY = event.pageY - window.innerHeight/2;
+
+                console.log(`pageX:${event.pageX} mouseX:${mouseX} pageY:${event.pageY} mouseY:${mouseY}`);
+
+            // if (this.domElement === document) {
+
+            //     console.log(`pageX:${event.pageX} pageY:${event.pageY}`);
+            //     this.mouseX = event.pageX - this.viewHalfX;
+            //     this.mouseY = event.pageY - this.viewHalfY;
+
+            // } else {
+
+            //     this.mouseX = event.pageX - this.domElement.offsetLeft - this.viewHalfX;
+            //     this.mouseY = event.pageY - this.domElement.offsetTop - this.viewHalfY;
+
+            // }
+
+        };
+
+    </script>
 </body>
 
 </html>
