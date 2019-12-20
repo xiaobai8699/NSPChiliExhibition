@@ -1,7 +1,11 @@
 import * as THREE from 'three';
-import { _Math } from 'three/src/math/Math';
+import {IPlayerContol} from './IPlayerControl';
 
-class PlayerContol {
+
+// https://zhuanlan.zhihu.com/p/40881782
+// https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
+
+class PcPlayerContol implements IPlayerContol {
 
     object: THREE.Camera;
 
@@ -18,47 +22,47 @@ class PlayerContol {
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
-
     }
 
-    //上下左右转动
+    //鼠标上下左右转动
 
-    mouseMovingX: number;
-    mouseMovingY: number;
+    lastX: number;
+    lastY: number;
 
     xDelta: number = 0;
     yDelta: number = 0;
 
-    horizontalSpeed: number = 1;
-    verticalSpeed: number = 1;
+    hSpeed: number = 0.1;
+    vSpeed: number = 0.1;
 
     isDrag: boolean = false;
-    canRotation: boolean = false;
 
     onMouseDown = (e: MouseEvent) => {
-        this.isDrag = true;
+        e.preventDefault();
+        e.stopPropagation();
 
-        this.mouseMovingX = e.pageX;
-        this.mouseMovingY = e.pageY;
+        this.isDrag = true;
+        this.lastX = e.pageX;
+        this.lastY = e.pageY;
     }
 
     onMouseMove = (e: MouseEvent) => {
-        if (!this.isDrag) return;
-        let xDelta = (e.pageX - this.mouseMovingX);
-        let yDelta = (e.pageY - this.mouseMovingY);
+        e.preventDefault();
+        e.stopPropagation();
 
-        this.xDelta += xDelta * this.horizontalSpeed;
-        this.yDelta += yDelta * this.verticalSpeed;
-        this.mouseMovingX = e.pageX;
-        this.mouseMovingY = e.pageY;
-        console.log(`x:${this.xDelta} y:${this.yDelta}`);
+        if (!this.isDrag) return;
+
+        this.xDelta += (e.pageX - this.lastX) * this.hSpeed;
+        this.yDelta += (e.pageY - this.lastY) * this.vSpeed;
+        this.lastX = e.pageX;
+        this.lastY = e.pageY;       
     }
 
     onMouseUp = (e: MouseEvent) => {
         this.isDrag = false;
     }
 
-    // 前后左右移动
+    //键盘前后左右移动
 
     moveForward: boolean;
     moveBackward: boolean;
@@ -108,7 +112,7 @@ class PlayerContol {
 
     };
 
-    moveSpeed:number = 2000;
+    moveSpeed:number = 4000;
 
     update = (delta: number) => {
 
@@ -121,6 +125,7 @@ class PlayerContol {
             if(this.object.position.z <= 19000)
                   this.object.translateZ(this.moveSpeed * delta);
         }
+
         if(this.moveLeft) {
             if(this.object.position.x >= -14000)
                 this.object.translateX(-this.moveSpeed * delta);
@@ -131,15 +136,13 @@ class PlayerContol {
                  this.object.translateX(this.moveSpeed * delta);
         }
 
-        console.log(this.object.position.x);
-
-        if (!this.isDrag) return;
+       // if (!this.isDrag) return;
 
         this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-        // if(THREE.Math.degToRad(this.yDelta) > Math.PI/6) return;
         // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
 
     }
 }
 
-export { PlayerContol };
+
+export {PcPlayerContol};
