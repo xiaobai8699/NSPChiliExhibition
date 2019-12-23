@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {IPlayerContol} from './IPlayerControl';
 
-
+// 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
