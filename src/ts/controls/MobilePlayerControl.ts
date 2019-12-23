@@ -20,7 +20,7 @@ class MobilePlayerContol implements IPlayerContol {
         //https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className
         // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/style
         // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
-        this.domElement.className = "canvas-rotation";
+        this.domElement.classList.add("canvas-rotation");
         this.domElement.style.width = `${window.innerHeight}`;
         this.domElement.style.height = `${window.innerWidth}`;
     }
