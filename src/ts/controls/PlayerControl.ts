@@ -1,8 +1,8 @@
 
 import {IPlayerContol} from './IPlayerControl';
-import {PcPlayerContol} from './PcPlayerControl';
-import {MobilePlayerControl} from './MobilePlayerControl';
-import {MobilePlayerControl2} from './MobilePlayerControl2';
+import {PcGameControl} from './PcGameControl';
+import {MobileRotateControl} from './MobileRotateControl';
+import {MobileGameControl} from './MobileGameControl';
 import {Utils} from '../utils/Utils';
 
 class PlayerContol implements IPlayerContol {
@@ -10,7 +10,7 @@ class PlayerContol implements IPlayerContol {
     playerControl: IPlayerContol;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement){
-        this.playerControl = Utils.isMobile() ? new MobilePlayerControl2(object, domElement) : new PcPlayerContol(object, domElement);;
+        this.playerControl = Utils.isMobile() ? new MobileGameControl(object, domElement) : new PcGameControl(object, domElement);;
     }
 
     update = (delta: number) => {

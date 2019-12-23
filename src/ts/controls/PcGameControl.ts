@@ -13,7 +13,7 @@ enum MoveDirection{
     Right
 }
 
-class PcPlayerContol implements IPlayerContol {
+class PcGameControl implements IPlayerContol {
 
     object: THREE.Camera;
 
@@ -160,4 +160,4 @@ class PcPlayerContol implements IPlayerContol {
 }
 
 
-export {PcPlayerContol};
+export {PcGameControl};
