@@ -5,21 +5,30 @@ import {IPlayerContol} from './IPlayerControl';
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
+enum MoveDirection{
+    NotMove,
+    Forward,
+    Backward,
+    Left,
+    Right
+}
+
 class PcPlayerContol implements IPlayerContol {
 
     object: THREE.Camera;
 
-    domElement: HTMLElement | HTMLDocument;
+    domElement: HTMLElement;
 
     enable: boolean;
 
-    constructor(object: THREE.Camera, domElement?: HTMLDocument) {
-        this.domElement = domElement || document;
+    constructor(object: THREE.Camera, domElement?: HTMLElement) {
+        this.domElement = domElement;
         this.object = object;
 
         this.domElement.addEventListener('mousedown', this.onMouseDown, false);
         this.domElement.addEventListener('mousemove', this.onMouseMove, false);
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);
+
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
     }
@@ -38,6 +47,11 @@ class PcPlayerContol implements IPlayerContol {
     isDrag: boolean = false;
 
     onMouseDown = (e: MouseEvent) => {
+
+        //需要调用focus方法后canvas元素才会响应keydown事件
+        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
+        this.domElement.focus();
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -64,83 +78,84 @@ class PcPlayerContol implements IPlayerContol {
 
     //键盘前后左右移动
 
-    moveForward: boolean;
-    moveBackward: boolean;
-
-    moveLeft: boolean;
-    moveRight: boolean;
+    moveDirection: MoveDirection = MoveDirection.NotMove;
 
     onKeyDown = (event: KeyboardEvent) => {
-
-        //event.preventDefault();
+        event.preventDefault();
+        event.stopPropagation();
 
         switch (event.keyCode) {
 
             case 38: /*up*/
-            case 87: /*W*/ this.moveForward = true; break;
+            case 87: /*W*/ this.moveDirection = MoveDirection.Forward; break;
 
             case 37: /*left*/
-            case 65: /*A*/ this.moveLeft = true; break;
+            case 65: /*A*/ this.moveDirection = MoveDirection.Left; break;
 
             case 40: /*down*/
-            case 83: /*S*/ this.moveBackward = true; break;
+            case 83: /*S*/ this.moveDirection = MoveDirection.Backward; break;
 
             case 39: /*right*/
-            case 68: /*D*/ this.moveRight = true; break;
+            case 68: /*D*/ this.moveDirection = MoveDirection.Right; break;
 
         }
 
     };
 
     onKeyUp = (event: KeyboardEvent) => {
+        event.preventDefault();
+        event.stopPropagation();
 
         switch (event.keyCode) {
-
+            
             case 38: /*up*/
-            case 87: /*W*/ this.moveForward = false; break;
-
+            case 87: /*W*/
             case 37: /*left*/
-            case 65: /*A*/ this.moveLeft = false; break;
-
+            case 65: /*A*/
             case 40: /*down*/
-            case 83: /*S*/ this.moveBackward = false; break;
-
+            case 83: /*S*/
             case 39: /*right*/
-            case 68: /*D*/ this.moveRight = false; break;
-
+            case 68: /*D*/ 
+                this.moveDirection = MoveDirection.NotMove;
         }
 
     };
 
-    moveSpeed:number = 4000;
+    moveSpeed:number = 9000;
 
     update = (delta: number) => {
 
-        if(this.moveForward) {
-            if(this.object.position.z >= -14000)
+        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
+         // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+
+        if(this.moveDirection == MoveDirection.NotMove) {
+            return;
+        }
+
+        if(this.moveDirection == MoveDirection.Forward) {
+          //  if(this.object.position.z >= -14000)
                 this.object.translateZ(-this.moveSpeed * delta);
         }
 
-        if(this.moveBackward){ 
-            if(this.object.position.z <= 19000)
+        if(this.moveDirection == MoveDirection.Backward){ 
+            //if(this.object.position.z <= 19000)
                   this.object.translateZ(this.moveSpeed * delta);
         }
 
-        if(this.moveLeft) {
-            if(this.object.position.x >= -14000)
+        if(this.moveDirection == MoveDirection.Left) {
+          //  if(this.object.position.x >= -14000)
                 this.object.translateX(-this.moveSpeed * delta);
         }
 
-        if(this.moveRight) {
-            if(this.object.position.x <= 17400)
+        if(this.moveDirection == MoveDirection.Right) {
+           // if(this.object.position.x <= 17400)
                  this.object.translateX(this.moveSpeed * delta);
         }
+    }
 
-       // if (!this.isDrag) return;
-
-        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-        // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
-
+    dispose = () => {
+        this.object = null;
+        this.domElement = null;
     }
 }
 
