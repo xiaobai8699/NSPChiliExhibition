@@ -3,7 +3,7 @@ import {IPlayerContol} from './IPlayerControl';
 
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Touch_events
 
-class MobilePlayerContol implements IPlayerContol {
+class MobilePlayerControl implements IPlayerContol {
     object: THREE.Camera;
 
     domElement: HTMLElement;
@@ -65,4 +65,4 @@ class MobilePlayerContol implements IPlayerContol {
 }
 
 
-export {MobilePlayerContol};
+export {MobilePlayerControl};
