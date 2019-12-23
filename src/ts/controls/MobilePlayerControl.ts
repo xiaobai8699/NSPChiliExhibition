@@ -6,16 +6,23 @@ import {IPlayerContol} from './IPlayerControl';
 class MobilePlayerContol implements IPlayerContol {
     object: THREE.Camera;
 
-    domElement: HTMLElement | HTMLDocument;
+    domElement: HTMLElement;
 
     enable: boolean;
 
-    constructor(object: THREE.Camera, domElement?: HTMLDocument) {
-        this.domElement = domElement || document;
+    constructor(object: THREE.Camera, domElement?: HTMLElement) {
+        this.domElement = domElement;
         this.object = object;
 
         this.domElement.addEventListener('touchstart', this.onTouchStart, false);
         this.domElement.addEventListener('touchmove', this.onTouchMove, false);
+
+        //https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className
+        // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/style
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
+        this.domElement.className = "canvas-rotation";
+        this.domElement.style.width = `${window.innerHeight}`;
+        this.domElement.style.height = `${window.innerWidth}`;
     }
 
 
@@ -47,6 +54,11 @@ class MobilePlayerContol implements IPlayerContol {
         this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
         // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
 
+    }
+
+    dispose = () => {
+        this.object = null;
+        this.domElement = null;
     }
 }
 

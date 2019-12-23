@@ -13,7 +13,8 @@ class Utils {
 
     static devicePixelRatio():number {
         //手机统一设置为2
-        return Utils.isMobile() ? 1 : devicePixelRatio;
+       // return Utils.isMobile() ? 2 : devicePixelRatio;
+        return window.devicePixelRatio;
     }
 
 }
