@@ -2,21 +2,24 @@
     padding: 0px;
     position: absolute;
     z-index: 99999;
-    background-color: rgba(24, 102, 218, 0.619);
+    background: url("../asset/image/cankong.png");
+    background-repeat: round;
     margin-left: 10px;
     margin-top: 10px;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #steering-wheel-dot{
-    width: 60px;
-    height: 60px;
-    background-color: rgba(94, 255, 0, 0.783);
+    width: 30px;
+    height: 30px;
+    background:url(data:image/png;base64,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);
+    background-repeat: round;
     /* https://developer.mozilla.org/en-US/docs/Web/CSS/left */
+    /* 需要设置这个属性,使用element.style.left才能移动元素 */
     position: absolute;
-    /* border-radius: 30px; */
+
 }   
