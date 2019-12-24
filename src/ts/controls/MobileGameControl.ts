@@ -49,11 +49,14 @@ class MobileGameControl implements IPlayerContol {
     }
 
     
-    lastMoveX: number = 0;
-    lastMoveY: number = 0;
+    lastLeft: number = 0;
+    lastTop: number = 0;
 
-    moveXDelta: number = 0;
-    moveYDelta: number = 0;
+    moveForward: boolean;
+    moveBackward: boolean;
+
+    moveLeft: boolean;
+    moveRight: boolean;
 
     isMoving: boolean = false;
 
@@ -61,10 +64,8 @@ class MobileGameControl implements IPlayerContol {
         e.preventDefault();
         e.stopPropagation();
 
-        this.lastMoveX = 0;
-        this.lastMoveY = 0;
-        this.moveXDelta = 0;
-        this.moveYDelta = 0;
+        this.lastLeft = 0;
+        this.lastTop = 0;
 
         this.isMoving = true;
     }
@@ -79,18 +80,37 @@ class MobileGameControl implements IPlayerContol {
         if (left > this.miniLeft && left < this.maxLeft) {
             this.swd.style.left = left.toString();
 
-            const x = (left + this.swdHalfWidth) - (this.swRect.width / 2)
-            this.moveXDelta = this.lastMoveX - x;
-            this.lastMoveX = x;
+            if(left < this.lastLeft) {
+                this.moveBackward = true;
+                this.moveForward = false;
+
+            }else if(left > this.lastLeft) {
+                this.moveBackward = false;
+                this.moveForward = true;
+
+            }else {
+                // to do
+            }
+
+            this.lastLeft = left;
         }
 
         const top = touch.clientY - this.swdHalfHeight - this.sw.offsetTop;
         if (top > this.miniTop && top < this.maxTop) {
             this.swd.style.top = top.toString();
 
-            const y = (top + this.swdHalfHeight) - (this.swRect.height / 2);
-            this.moveYDelta = this.lastMoveY - y;
-            this.lastMoveY = y;
+            if(top < this.lastTop) {
+                this.moveLeft = true;
+                this.moveRight = false;
+
+            }else if(top > this.lastTop){
+                this.moveLeft = false;
+                this.moveRight = true;
+
+            }else {
+
+            }
+           this.lastTop = top;
         }
     }
 
@@ -99,17 +119,34 @@ class MobileGameControl implements IPlayerContol {
         this.swd.style.top = this.originOffsetTop.toString();
 
         this.isMoving = false;
+        this.moveForward = false;
+        this.moveBackward = false;
+        this.moveLeft = false;
+        this.moveRight = false;
     }
 
-    moveSpeed: number = 9000;
+    moveSpeed: number = 5000;
 
     update = (delta: number) => {
-        if(this.isMoving) {
-            const z = this.moveXDelta * delta * this.moveSpeed;
-            const x = this.moveYDelta * delta * this.moveSpeed;
-            this.object.translateZ(z);
-            this.object.translateX(-x);
-        }
+        if(this.moveForward) {
+            //  if(this.object.position.z >= -14000)
+                  this.object.translateZ(-this.moveSpeed * delta);
+          }
+  
+          if(this.moveBackward){ 
+              //if(this.object.position.z <= 19000)
+                    this.object.translateZ(this.moveSpeed * delta);
+          }
+  
+          if(this.moveLeft) {
+            //  if(this.object.position.x >= -14000)
+                  this.object.translateX(-this.moveSpeed * delta);
+          }
+  
+          if(this.moveRight) {
+             // if(this.object.position.x <= 17400)
+                   this.object.translateX(this.moveSpeed * delta);
+          }
     }
 
     dispose = () => {
