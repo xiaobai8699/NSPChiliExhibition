@@ -1,7 +1,10 @@
-import * as THREE from 'three';
-import {IPlayerContol} from './IPlayerControl';
-
+// 实现参考:
+// https://zhuanlan.zhihu.com/p/40881782
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Touch_events
+
+
+import * as THREE from 'three';
+import { IPlayerContol } from './IPlayerControl';
 
 class MobileRotateControl implements IPlayerContol {
     object: THREE.Camera;
@@ -16,15 +19,7 @@ class MobileRotateControl implements IPlayerContol {
 
         this.domElement.addEventListener('touchstart', this.onTouchStart, false);
         this.domElement.addEventListener('touchmove', this.onTouchMove, false);
-
-        //如何动态改变HTMLElement的css属性:
-        //https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className
-        // https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/style
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference
-        // https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
-        this.domElement.classList.add("canvas-rotation");
-        this.domElement.style.width = `${window.innerHeight}`;
-        this.domElement.style.height = `${window.innerWidth}`;
+        this.domElement.addEventListener('touchend', this.onTouchEnd, false);
     }
 
 
@@ -37,24 +32,44 @@ class MobileRotateControl implements IPlayerContol {
     hSpeed: number = 0.1;
     vSpeed: number = 0.1;
 
+    isDrag: boolean = false;
 
     onTouchStart = (e: TouchEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.isDrag = true;
+
         var evt = e.changedTouches[0];
+        this.lastX = evt.clientX;
+        this.lastY = evt.clientY;
+    }
+
+    onTouchMove = (e: TouchEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var evt = e.changedTouches[0];
+        this.xDelta += (evt.clientX - this.lastX) * this.hSpeed;
+        this.yDelta += (evt.clientY - this.lastY) * this.vSpeed;
         this.lastX = evt.pageX;
         this.lastY = evt.pageY;
     }
 
-    onTouchMove = (e: TouchEvent) => {
-        var evt = e.changedTouches[0];
-        this.xDelta += (evt.pageX - this.lastX) * this.hSpeed;
-        this.yDelta += (evt.pageY - this.lastY) * this.vSpeed;
-        this.lastX = evt.pageX;
-        this.lastY = evt.pageY;       
+    onTouchEnd = (e: TouchEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.isDrag = false;
+
+        // 这里可以添加减速效果增加流畅性
     }
 
     update = (delta: number) => {
-        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-        // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+        if (this.isDrag) {
+            this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
+            // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+        }
 
     }
 
@@ -65,4 +80,4 @@ class MobileRotateControl implements IPlayerContol {
 }
 
 
-export {MobileRotateControl};
+export { MobileRotateControl };
