@@ -1,17 +1,11 @@
 import * as THREE from 'three';
 import {IPlayerContol} from './IPlayerControl';
+import {MoveDirection} from './MoveDirection';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
-enum MoveDirection{
-    NotMove,
-    Forward,
-    Backward,
-    Left,
-    Right
-}
 
 class PcGameControl implements IPlayerContol {
 
@@ -78,7 +72,11 @@ class PcGameControl implements IPlayerContol {
 
     //键盘前后左右移动
 
-    moveDirection: MoveDirection = MoveDirection.NotMove;
+    moveForward: boolean;
+    moveBackward: boolean;
+
+    moveLeft: boolean;
+    moveRight: boolean;
 
     onKeyDown = (event: KeyboardEvent) => {
         event.preventDefault();
@@ -87,16 +85,16 @@ class PcGameControl implements IPlayerContol {
         switch (event.keyCode) {
 
             case 38: /*up*/
-            case 87: /*W*/ this.moveDirection = MoveDirection.Forward; break;
+            case 87: /*W*/ this.moveForward = true; break;
 
             case 37: /*left*/
-            case 65: /*A*/ this.moveDirection = MoveDirection.Left; break;
+            case 65: /*A*/ this.moveLeft = true; break;
 
             case 40: /*down*/
-            case 83: /*S*/ this.moveDirection = MoveDirection.Backward; break;
+            case 83: /*S*/ this.moveBackward = true; break;
 
             case 39: /*right*/
-            case 68: /*D*/ this.moveDirection = MoveDirection.Right; break;
+            case 68: /*D*/ this.moveRight = true; break;
 
         }
 
@@ -109,14 +107,16 @@ class PcGameControl implements IPlayerContol {
         switch (event.keyCode) {
             
             case 38: /*up*/
-            case 87: /*W*/
+            case 87: /*W*/ this.moveForward = false; break;
+
             case 37: /*left*/
-            case 65: /*A*/
+            case 65: /*A*/ this.moveLeft = false; break;
+
             case 40: /*down*/
-            case 83: /*S*/
+            case 83: /*S*/ this.moveBackward = false; break;
+
             case 39: /*right*/
-            case 68: /*D*/ 
-                this.moveDirection = MoveDirection.NotMove;
+            case 68: /*D*/ this.moveRight = false; break;
         }
 
     };
@@ -128,26 +128,23 @@ class PcGameControl implements IPlayerContol {
         this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
          // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
 
-        if(this.moveDirection == MoveDirection.NotMove) {
-            return;
-        }
 
-        if(this.moveDirection == MoveDirection.Forward) {
+        if(this.moveForward) {
           //  if(this.object.position.z >= -14000)
                 this.object.translateZ(-this.moveSpeed * delta);
         }
 
-        if(this.moveDirection == MoveDirection.Backward){ 
+        if(this.moveBackward){ 
             //if(this.object.position.z <= 19000)
                   this.object.translateZ(this.moveSpeed * delta);
         }
 
-        if(this.moveDirection == MoveDirection.Left) {
+        if(this.moveLeft) {
           //  if(this.object.position.x >= -14000)
                 this.object.translateX(-this.moveSpeed * delta);
         }
 
-        if(this.moveDirection == MoveDirection.Right) {
+        if(this.moveRight) {
            // if(this.object.position.x <= 17400)
                  this.object.translateX(this.moveSpeed * delta);
         }
