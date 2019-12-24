@@ -1,17 +1,25 @@
+/*
+author:Li Hong
+email:lh.work@qq.com 
+*/
+
 // 实现参考:
 // https://zhuanlan.zhihu.com/p/40881782
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Touch_events
 
-
 import * as THREE from 'three';
 import { IPlayerContol } from './IPlayerControl';
 
+enum RotationDirection {
+    Landscape,  //横屏转动
+    Portrait    //竖屏转动
+}
+
 class MobileRotateControl implements IPlayerContol {
+
     object: THREE.Camera;
 
     domElement: HTMLElement;
-
-    enable: boolean;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
         this.domElement = domElement;
@@ -22,15 +30,13 @@ class MobileRotateControl implements IPlayerContol {
         this.domElement.addEventListener('touchend', this.onTouchEnd, false);
     }
 
+    direction: RotationDirection = RotationDirection.Landscape;
 
     lastX: number;
     lastY: number;
 
     xDelta: number = 0;
     yDelta: number = 0;
-
-    hSpeed: number = 0.1;
-    vSpeed: number = 0.1;
 
     isDrag: boolean = false;
 
@@ -50,10 +56,11 @@ class MobileRotateControl implements IPlayerContol {
         e.stopPropagation();
 
         var evt = e.changedTouches[0];
-        this.xDelta += (evt.clientX - this.lastX) * this.hSpeed;
-        this.yDelta += (evt.clientY - this.lastY) * this.vSpeed;
-        this.lastX = evt.pageX;
-        this.lastY = evt.pageY;
+
+        this.xDelta += (evt.clientX - this.lastX);
+        this.yDelta += (evt.clientY - this.lastY);
+        this.lastX = evt.clientX;
+        this.lastY = evt.clientY;
     }
 
     onTouchEnd = (e: TouchEvent) => {
@@ -65,9 +72,12 @@ class MobileRotateControl implements IPlayerContol {
         // 这里可以添加减速效果增加流畅性
     }
 
+    rotationSpeed = 0.2;
+
     update = (delta: number) => {
         if (this.isDrag) {
-            this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
+            let delta = this.direction == RotationDirection.Landscape ? this.yDelta : this.xDelta;
+            this.object.rotation.y = THREE.Math.degToRad(this.yDelta * this.rotationSpeed);
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
 

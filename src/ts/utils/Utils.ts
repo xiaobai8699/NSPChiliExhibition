@@ -1,3 +1,7 @@
+/*
+author:Li Hong
+email:lh.work@qq.com 
+*/
 
 class Utils {
 
@@ -6,14 +10,14 @@ class Utils {
     static isMobile(): boolean {
         let userAgent = navigator.userAgent || navigator.vendor;
 
-        return  (/windows phone/i.test(userAgent)) || 
-                (/android/i.test(userAgent))       || 
-                (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
+        return (/windows phone/i.test(userAgent)) ||
+            (/android/i.test(userAgent)) ||
+            (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
     }
 
-    static devicePixelRatio():number {
+    static devicePixelRatio(): number {
         //手机统一设置为2
-       // return Utils.isMobile() ? 2 : devicePixelRatio;
+        // return Utils.isMobile() ? 2 : devicePixelRatio;
         return window.devicePixelRatio;
     }
 

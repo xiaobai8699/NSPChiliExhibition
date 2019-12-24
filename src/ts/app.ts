@@ -1,8 +1,12 @@
+/*
+author:Li Hong
+email:lh.work@qq.com 
+*/
+
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { PlayerContol } from './controls/PlayerControl';
 import { Utils } from './utils/Utils';
-import { AxesHelper } from 'three';
 // import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
 

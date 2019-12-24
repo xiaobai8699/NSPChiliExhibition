@@ -1,10 +1,14 @@
-import * as THREE from 'three';
+/*
+author:Li Hong
+email:lh.work@qq.com 
+*/
 
-interface IPlayerContol{
-    
+
+interface IPlayerContol {
+
     update(delta: number): void;
 
-    dispose():void;
+    dispose(): void;
 }
 
-export {IPlayerContol}
+export { IPlayerContol }

@@ -1,5 +1,10 @@
+/*
+author:Li Hong
+email:lh.work@qq.com 
+*/
+
 import * as THREE from 'three';
-import {IPlayerContol} from './IPlayerControl';
+import { IPlayerContol } from './IPlayerControl';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
@@ -62,7 +67,7 @@ class PcGameControl implements IPlayerContol {
         this.xDelta += (e.pageX - this.lastX) * this.hSpeed;
         this.yDelta += (e.pageY - this.lastY) * this.vSpeed;
         this.lastX = e.pageX;
-        this.lastY = e.pageY;       
+        this.lastY = e.pageY;
     }
 
     onMouseUp = (e: MouseEvent) => {
@@ -104,7 +109,7 @@ class PcGameControl implements IPlayerContol {
         event.stopPropagation();
 
         switch (event.keyCode) {
-            
+
             case 38: /*up*/
             case 87: /*W*/ this.moveForward = false; break;
 
@@ -120,32 +125,32 @@ class PcGameControl implements IPlayerContol {
 
     };
 
-    moveSpeed:number = 9000;
+    moveSpeed: number = 9000;
 
     update = (delta: number) => {
 
         this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-         // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+        // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
 
 
-        if(this.moveForward) {
-          //  if(this.object.position.z >= -14000)
-                this.object.translateZ(-this.moveSpeed * delta);
+        if (this.moveForward) {
+            //  if(this.object.position.z >= -14000)
+            this.object.translateZ(-this.moveSpeed * delta);
         }
 
-        if(this.moveBackward){ 
+        if (this.moveBackward) {
             //if(this.object.position.z <= 19000)
-                  this.object.translateZ(this.moveSpeed * delta);
+            this.object.translateZ(this.moveSpeed * delta);
         }
 
-        if(this.moveLeft) {
-          //  if(this.object.position.x >= -14000)
-                this.object.translateX(-this.moveSpeed * delta);
+        if (this.moveLeft) {
+            //  if(this.object.position.x >= -14000)
+            this.object.translateX(-this.moveSpeed * delta);
         }
 
-        if(this.moveRight) {
-           // if(this.object.position.x <= 17400)
-                 this.object.translateX(this.moveSpeed * delta);
+        if (this.moveRight) {
+            // if(this.object.position.x <= 17400)
+            this.object.translateX(this.moveSpeed * delta);
         }
     }
 
@@ -156,4 +161,4 @@ class PcGameControl implements IPlayerContol {
 }
 
 
-export {PcGameControl};
+export { PcGameControl };
