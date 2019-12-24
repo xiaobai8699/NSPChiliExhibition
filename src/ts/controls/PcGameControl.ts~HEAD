@@ -5,23 +5,33 @@ import {IPlayerContol} from './IPlayerControl';
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
+<<<<<<< HEAD:src/ts/controls/PcGameControl.ts
+enum MoveDirection{
+    NotMove,
+    Forward,
+    Backward,
+    Left,
+    Right
+}
 
 class PcGameControl implements IPlayerContol {
+=======
+class PcPlayerContol implements IPlayerContol {
+>>>>>>> parent of 749712c... 定义枚举MoveDirection表示移动方向:src/ts/controls/PcPlayerControl.ts
 
     object: THREE.Camera;
 
-    domElement: HTMLElement;
+    domElement: HTMLElement | HTMLDocument;
 
     enable: boolean;
 
-    constructor(object: THREE.Camera, domElement?: HTMLElement) {
-        this.domElement = domElement;
+    constructor(object: THREE.Camera, domElement?: HTMLDocument) {
+        this.domElement = domElement || document;
         this.object = object;
 
         this.domElement.addEventListener('mousedown', this.onMouseDown, false);
         this.domElement.addEventListener('mousemove', this.onMouseMove, false);
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);
-
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
     }
@@ -40,11 +50,6 @@ class PcGameControl implements IPlayerContol {
     isDrag: boolean = false;
 
     onMouseDown = (e: MouseEvent) => {
-
-        //需要调用focus方法后canvas元素才会响应keydown事件
-        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
-        this.domElement.focus();
-
         e.preventDefault();
         e.stopPropagation();
 
@@ -78,8 +83,8 @@ class PcGameControl implements IPlayerContol {
     moveRight: boolean;
 
     onKeyDown = (event: KeyboardEvent) => {
-        event.preventDefault();
-        event.stopPropagation();
+
+        //event.preventDefault();
 
         switch (event.keyCode) {
 
@@ -100,11 +105,9 @@ class PcGameControl implements IPlayerContol {
     };
 
     onKeyUp = (event: KeyboardEvent) => {
-        event.preventDefault();
-        event.stopPropagation();
 
         switch (event.keyCode) {
-            
+
             case 38: /*up*/
             case 87: /*W*/ this.moveForward = false; break;
 
@@ -116,42 +119,40 @@ class PcGameControl implements IPlayerContol {
 
             case 39: /*right*/
             case 68: /*D*/ this.moveRight = false; break;
+
         }
 
     };
 
-    moveSpeed:number = 9000;
+    moveSpeed:number = 4000;
 
     update = (delta: number) => {
 
-        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-         // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
-
-
         if(this.moveForward) {
-          //  if(this.object.position.z >= -14000)
+            if(this.object.position.z >= -14000)
                 this.object.translateZ(-this.moveSpeed * delta);
         }
 
         if(this.moveBackward){ 
-            //if(this.object.position.z <= 19000)
+            if(this.object.position.z <= 19000)
                   this.object.translateZ(this.moveSpeed * delta);
         }
 
         if(this.moveLeft) {
-          //  if(this.object.position.x >= -14000)
+            if(this.object.position.x >= -14000)
                 this.object.translateX(-this.moveSpeed * delta);
         }
 
         if(this.moveRight) {
-           // if(this.object.position.x <= 17400)
+            if(this.object.position.x <= 17400)
                  this.object.translateX(this.moveSpeed * delta);
         }
-    }
 
-    dispose = () => {
-        this.object = null;
-        this.domElement = null;
+       // if (!this.isDrag) return;
+
+        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
+        // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+
     }
 }
 
