@@ -34,7 +34,14 @@ class App {
         let w = Utils.isMobile() ? window.innerHeight : window.innerWidth;
         let h = Utils.isMobile() ? window.innerWidth  : window.innerHeight; 
 
-        this.renderer = new THREE.WebGLRenderer({ canvas, logarithmicDepthBuffer: true, antialias: true });
+        let opt = null;
+        if(Utils.isMobile()){
+            opt = { canvas, antialias: false,logarithmicDepthBuffer:true };
+        }else {
+           opt = { canvas, antialias: true,logarithmicDepthBuffer:true }
+        }
+
+        this.renderer = new THREE.WebGLRenderer(opt);
         this.renderer.setSize(w,h);
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
@@ -96,7 +103,7 @@ class App {
             const color = 0xffffff;
             const intensity = 2;
             const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(0, 5000, 10000);
+            light.position.set(0, 10000, 10000);
             light.lookAt(0, 0, 0);
             this.scene.add(light);
         }
@@ -125,7 +132,7 @@ class App {
         const pos = center.clone().setY(y).setZ(10000);
         const cen = center.clone().setY(y).setZ(center.z - 4000);
 
-        this.camera.near = Utils.isMobile() ? 5000 : 0.1;
+        this.camera.near =  0.1;
         this.camera.far = length * 100;
         this.camera.position.copy(pos);
         this.camera.lookAt(cen);
@@ -140,14 +147,10 @@ class App {
 
     animateAd = () => {
         this.bigTV = this.bigTV || this.scene.getObjectByName("BIG_AD");
-        this.bigTVTXT = this.bigTVTXT || this.scene.getObjectByName("BIG_ADTXT");
         this.smallTV = this.smallTV || this.scene.getObjectByName("SMALL_AD");
-        this.smallTVTXT = this.smallTVTXT || this.scene.getObjectByName("SMALL_ADTXT");
 
         this.bigTV.rotation.y += this.speed;
-        this.bigTVTXT.rotation.y += this.speed;
         this.smallTV.rotation.y -= this.speed;
-        this.smallTVTXT.rotation.y -= this.speed;
     }
 
 
@@ -203,15 +206,22 @@ class App {
 }
 
 const progress: HTMLElement = document.querySelector("#progres-fill");
+const progressText: HTMLElement = document.querySelector("#progress-text");
 const ui: HTMLElement = document.querySelector("#ui");
+const steeringWheel: HTMLElement = document.querySelector("#steering-wheel");
 
 new GLTFLoader().load(
-    './asset/model/NSP_CJ.glb',
+    './asset/model/NSP_NG.gltf',
 
     glft => {
         try {
             const app = new App();
             app.run(glft);
+
+            ui.style.display = "none";
+            if(Utils.isMobile()){
+                 steeringWheel.style.visibility = "visible";
+            }
         }
         catch (e) {
             alert(`应用异常(${e})`);
@@ -220,10 +230,10 @@ new GLTFLoader().load(
 
     xhr => {
         let p = (xhr.loaded / xhr.total) * 100;
-        console.log(p);
         progress.style.width = `${p}%`;
-        if (p >= 100) {
-            ui.style.display = "none";
+        progressText.innerText = `正在加载资源 ${p}%`;
+        if(p >= 100){
+            progressText.innerText = "正在进入展馆，请稍候..";
         }
     },
 

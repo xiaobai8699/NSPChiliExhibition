@@ -17,7 +17,6 @@ class PcGameControl implements IPlayerContol {
 
     domElement: HTMLElement;
 
-    enable: boolean;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
         this.domElement = domElement;
@@ -64,8 +63,8 @@ class PcGameControl implements IPlayerContol {
 
         if (!this.isDrag) return;
 
-        this.xDelta += (e.pageX - this.lastX) * this.hSpeed;
-        this.yDelta += (e.pageY - this.lastY) * this.vSpeed;
+        this.xDelta += (e.pageX - this.lastX);
+        this.yDelta += (e.pageY - this.lastY);
         this.lastX = e.pageX;
         this.lastY = e.pageY;
     }
@@ -125,32 +124,34 @@ class PcGameControl implements IPlayerContol {
 
     };
 
-    moveSpeed: number = 9000;
+    moveSpeed: number = 200;
+    rotationSpeed: number = 0.08;
 
     update = (delta: number) => {
 
-        this.object.rotation.y = THREE.Math.degToRad(this.xDelta);
-        // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
-
+        if(this.isDrag){
+            this.object.rotation.y = THREE.Math.degToRad(this.xDelta * this.rotationSpeed);
+            // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
+        }
 
         if (this.moveForward) {
             //  if(this.object.position.z >= -14000)
-            this.object.translateZ(-this.moveSpeed * delta);
+            this.object.translateZ(-this.moveSpeed );
         }
 
         if (this.moveBackward) {
-            //if(this.object.position.z <= 19000)
-            this.object.translateZ(this.moveSpeed * delta);
+            // if(this.object.position.z <= 19000)
+            this.object.translateZ(this.moveSpeed );
         }
 
         if (this.moveLeft) {
             //  if(this.object.position.x >= -14000)
-            this.object.translateX(-this.moveSpeed * delta);
+            this.object.translateX(-this.moveSpeed );
         }
 
         if (this.moveRight) {
             // if(this.object.position.x <= 17400)
-            this.object.translateX(this.moveSpeed * delta);
+            this.object.translateX(this.moveSpeed);
         }
     }
 
