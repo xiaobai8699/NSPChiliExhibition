@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 15:23:42
+ * @Last Modified time: 2019-12-25 15:51:08
  */
 
 // 参考：
@@ -59,34 +59,29 @@ export class PickupManager {
 
         const rect: DOMRect = this.canvas.getBoundingClientRect();
 
+        const position: THREE.Vector2 = new THREE.Vector2();
+
         if (event instanceof MouseEvent) {
 
-            const position: THREE.Vector2 = new THREE.Vector2();
+            position.x = event.clientX;
+            position.y = event.clientY;
 
-            position.x = event.pageX - rect.left;
-
-            position.y = event.pageY - rect.top;
-
-            return position;
         }
 
         else if (event instanceof TouchEvent) {
 
             const touch: Touch = event.changedTouches[0];
 
-            const position: THREE.Vector2 = new THREE.Vector2();
-
             position.x = touch.clientX - rect.left;
-
             position.y = touch.clientY - rect.top;
-
-            return position;
 
         }
 
         else {
             throw "Incorrect event, needs MouseEvent or TouchEvent";
         }
+
+        return position;
     }
 
     getPickPoint = (event: MouseEvent | TouchEvent) => {
