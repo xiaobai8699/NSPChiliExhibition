@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 14:37:54
+ * @Last Modified time: 2019-12-25 19:59:46
  */
 
 
@@ -134,7 +134,7 @@ class PcGameControl implements IPlayerContol {
 
     };
 
-    moveSpeed: number = 200;
+    moveSpeed: number = 2.5;
     rotationSpeed: number = 0.08;
 
     update = (delta: number) => {
@@ -146,22 +146,22 @@ class PcGameControl implements IPlayerContol {
 
         if (this.moveForward) {
             //  if(this.object.position.z >= -14000)
-            this.object.translateZ(-this.moveSpeed );
+            this.object.translateZ(-this.moveSpeed * delta );
         }
 
         if (this.moveBackward) {
             // if(this.object.position.z <= 19000)
-            this.object.translateZ(this.moveSpeed );
+            this.object.translateZ(this.moveSpeed * delta );
         }
 
         if (this.moveLeft) {
             //  if(this.object.position.x >= -14000)
-            this.object.translateX(-this.moveSpeed );
+            this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (this.moveRight) {
             // if(this.object.position.x <= 17400)
-            this.object.translateX(this.moveSpeed);
+            this.object.translateX(this.moveSpeed * delta);
         }
     }
 

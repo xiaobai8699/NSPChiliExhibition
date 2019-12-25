@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 17:11:08
+ * @Last Modified time: 2019-12-25 19:58:54
  */
 
 // 参考：
@@ -50,8 +50,7 @@ export class PickupManager {
             this.pickedObject = intersectedObjects[0];
 
             console.log(`pick object:${this.pickedObject.object.name}`)
-            const obj:THREE.Object3D = this.pickedObject.object;
-            obj.translateX(20000);
+          
         } else {
 
             console.log("Not found!")

@@ -2,15 +2,15 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 18:02:19
+ * @Last Modified time: 2019-12-25 19:57:48
  */
 
 
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { PlayerContol } from './controls/PlayerControl';
 import { PickupManager } from './pickup/PickupManager';
-import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 
 import { Utils } from './utils/Utils';
 // import * as dat from 'dat.gui';
@@ -59,7 +59,7 @@ class App {
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x000000);
+        // this.scene.background = new THREE.Color(0xf20000);
 
         this.camera = new THREE.PerspectiveCamera();
         this.camera.fov = 65;
@@ -67,11 +67,9 @@ class App {
         this.camera.lookAt(this.scene.position);
         this.scene.add(this.camera);
 
-        //this.scene.add(new AxesHelper(10000));
+        this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
 
-       // this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
-
-       // this.pickupManager = new PickupManager(this.camera, this.scene, canvas);
+        this.pickupManager = new PickupManager(this.camera, this.scene, canvas);
 
         this.clock = new THREE.Clock();
 
@@ -83,8 +81,7 @@ class App {
 
     }
 
-    tContrl:TransformControls;
-
+    
     run = (gltf: GLTF) => {
 
         gltf.scene.name = "NSP";
@@ -93,12 +90,7 @@ class App {
         this.renderLoop();
         this.repositionCamera();
         this.playVideo();
-
-      this.tContrl = new TransformControls( this.camera, this.renderer.domElement );
-        var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
-        console.log('lj'+obj.name);
-       this.tContrl.attach(obj);
-       this.scene.add(this.tContrl);
+     
     }
 
     renderLoop = () => {
@@ -107,13 +99,11 @@ class App {
         {
             this.renderer.render(this.scene, this.camera);
             this.animateAd();
-           // this.pControl.update(this.clock.getDelta());
+            this.pControl.update(this.clock.getDelta());
 
-        //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
+           var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
+           obj.translateY(20 * this.clock.getDelta());
 
-        //    obj.translateZ(-10);
-
-        
         }
         this.stats.end();
 
@@ -137,18 +127,14 @@ class App {
             const color = 0xffffff;
             const intensity = 2;
             const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(0, 10000, 0);
-            // this.scene.add(light);
-            this.camera.add(light);
+            light.position.set(0, 2, 0);
+             this.scene.add(light);
+
+            let helper = new THREE.DirectionalLightHelper(light);
+            this.scene.add(helper);
+
+           // this.camera.add(light);
         }
-
-        const m = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-        const g = new THREE.BoxGeometry(2, 2, 2);
-        const mesh = new THREE.Mesh(g, m);
-        const scaler = 1000;
-        mesh.position.set(0, 1, 0);
-        this.scene.add(mesh);
-
     }
 
     onWindowResize = () => {
@@ -165,15 +151,13 @@ class App {
         const length = box.getSize(new THREE.Vector3()).length();
         const center = box.getCenter(new THREE.Vector3());
 
-        const y = 2500;
-        //18700
-        const pos = center.clone().setY(y).setZ(10000);
-        const cen = center.clone().setY(y).setZ(center.z - 4000);
+        const y = 3;
+        const pos = center.clone().setY(y).setZ(10);
+        
 
         this.camera.near = 0.1;
-        this.camera.far = length * 100;
+        this.camera.far = length * 3;
         this.camera.position.copy(pos);
-        this.camera.lookAt(cen);
         this.camera.updateProjectionMatrix();
 
     }
@@ -189,8 +173,8 @@ class App {
         this.bigTV = this.bigTV || this.scene.getObjectByName("BIG_AD");
         this.smallTV = this.smallTV || this.scene.getObjectByName("SMALL_AD");
 
-        this.bigTV.rotation.y += this.speed;
-        this.smallTV.rotation.y -= this.speed;
+        this.bigTV.rotation.z += this.speed;
+        this.smallTV.rotation.z -= this.speed;
 
     }
 
@@ -203,7 +187,7 @@ class App {
         const video: HTMLVideoElement = document.querySelector("#video");
         video.volume = 1.0;
         video.muted = false;
-        //video.play();
+        // video.play();
 
         let contaienr = this.scene.getObjectByName("TV");
         let box3 = new THREE.Box3();
@@ -230,8 +214,14 @@ class App {
     const progressText: HTMLElement = document.querySelector("#progress-text");
     const steeringWheel: HTMLElement = document.querySelector("#steering-wheel");
 
-    new GLTFLoader().load(
-        './asset/model/model.glb',
+    const loader = new GLTFLoader();
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('./draco/');
+    loader.setDRACOLoader(dracoLoader);
+
+    loader.load(
+        './asset/model/NSP.glb',
     
         glft => {
             try {

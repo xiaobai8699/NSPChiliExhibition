@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 14:37:08
+ * @Last Modified time: 2019-12-25 20:00:48
  */
 
 
@@ -149,7 +149,7 @@ class MobileMoveControl implements IPlayerContol {
 
     }
 
-    moveSpeed: number = 3000;
+    moveSpeed: number = 2.5;
 
     update = (delta: number) => {
         
