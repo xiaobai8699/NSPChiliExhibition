@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 15:12:24
+ * @Last Modified time: 2019-12-25 15:28:08
  */
 
 
@@ -88,7 +88,6 @@ class App {
         this.renderLoop();
         this.repositionCamera();
         this.playVideo();
-        this.debug();
 
     }
 
@@ -206,30 +205,6 @@ class App {
         contaienr.add(mesh);
 
     }
-
-    debug = () => {
-        // this.gui = new dat.GUI();
-
-
-        // this.stats.showPanel(0);
-        // document.body.appendChild(this.stats.dom);
-
-        // const self = this;
-
-        //  const data = {
-        //     playerControl:function () {
-
-        //     },
-
-        //     orbitControls: function () {
-
-        //     }
-        //  }
-        // const cameraFloder = this.gui.addFolder('控制器');
-        // cameraFloder.add(data,'playerControl');
-        // cameraFloder.add(data,'orbitControls');
-    }
-
 }
 
 (function main(){
