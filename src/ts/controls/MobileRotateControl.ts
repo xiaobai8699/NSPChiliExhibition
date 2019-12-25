@@ -1,8 +1,8 @@
 /*
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:18 
- * @Last Modified by:   Li Hong (lh.work@qq.com) 
- * @Last Modified time: 2019-12-25 08:44:18 
+ * @Last Modified by: Li Hong (lh.work@qq.com)
+ * @Last Modified time: 2019-12-25 14:37:31
  */
 
 
@@ -26,12 +26,14 @@ class MobileRotateControl implements IPlayerContol {
     domElement: HTMLElement;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
+        
         this.domElement = domElement;
         this.object = object;
 
         this.domElement.addEventListener('touchstart', this.onTouchStart, false);
         this.domElement.addEventListener('touchmove', this.onTouchMove, false);
         this.domElement.addEventListener('touchend', this.onTouchEnd, false);
+
     }
 
     direction: RotationDirection = RotationDirection.Landscape;
@@ -45,6 +47,7 @@ class MobileRotateControl implements IPlayerContol {
     isDrag: boolean = false;
 
     onTouchStart = (e: TouchEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -53,9 +56,11 @@ class MobileRotateControl implements IPlayerContol {
         var evt = e.changedTouches[0];
         this.lastX = evt.clientX;
         this.lastY = evt.clientY;
+
     }
 
     onTouchMove = (e: TouchEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -65,9 +70,11 @@ class MobileRotateControl implements IPlayerContol {
         this.yDelta += (evt.clientY - this.lastY);
         this.lastX = evt.clientX;
         this.lastY = evt.clientY;
+
     }
 
     onTouchEnd = (e: TouchEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -79,6 +86,7 @@ class MobileRotateControl implements IPlayerContol {
     rotationSpeed = 0.2;
 
     update = (delta: number) => {
+        
         if (this.isDrag) {
             let delta = this.direction == RotationDirection.Landscape ? this.yDelta : this.xDelta;
             this.object.rotation.y = THREE.Math.degToRad(this.yDelta * this.rotationSpeed);

@@ -1,8 +1,8 @@
 /*
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
- * @Last Modified by:   Li Hong (lh.work@qq.com) 
- * @Last Modified time: 2019-12-25 08:44:15 
+ * @Last Modified by: Li Hong (lh.work@qq.com)
+ * @Last Modified time: 2019-12-25 14:37:08
  */
 
 
@@ -70,6 +70,7 @@ class MobileMoveControl implements IPlayerContol {
     isMoving: boolean = false;
 
     onTouchStart = (e: TouchEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -77,19 +78,24 @@ class MobileMoveControl implements IPlayerContol {
         this.lastTop = 0;
 
         this.isMoving = true;
+        
     }
 
     onTouchMove = (e: TouchEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
         const touch = e.changedTouches.item(0);
 
         const left = touch.clientX - this.swdHalfWidth - this.sw.offsetLeft;
+
         if (left > this.miniLeft && left < this.maxLeft) {
+
             this.swd.style.left = left.toString();
 
             if (left < this.lastLeft) {
+                //注:因为是横屏，这里需要将在x轴的移动映射到场景中的前后移动
                 this.moveBackward = true;
                 this.moveForward = false;
 
@@ -102,28 +108,36 @@ class MobileMoveControl implements IPlayerContol {
             }
 
             this.lastLeft = left;
+
         }
 
         const top = touch.clientY - this.swdHalfHeight - this.sw.offsetTop;
+
         if (top > this.miniTop && top < this.maxTop) {
+
             this.swd.style.top = top.toString();
 
             if (top < this.lastTop) {
+
+                 //注:因为是横屏，这里需要将在y轴的移动映射到场景中的左右移动
                 this.moveLeft = true;
                 this.moveRight = false;
 
             } else if (top > this.lastTop) {
+
                 this.moveLeft = false;
                 this.moveRight = true;
 
             } else {
 
             }
+
             this.lastTop = top;
         }
     }
 
     onTouchEnd = (e: TouchEvent) => {
+        
         this.swd.style.left = this.originOffsetLeft.toString();
         this.swd.style.top = this.originOffsetTop.toString();
 
@@ -132,11 +146,13 @@ class MobileMoveControl implements IPlayerContol {
         this.moveBackward = false;
         this.moveLeft = false;
         this.moveRight = false;
+
     }
 
     moveSpeed: number = 3000;
 
     update = (delta: number) => {
+        
         if (this.moveForward) {
             //  if(this.object.position.z >= -14000)
             this.object.translateZ(-this.moveSpeed * delta);

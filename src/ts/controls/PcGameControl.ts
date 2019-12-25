@@ -1,8 +1,8 @@
 /*
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
- * @Last Modified by:   Li Hong (lh.work@qq.com) 
- * @Last Modified time: 2019-12-25 08:44:22 
+ * @Last Modified by: Li Hong (lh.work@qq.com)
+ * @Last Modified time: 2019-12-25 14:37:54
  */
 
 
@@ -23,6 +23,7 @@ class PcGameControl implements IPlayerContol {
 
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
+        
         this.domElement = domElement;
         this.object = object;
 
@@ -59,9 +60,11 @@ class PcGameControl implements IPlayerContol {
         this.isDrag = true;
         this.lastX = e.pageX;
         this.lastY = e.pageY;
+
     }
 
     onMouseMove = (e: MouseEvent) => {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -71,6 +74,7 @@ class PcGameControl implements IPlayerContol {
         this.yDelta += (e.pageY - this.lastY);
         this.lastX = e.pageX;
         this.lastY = e.pageY;
+
     }
 
     onMouseUp = (e: MouseEvent) => {
@@ -86,6 +90,7 @@ class PcGameControl implements IPlayerContol {
     moveRight: boolean;
 
     onKeyDown = (event: KeyboardEvent) => {
+
         event.preventDefault();
         event.stopPropagation();
 
@@ -108,6 +113,7 @@ class PcGameControl implements IPlayerContol {
     };
 
     onKeyUp = (event: KeyboardEvent) => {
+        
         event.preventDefault();
         event.stopPropagation();
 
