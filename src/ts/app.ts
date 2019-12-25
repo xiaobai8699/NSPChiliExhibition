@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 15:28:08
+ * @Last Modified time: 2019-12-25 18:02:19
  */
 
 
@@ -10,6 +10,7 @@ import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { PlayerContol } from './controls/PlayerControl';
 import { PickupManager } from './pickup/PickupManager';
+import {TransformControls} from 'three/examples/jsm/controls/TransformControls';
 
 import { Utils } from './utils/Utils';
 // import * as dat from 'dat.gui';
@@ -63,13 +64,14 @@ class App {
         this.camera = new THREE.PerspectiveCamera();
         this.camera.fov = 65;
         this.camera.aspect = w / h;
+        this.camera.lookAt(this.scene.position);
         this.scene.add(this.camera);
 
         //this.scene.add(new AxesHelper(10000));
 
-        this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
+       // this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
 
-        this.pickupManager = new PickupManager(this.camera, this.scene, canvas);
+       // this.pickupManager = new PickupManager(this.camera, this.scene, canvas);
 
         this.clock = new THREE.Clock();
 
@@ -81,14 +83,22 @@ class App {
 
     }
 
+    tContrl:TransformControls;
+
     run = (gltf: GLTF) => {
 
+        gltf.scene.name = "NSP";
         this.addLights();
         this.scene.add(gltf.scene);
         this.renderLoop();
         this.repositionCamera();
         this.playVideo();
 
+      this.tContrl = new TransformControls( this.camera, this.renderer.domElement );
+        var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
+        console.log('lj'+obj.name);
+       this.tContrl.attach(obj);
+       this.scene.add(this.tContrl);
     }
 
     renderLoop = () => {
@@ -97,7 +107,13 @@ class App {
         {
             this.renderer.render(this.scene, this.camera);
             this.animateAd();
-            this.pControl.update(this.clock.getDelta());
+           // this.pControl.update(this.clock.getDelta());
+
+        //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
+
+        //    obj.translateZ(-10);
+
+        
         }
         this.stats.end();
 
