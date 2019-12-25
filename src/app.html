@@ -35,61 +35,6 @@
     <canvas id="canvas" tabindex="1"></canvas>
     <script src="./app.js"></script>
 
-    <!--
-    <script>
-
-        const sw = document.querySelector("#steering-wheel");
-        const swd = document.querySelector("#steering-wheel-dot");
-
-        swd.addEventListener('touchmove', onTouchMove, false);
-        swd.addEventListener('touchend', onTouchEnd,false);
-
-        const swRect = sw.getBoundingClientRect();
-        const swdRect = swd.getBoundingClientRect();
-
-        const halfWidth = swdRect.width / 2;
-        const halfHeight = swdRect.height / 2;
-
-        const miniLeft = 0;
-        const maxLeft = swRect.width - swdRect.width;
-        const miniTop = 0;
-        const maxTop = swRect.height - swdRect.height;
-
-        let originOffsetTop = swd.offsetTop;
-        let originOffsetLeft = swd.offsetLeft;
-
-        function onTouchMove(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            const touch = e.changedTouches.item(0);
-
-            const left = touch.clientX - halfWidth -sw.offsetLeft;
-            if(left > miniLeft && left < maxLeft) {
-                swd.style.left = left;
-
-                const x = (left + halfWidth) - (swRect.width / 2)
-                console.log(`x:${x}`);
-
-            }
-
-            const top = touch.clientY - halfHeight-sw.offsetTop;
-            if(top > miniTop && top < maxTop) {
-                swd.style.top = top;
-
-                const y = (top + halfHeight) - (swRect.height / 2);
-                console.log(`y:${y }`);
-            }
-        }
-
-        function onTouchEnd(e){
-            swd.style.left = originOffsetLeft;
-            swd.style.top = originOffsetTop;
-        }
-
-    </script>
-    -->
-
 </body>
 
 </html>
