@@ -1,7 +1,11 @@
 /*
-author:Li Hong
-email:lh.work@qq.com 
-*/
+ * @Author: Li Hong (lh.work@qq.com) 
+ * @Date: 2019-12-25 08:44:11 
+ * @Last Modified by:   Li Hong (lh.work@qq.com) 
+ * @Last Modified time: 2019-12-25 08:44:11 
+ */
+
+
 
 import { IPlayerContol } from './IPlayerControl';
 import { MobileRotateControl } from './MobileRotateControl';
