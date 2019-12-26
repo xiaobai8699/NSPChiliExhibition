@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 12:58:29
+ * @Last Modified time: 2019-12-26 14:53:33
  */
 
 // 参考：
@@ -56,13 +56,13 @@ export class PickupManager {
 
         // 计算物体和射线的焦点
         const objects = [this.ljj1, this.ljj2, this.ljj3,this.ljj4, this.ljj5];
-        const intersectedObjects = this.raycaster.intersectObjects(objects,true);
+        const intersectedObjects = this.raycaster.intersectObjects(this.scene.children,true);
 
         if (intersectedObjects.length > 0) {    
             this.pickedObject = intersectedObjects[0];
 
             const obj:THREE.Object3D = this.pickedObject.object;
-            console.log(obj.parent.name);
+            console.log(`naem:${obj.parent.name != "" ? obj.parent.name : obj.name} postion:${JSON.stringify(obj.parent.position)}` );
           
         } else {
 
