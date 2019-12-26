@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 09:15:49
+ * @Last Modified time: 2019-12-26 11:46:22
  */
 
 
@@ -11,6 +11,7 @@ import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { PlayerContol } from './controls/PlayerControl';
 import { PickupManager } from './pickup/PickupManager';
+import {Animation} from './animation/Animation';
 
 import { Utils } from './utils/Utils';
 // import * as dat from 'dat.gui';
@@ -98,7 +99,7 @@ class App {
         this.stats.begin();
         {
             this.renderer.render(this.scene, this.camera);
-            this.animateAd();
+            Animation.start(this.scene);
             this.pControl.update(this.clock.getDelta());
 
         //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
@@ -161,23 +162,6 @@ class App {
         this.camera.updateProjectionMatrix();
 
     }
-
-    bigTV: THREE.Object3D = null;
-    bigTVTXT: THREE.Object3D = null;
-    smallTV: THREE.Object3D = null;
-    smallTVTXT: THREE.Object3D = null;
-    speed: number = 0.003;
-
-    animateAd = () => {
-
-        this.bigTV = this.bigTV || this.scene.getObjectByName("BIG_AD");
-        this.smallTV = this.smallTV || this.scene.getObjectByName("SMALL_AD");
-
-        this.bigTV.rotation.z += this.speed;
-        this.smallTV.rotation.z -= this.speed;
-
-    }
-
 
     // 为什么在移动设备上无法自动播放视频:
     // https://www.aerserv.com/blog/why-does-video-autoplay-on-mobile-devices-not-work/
