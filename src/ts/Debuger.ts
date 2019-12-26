@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 16:02:03
+ * @Last Modified time: 2019-12-26 17:05:36
  */
 
 // https://github.com/mrdoob/stats.js
@@ -94,14 +94,13 @@ export class Debuger {
         var controls = {
             disable:false,
             helper: false,
-            x: 0,
-            y: 0,
-            z: 0,
-            intensity: 1,
+            x: spotLight.position.x,
+            y: spotLight.position.y,
+            z: spotLight.position.z,
+            intensity: spotLight.intensity,
             pointColor: spotLight.color.getStyle(),
-            angle: 0.1,
-            distance: 0
-
+            angle: spotLight.angle,
+            distance: spotLight.dispatchEvent
         }
 
         floder.add(controls, 'disable').onChange(function (e) {
@@ -114,6 +113,8 @@ export class Debuger {
                 self.scene.add(self.spotLightHelper);
             } else {
                 self.scene.remove(self.spotLightHelper);
+                self.spotLightHelper.dispose();
+                self.spotLightHelper = null;
             }
         });
 
@@ -144,6 +145,61 @@ export class Debuger {
         floder.add(controls, 'distance', 0, 200).onChange(function (e) {
             spotLight.distance = e;
         });
+    }
+
+    directionalLightHelper: THREE.DirectionalLightHelper = null;
+
+    debugDirectionalLight= (directionalLight: THREE.DirectionalLight, name: string) => {
+       
+        const self = this;
+
+        const floder: dat.GUI = this.lightFolder.addFolder(name);
+
+        var controls = {
+            disable:false,
+            helper: false,
+            x: directionalLight.position.x,
+            y: directionalLight.position.y,
+            z: directionalLight.position.z,
+            intensity: directionalLight.intensity,
+            pointColor: directionalLight.color.getStyle(),
+        }
+
+        floder.add(controls, 'disable').onChange(function (e) {
+            directionalLight.visible = !e;
+        });
+        
+        floder.add(controls, 'helper').onChange(function (e) {
+            self.directionalLightHelper = self.directionalLightHelper || new THREE.DirectionalLightHelper(directionalLight,2);
+            if (e) {
+                self.scene.add(self.directionalLightHelper);
+            } else {
+                self.directionalLightHelper.dispose();
+                self.scene.remove(self.directionalLightHelper);
+                self.directionalLightHelper = null;
+            }
+        });
+
+        floder.add(controls, "x", -20, 20).onChange(function (e) {
+            directionalLight.position.x = e;
+        });
+
+        floder.add(controls, "y", 0, 20).onChange(function (e) {
+            directionalLight.position.y = e;
+        });
+
+        floder.add(controls, "z", -20, 20).onChange(function (e) {
+            directionalLight.position.z = e;
+        });
+
+        floder.add(controls, "intensity", 0, 5).onChange(function (e) {
+            directionalLight.intensity = e;
+        });
+
+        floder.addColor(controls, 'pointColor').onChange(function (e) {
+            directionalLight.color = new THREE.Color(e);
+        });
+
     }
 
     update = (delta: number) => {

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 14:53:33
+ * @Last Modified time: 2019-12-26 16:13:02
  */
 
 // 参考：
@@ -56,7 +56,7 @@ export class PickupManager {
 
         // 计算物体和射线的焦点
         const objects = [this.ljj1, this.ljj2, this.ljj3,this.ljj4, this.ljj5];
-        const intersectedObjects = this.raycaster.intersectObjects(this.scene.children,true);
+        const intersectedObjects = this.raycaster.intersectObjects(objects,true);
 
         if (intersectedObjects.length > 0) {    
             this.pickedObject = intersectedObjects[0];

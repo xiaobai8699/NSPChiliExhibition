@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 15:55:29
+ * @Last Modified time: 2019-12-26 18:17:44
  */
 
 
@@ -13,6 +13,7 @@ import { PlayerContol } from './controls/PlayerControl';
 import { PickupManager } from './PickupManager';
 import { AnimationManager } from './AnimationManager';
 import { LightManager } from './LightManager';
+import { MediaManager } from './MediaManager';
 import { Utils } from './utils/Utils';
 import { Debuger } from './Debuger';
 
@@ -61,7 +62,6 @@ class App {
         this.camera = new THREE.PerspectiveCamera();
         this.camera.fov = 65;
         this.camera.aspect = w / h;
-        this.camera.lookAt(this.scene.position);
         this.scene.add(this.camera);
 
         this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
@@ -81,8 +81,9 @@ class App {
         this.scene.add(gltf.scene);
         LightManager.addLights(this.scene);
         this.repositionCamera();
-        this.playVideo();
         this.renderer.setAnimationLoop(this.render);
+
+        MediaManager.playVideo(this.scene);
     }
 
     render = () => {
@@ -98,7 +99,7 @@ class App {
 
         }
         Debuger.x().stats.end();
-        
+
     }
 
 
@@ -117,26 +118,13 @@ class App {
         const length = box.getSize(new THREE.Vector3()).length();
         const center = box.getCenter(new THREE.Vector3());
 
-        const y = 3;
-        const pos = center.clone().setY(y).setZ(10);
+        const pos = center.clone().setY(3).setZ(10);
 
-
-        this.camera.near = 0.1;
-        this.camera.far = length * 3;
+        this.camera.near = 0.3;
+        this.camera.far = length;
         this.camera.position.copy(pos);
         this.camera.updateProjectionMatrix();
 
-    }
-
-    // 为什么在移动设备上无法自动播放视频:
-    // https://www.aerserv.com/blog/why-does-video-autoplay-on-mobile-devices-not-work/
-    // https://www.google.com/search?sxsrf=ACYBGNSWYbUUOlnNjrq-USPBftDSpPX1Kw%3A1576825687684&source=hp&ei=V3P8XYydJ5iSr7wP-tWggAE&q=can+video+autoplay+on+mobile&oq=video+can%27t+autoplay&gs_l=psy-ab.1.6.0i13i30j0i13i5i30l2j0i8i13i30l5.2832.15948..24624...4.0..0.195.3646.0j22......0....1..gws-wiz.....10..35i362i39j0j0i10j0i13j0i10i30j0i19j0i12i30i19j0i12i10i30i19j33i160.1-ba9bWx3VU
-    playVideo = () => {
-
-        const video: HTMLVideoElement = document.querySelector("#video");
-        video.volume = 1.0;
-        video.muted = false;
-        // video.play();
     }
 }
 
