@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 14:00:17
+ * @Last Modified time: 2019-12-26 15:55:29
  */
 
 
@@ -71,6 +71,8 @@ class App {
         this.clock = new THREE.Clock();
 
         window.addEventListener("resize", this.onWindowResize, false);
+
+        Debuger.start(this.scene);
     }
 
 
@@ -85,18 +87,18 @@ class App {
 
     render = () => {
 
-        Debuger.sharedInstance().stats.begin();
+        Debuger.x().stats.begin();
         {
             this.renderer.render(this.scene, this.camera);
             AnimationManager.start(this.scene);
             this.pControl.update(this.clock.getDelta());
-
+            Debuger.x().update(this.clock.getDelta());
             //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
             //    obj.translateY(20 * this.clock.getDelta());
 
         }
-        Debuger.sharedInstance().stats.end();
-
+        Debuger.x().stats.end();
+        
     }
 
 
