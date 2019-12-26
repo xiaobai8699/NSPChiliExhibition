@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 19:57:48
+ * @Last Modified time: 2019-12-26 09:15:49
  */
 
 
@@ -15,6 +15,7 @@ import { PickupManager } from './pickup/PickupManager';
 import { Utils } from './utils/Utils';
 // import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
+import { Box3, Vector3 } from 'three';
 
 class App {
 
@@ -59,7 +60,7 @@ class App {
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
         this.scene = new THREE.Scene();
-        // this.scene.background = new THREE.Color(0xf20000);
+         this.scene.background = new THREE.Color(0xf20000);
 
         this.camera = new THREE.PerspectiveCamera();
         this.camera.fov = 65;
@@ -84,11 +85,10 @@ class App {
     
     run = (gltf: GLTF) => {
 
-        gltf.scene.name = "NSP";
-        this.addLights();
         this.scene.add(gltf.scene);
-        this.renderLoop();
+        this.addLights();
         this.repositionCamera();
+        this.renderLoop();
         this.playVideo();
      
     }
@@ -101,8 +101,8 @@ class App {
             this.animateAd();
             this.pControl.update(this.clock.getDelta());
 
-           var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
-           obj.translateY(20 * this.clock.getDelta());
+        //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
+        //    obj.translateY(20 * this.clock.getDelta());
 
         }
         this.stats.end();
@@ -188,22 +188,6 @@ class App {
         video.volume = 1.0;
         video.muted = false;
         // video.play();
-
-        let contaienr = this.scene.getObjectByName("TV");
-        let box3 = new THREE.Box3();
-        box3.setFromObject(contaienr);
-        let size = box3.getSize(new THREE.Vector3());
-
-        const texture = new THREE.VideoTexture(video);
-        const mat = new THREE.MeshStandardMaterial({ map: texture });
-        const box = new THREE.BoxGeometry(size.x - 50, size.y, 1000);
-        const mesh = new THREE.Mesh(box, mat);
-        mesh.position.y -= 420;
-        mesh.position.x += 4000;
-        mesh.position.z += 500;
-        mesh.rotation.x = THREE.Math.degToRad(-90);
-        contaienr.add(mesh);
-
     }
 }
 

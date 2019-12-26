@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 19:58:54
+ * @Last Modified time: 2019-12-26 09:27:01
  */
 
 // 参考：
@@ -10,6 +10,7 @@
  
 
 import * as THREE from 'three';
+import { Vector3 } from 'three';
 
 export class PickupManager {
 
@@ -41,15 +42,14 @@ export class PickupManager {
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
-         const nspScene = this.scene.getObjectByName("NSP");
-
         // 计算物体和射线的焦点
-        const intersectedObjects = this.raycaster.intersectObjects(nspScene.children);
+        const intersectedObjects = this.raycaster.intersectObjects(this.scene.children,true);
 
         if (intersectedObjects.length > 0) {    
             this.pickedObject = intersectedObjects[0];
 
-            console.log(`pick object:${this.pickedObject.object.name}`)
+            const obj:THREE.Object3D = this.pickedObject.object;
+            obj.translateX(2);
           
         } else {
 
@@ -65,8 +65,8 @@ export class PickupManager {
 
         if (event instanceof MouseEvent) {
 
-            position.x = event.clientX - rect.left;
-            position.y = event.clientY - rect.top;
+            position.x = event.clientX ;
+            position.y = event.clientY;
             
         }
 
@@ -93,8 +93,8 @@ export class PickupManager {
         const pickPoint:THREE.Vector2 = new THREE.Vector2();
 
         // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
-        pickPoint.x = (canvasPosition.x / this.canvas.clientWidth ) * 2 - 1;
-        pickPoint.y = (canvasPosition.y / this.canvas.clientHeight) * 2 + 1;
+        pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
+        pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
 
         return pickPoint;
         
