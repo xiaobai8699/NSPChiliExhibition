@@ -2,34 +2,36 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:01:40 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 13:03:40
+ * @Last Modified time: 2019-12-26 15:55:19
  */
 
+ 
 import * as THREE from 'three';
+import { Debuger } from './Debuger';
 
  export class LightManager {
 
+    static spotLightHelper: THREE.SpotLightHelper;
+
     static addLights(scene: THREE.Scene){
+
         {
-            const skyColor = 0xffffff;
-            const groundColor = 0xffffff;
-            const intensity = 1;
-            const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+            const light = new THREE.AmbientLight("#606008");
             scene.add(light);
-            var helper = new THREE.HemisphereLightHelper(light, 5);
-            scene.add(helper);
+
+            Debuger.x().debugAmbientLight(light);
         }
-    
+
         {
-            const color = 0xffffff;
-            const intensity = 2;
-            const light = new THREE.DirectionalLight(color, intensity);
-            light.position.set(0, 2, 0);
-             scene.add(light);
-    
-            let helper = new THREE.DirectionalLightHelper(light);
-            scene.add(helper);
-    
+            var spotLight = new THREE.SpotLight("#ffffff");
+            spotLight.position.set(-3, 7, 8);
+            spotLight.target = scene.getObjectByName("LJJ3");
+            spotLight.distance = 0;
+            spotLight.angle = 0.4;
+            scene.add(spotLight);
+
+            Debuger.x().debugSpotLight(spotLight,"SpotLight");
         }
     }
+
  }
