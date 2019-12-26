@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 20:06:29
+ * @Last Modified time: 2019-12-26 20:31:02
  */
 
 // 参考：
@@ -115,26 +115,16 @@ export class PickupManager {
 
     addEventListener = () => {
 
-        this.canvas.addEventListener('mousedown', this.onMouseDown, false);
-
-        this.canvas.addEventListener('touchstart', this.onTouchStart, false);
+        this.canvas.addEventListener('mousedown', this.onClick, false);
+        this.canvas.addEventListener('touchstart', this.onClick, false);
  
     }
 
-    onMouseDown = (event: MouseEvent) => {
+    onClick = (event: MouseEvent | TouchEvent) => {
 
         event.preventDefault();
-
         this.pick(this.getPickPoint(event));
-
-    }
-
-    onTouchStart = (event: TouchEvent) => {
-
-        event.preventDefault();
-
-        this.pick(this.getPickPoint(event));
-
+        
     }
 
 }
