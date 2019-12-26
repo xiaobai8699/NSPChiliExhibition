@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 17:05:36
+ * @Last Modified time: 2019-12-26 19:05:22
  */
 
 // https://github.com/mrdoob/stats.js
@@ -100,7 +100,7 @@ export class Debuger {
             intensity: spotLight.intensity,
             pointColor: spotLight.color.getStyle(),
             angle: spotLight.angle,
-            distance: spotLight.dispatchEvent
+            distance: spotLight.distance
         }
 
         floder.add(controls, 'disable').onChange(function (e) {
@@ -142,7 +142,7 @@ export class Debuger {
             spotLight.angle = e;
         });
 
-        floder.add(controls, 'distance', 0, 200).onChange(function (e) {
+        floder.add(controls, 'distance', 0, 50).onChange(function (e) {
             spotLight.distance = e;
         });
     }
