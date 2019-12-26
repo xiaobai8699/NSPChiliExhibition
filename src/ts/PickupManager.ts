@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 16:13:02
+ * @Last Modified time: 2019-12-26 20:06:29
  */
 
 // 参考：
@@ -10,7 +10,6 @@
  
 
 import * as THREE from 'three';
-import { Vector3 } from 'three';
 
 export class PickupManager {
 
@@ -62,7 +61,8 @@ export class PickupManager {
             this.pickedObject = intersectedObjects[0];
 
             const obj:THREE.Object3D = this.pickedObject.object;
-            console.log(`naem:${obj.parent.name != "" ? obj.parent.name : obj.name} postion:${JSON.stringify(obj.parent.position)}` );
+            //output name of selected object
+            console.log(obj.name );
           
         } else {
 
@@ -116,13 +116,9 @@ export class PickupManager {
     addEventListener = () => {
 
         this.canvas.addEventListener('mousedown', this.onMouseDown, false);
-        this.canvas.addEventListener('mousemove', this.onMouseMove, false);
-        this.canvas.addEventListener('mouseup',   this.onMouseUp,   false);
 
         this.canvas.addEventListener('touchstart', this.onTouchStart, false);
-        this.canvas.addEventListener('touchmove',  this.onTouchMove,  false);
-        this.canvas.addEventListener('touchend',   this.onTouchEnd,   false);
-
+ 
     }
 
     onMouseDown = (event: MouseEvent) => {
@@ -130,14 +126,6 @@ export class PickupManager {
         event.preventDefault();
 
         this.pick(this.getPickPoint(event));
-
-    }
-
-    onMouseMove = (event: MouseEvent) => {
-
-    }
-
-    onMouseUp = (event: MouseEvent) => {
 
     }
 
@@ -149,11 +137,4 @@ export class PickupManager {
 
     }
 
-    onTouchMove = (event: TouchEvent) => {
-        
-    }
-
-    onTouchEnd = (event: TouchEvent) => {
-        
-    }
 }
