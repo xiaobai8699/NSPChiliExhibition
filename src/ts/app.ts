@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 18:17:44
+ * @Last Modified time: 2019-12-26 18:51:34
  */
 
 
@@ -79,11 +79,16 @@ class App {
     run = (gltf: GLTF) => {
 
         this.scene.add(gltf.scene);
-        LightManager.addLights(this.scene);
-        this.repositionCamera();
+        
         this.renderer.setAnimationLoop(this.render);
 
+        this.repositionCamera();
+
         MediaManager.playVideo(this.scene);
+
+        //需要最后添加灯光
+        LightManager.addLights(this.scene);
+
     }
 
     render = () => {
