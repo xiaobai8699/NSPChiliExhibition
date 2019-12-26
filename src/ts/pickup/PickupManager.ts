@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 09:27:01
+ * @Last Modified time: 2019-12-26 12:06:44
  */
 
 // 参考：
@@ -37,19 +37,32 @@ export class PickupManager {
 
     pickedObject: THREE.Object3D | any;
 
+     ljj1: THREE.Object3D = null;
+     ljj2: THREE.Object3D = null;
+     ljj3: THREE.Object3D = null;
+     ljj4: THREE.Object3D = null;
+     ljj5: THREE.Object3D = null;
+    
     pick = (normalizedPosition: THREE.Vector2) => {
+
+        this.ljj1 = this.ljj1 || this.scene.getObjectByName("LJJ1");
+        this.ljj2 = this.ljj2 || this.scene.getObjectByName("LJJ2");
+        this.ljj3 = this.ljj3 || this.scene.getObjectByName("LJJ3");
+        this.ljj4 = this.ljj4 || this.scene.getObjectByName("LJJ4");
+        this.ljj5 = this.ljj5 || this.scene.getObjectByName("64mmB016");
 
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
         // 计算物体和射线的焦点
-        const intersectedObjects = this.raycaster.intersectObjects(this.scene.children,true);
+        const objects = [this.ljj1, this.ljj2, this.ljj3,this.ljj4, this.ljj5];
+        const intersectedObjects = this.raycaster.intersectObjects(objects,true);
 
         if (intersectedObjects.length > 0) {    
             this.pickedObject = intersectedObjects[0];
 
             const obj:THREE.Object3D = this.pickedObject.object;
-            obj.translateX(2);
+            console.log(obj.parent.name);
           
         } else {
 
