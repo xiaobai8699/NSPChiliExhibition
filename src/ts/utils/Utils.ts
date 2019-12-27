@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 12:00:58
+ * @Last Modified time: 2019-12-27 13:17:00
  */
 
  import * as THREE from 'three';
@@ -73,6 +73,7 @@ class Utils {
 
     
     static setCameraAspect(camera: THREE.PerspectiveCamera){
+        
         let aspect = window.innerWidth / window.innerHeight;
 
         if(this.isMobile() && MobileRotationDirection.isLandscape()){
