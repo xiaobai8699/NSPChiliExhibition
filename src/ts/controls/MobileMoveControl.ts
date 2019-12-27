@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 20:00:48
+ * @Last Modified time: 2019-12-27 11:50:19
  */
 
 
@@ -17,6 +17,7 @@
 
 import * as THREE from 'three';
 import { IPlayerContol } from './IPlayerControl';
+import { MobileRotationDirection } from './MobileRotationDirection';
 
 
 class MobileMoveControl implements IPlayerContol {
@@ -47,10 +48,14 @@ class MobileMoveControl implements IPlayerContol {
         this.domElement = domElement;
         this.object = object;
 
-        // https://github.com/lh2lyc/ForceLandscape
-        this.domElement.classList.add("canvas-rotation");
-        this.domElement.style.width = `${window.innerHeight}`;
-        this.domElement.style.height = `${window.innerWidth}`;
+        if (MobileRotationDirection.isLandscape()) {
+
+            // https://github.com/lh2lyc/ForceLandscape
+            this.domElement.classList.add("canvas-rotation");
+            this.domElement.style.width = `${window.innerHeight}`;
+            this.domElement.style.height = `${window.innerWidth}`;
+            
+        }
 
         this.swd.addEventListener('touchstart', this.onTouchStart, false);
         this.swd.addEventListener('touchmove', this.onTouchMove, false);
@@ -78,7 +83,7 @@ class MobileMoveControl implements IPlayerContol {
         this.lastTop = 0;
 
         this.isMoving = true;
-        
+
     }
 
     onTouchMove = (e: TouchEvent) => {
@@ -94,17 +99,34 @@ class MobileMoveControl implements IPlayerContol {
 
             this.swd.style.left = left.toString();
 
-            if (left < this.lastLeft) {
-                //注:因为是横屏，这里需要将在x轴的移动映射到场景中的前后移动
-                this.moveBackward = true;
-                this.moveForward = false;
+            if (MobileRotationDirection.isLandscape) {
 
-            } else if (left > this.lastLeft) {
-                this.moveBackward = false;
-                this.moveForward = true;
+                if (left < this.lastLeft) {
+
+                    this.moveBackward = true;
+                    this.moveForward = false;
+
+                } else if (left > this.lastLeft) {
+
+                    this.moveBackward = false;
+                    this.moveForward = true;
+
+                }
 
             } else {
-                // to do
+
+                if (left < this.lastLeft) {
+
+                    this.moveLeft = true;
+                    this.moveForward = false;
+
+                } else if (left > this.lastLeft) {
+
+                    this.moveLeft = false;
+                    this.moveForward = true;
+
+                }
+
             }
 
             this.lastLeft = left;
@@ -117,19 +139,33 @@ class MobileMoveControl implements IPlayerContol {
 
             this.swd.style.top = top.toString();
 
-            if (top < this.lastTop) {
+            if (MobileRotationDirection.isLandscape()) {
 
-                 //注:因为是横屏，这里需要将在y轴的移动映射到场景中的左右移动
-                this.moveLeft = true;
-                this.moveRight = false;
+                if (top < this.lastTop) {
 
-            } else if (top > this.lastTop) {
+                    this.moveLeft = true;
+                    this.moveRight = false;
 
-                this.moveLeft = false;
-                this.moveRight = true;
+                } else if (top > this.lastTop) {
+
+                    this.moveLeft = false;
+                    this.moveRight = true;
+
+                }
 
             } else {
 
+                if (top < this.lastTop) {
+
+                    this.moveForward = true;
+                    this.moveBackward = false;
+
+                } else if (top > this.lastTop) {
+
+                    this.moveForward = false;
+                    this.moveBackward = true;
+
+                }
             }
 
             this.lastTop = top;
@@ -137,7 +173,7 @@ class MobileMoveControl implements IPlayerContol {
     }
 
     onTouchEnd = (e: TouchEvent) => {
-        
+
         this.swd.style.left = this.originOffsetLeft.toString();
         this.swd.style.top = this.originOffsetTop.toString();
 
@@ -152,7 +188,7 @@ class MobileMoveControl implements IPlayerContol {
     moveSpeed: number = 2.5;
 
     update = (delta: number) => {
-        
+
         if (this.moveForward) {
             //  if(this.object.position.z >= -14000)
             this.object.translateZ(-this.moveSpeed * delta);

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 19:59:46
+ * @Last Modified time: 2019-12-27 11:33:25
  */
 
 
@@ -26,7 +26,7 @@ class PcGameControl implements IPlayerContol {
         
         this.domElement = domElement;
         this.object = object;
-
+        
         this.domElement.addEventListener('mousedown', this.onMouseDown, false);
         this.domElement.addEventListener('mousemove', this.onMouseMove, false);
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);

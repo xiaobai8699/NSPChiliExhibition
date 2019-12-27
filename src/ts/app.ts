@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 18:51:34
+ * @Last Modified time: 2019-12-27 12:01:51
  */
 
 
@@ -38,9 +38,6 @@ class App {
 
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
-        let w = Utils.isMobile() ? window.innerHeight : window.innerWidth;
-        let h = Utils.isMobile() ? window.innerWidth : window.innerHeight;
-
         let opt = null;
         if (Utils.isMobile()) {
 
@@ -53,7 +50,7 @@ class App {
         }
 
         this.renderer = new THREE.WebGLRenderer(opt);
-        this.renderer.setSize(w, h);
+        Utils.setRendererSize(this.renderer);
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
         this.scene = new THREE.Scene();
@@ -61,7 +58,7 @@ class App {
 
         this.camera = new THREE.PerspectiveCamera();
         this.camera.fov = 65;
-        this.camera.aspect = w / h;
+        Utils.setCameraAspect(this.camera);
         this.scene.add(this.camera);
 
         this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
@@ -111,8 +108,8 @@ class App {
 
     onWindowResize = () => {
 
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.camera.aspect = window.innerWidth / window.innerHeight;
+        Utils.setRendererSize(this.renderer);
+        Utils.setCameraAspect(this.camera);
         this.camera.updateProjectionMatrix();
 
     }

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 20:34:08
+ * @Last Modified time: 2019-12-27 11:42:44
  */
 
 // 参考：
@@ -10,6 +10,7 @@
  
 
 import * as THREE from 'three';
+import { Utils } from './utils/Utils';
 
 export class PickupManager {
 
@@ -49,7 +50,7 @@ export class PickupManager {
 
             const obj:THREE.Object3D = this.pickedObject.object;
             //output name of selected object
-            console.log(obj.name );
+            console.log(obj.parent.name );
           
         } else {
 
@@ -92,9 +93,20 @@ export class PickupManager {
 
         const pickPoint:THREE.Vector2 = new THREE.Vector2();
 
-        // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
-        pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
-        pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
+        // 屏幕坐标转世界坐标的推导过程:
+        // http://note.youdao.com/noteshare?id=fa72f3c8ccacc54a8e7ad56fa4feba1a
+        if(Utils.isMobile()){
+
+            pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
+            pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
+
+        }else {
+
+            pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
+            pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
+
+        }
+     
 
         return pickPoint;
         

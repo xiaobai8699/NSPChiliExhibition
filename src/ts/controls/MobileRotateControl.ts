@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:18 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-25 14:37:31
+ * @Last Modified time: 2019-12-27 11:43:59
  */
 
 
@@ -13,11 +13,8 @@
 
 import * as THREE from 'three';
 import { IPlayerContol } from './IPlayerControl';
+import { MobileRotationDirection } from './MobileRotationDirection';
 
-enum RotationDirection {
-    Landscape,  //横屏转动
-    Portrait    //竖屏转动
-}
 
 class MobileRotateControl implements IPlayerContol {
 
@@ -35,8 +32,6 @@ class MobileRotateControl implements IPlayerContol {
         this.domElement.addEventListener('touchend', this.onTouchEnd, false);
 
     }
-
-    direction: RotationDirection = RotationDirection.Landscape;
 
     lastX: number;
     lastY: number;
@@ -88,8 +83,8 @@ class MobileRotateControl implements IPlayerContol {
     update = (delta: number) => {
         
         if (this.isDrag) {
-            let delta = this.direction == RotationDirection.Landscape ? this.yDelta : this.xDelta;
-            this.object.rotation.y = THREE.Math.degToRad(this.yDelta * this.rotationSpeed);
+            let delta =  MobileRotationDirection.isLandscape()? this.yDelta : this.xDelta;
+            this.object.rotation.y = THREE.Math.degToRad(delta * this.rotationSpeed);
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
 

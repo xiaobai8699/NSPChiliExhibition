@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 19:05:22
+ * @Last Modified time: 2019-12-27 10:15:52
  */
 
 // https://github.com/mrdoob/stats.js
@@ -13,6 +13,8 @@ import * as Stats from 'stats.js';
 import * as THREE from 'three';
 
 let debuger: Debuger = null;
+
+let enable:boolean = true;
 
 export class Debuger {
 
