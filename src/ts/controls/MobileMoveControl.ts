@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 14:06:26
+ * @Last Modified time: 2019-12-27 14:17:22
  */
 
 
@@ -194,7 +194,7 @@ class MobileMoveControl implements IPlayerContol {
     update = (delta: number) => {
 
         if (this.moveForward) {
-             if(this.object.position.z >= -7)
+             if(this.object.position.z >= -6)
                  this.object.translateZ(-this.moveSpeed * delta);
         }
 
