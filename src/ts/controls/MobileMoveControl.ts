@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 12:33:59
+ * @Last Modified time: 2019-12-27 12:41:18
  */
 
 
@@ -56,6 +56,10 @@ class MobileMoveControl implements IPlayerContol {
             this.domElement.style.height = `${window.innerWidth}`;
             
         }
+
+        const steeringWheel = document.querySelector("#steering-wheel");
+        const cls = MobileRotationDirection.isLandscape() ? "steering-wheel-postion-landscape" : "steering-wheel-position-portrait";
+        steeringWheel.classList.add(cls)
 
         this.swd.addEventListener('touchstart', this.onTouchStart, false);
         this.swd.addEventListener('touchmove', this.onTouchMove, false);
