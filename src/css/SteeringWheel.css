@@ -1,8 +1,8 @@
 /*
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 09:11:13 
- * @Last Modified by:   Li Hong (lh.work@qq.com) 
- * @Last Modified time: 2019-12-25 09:11:13 
+ * @Last Modified by: Li Hong (lh.work@qq.com)
+ * @Last Modified time: 2019-12-27 12:38:57
  */
 
 
@@ -12,8 +12,7 @@
     z-index: 99999;
     background: url("../asset/image/cankong.png");
     background-repeat: round;
-    margin-left: 20px;
-    margin-top: 20px;
+    left: 20px;
     width: 120px;
     height: 120px;
     display: flex;
@@ -24,6 +23,16 @@
     /* https://css-tricks.com/forums/topic/is-display-none-the-right-way-to-hide-an-element/ */
     /* 不能使用display:none隐藏元素，这样会将元素从文档流中删除 */
     visibility:hidden;
+}
+
+/* 横屏时方向盘的位置 */
+.steering-wheel-postion-landscape {
+    top: 20px;
+}
+
+/* 竖屏时方向盘的位置 */
+.steering-wheel-position-portrait {
+    bottom: 20px;
 }
 
 #steering-wheel-dot{
