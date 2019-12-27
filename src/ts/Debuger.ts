@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:17:49
+ * @Last Modified time: 2019-12-27 16:21:40
  */
 
 // https://github.com/mrdoob/stats.js
@@ -223,7 +223,6 @@ export class Debuger {
         }
 
         const floder: dat.GUI = this.gui.addFolder("Video");
-        floder.open();
         
         floder.add(controls, "play");
         floder.add(controls, "pause");
