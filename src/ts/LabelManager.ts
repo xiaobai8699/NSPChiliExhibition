@@ -2,18 +2,18 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 20:23:13
+ * @Last Modified time: 2019-12-27 20:31:37
  */
 
  // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
  // https://manu.ninja/webgl-three-js-annotations
 
- 
+
  import * as THREE from 'three';
 
 let labelManager: LabelManager;
 
- export   class LabelManager {
+ export  class LabelManager {
 
     scene: THREE.Scene;
 
@@ -40,7 +40,7 @@ let labelManager: LabelManager;
     update = (delta: number) => {
 
        
-       let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName("LJJ1");
+       let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName("64mmA016");
 
         let v3: THREE.Vector3 = new THREE.Vector3();
 
