@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 11:42:44
+ * @Last Modified time: 2019-12-27 14:18:21
  */
 
 // 参考：
@@ -51,6 +51,7 @@ export class PickupManager {
             const obj:THREE.Object3D = this.pickedObject.object;
             //output name of selected object
             console.log(obj.parent.name );
+            alert(obj.parent.name);
           
         } else {
 
