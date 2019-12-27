@@ -48,6 +48,7 @@ class App {
         this.scene.background = new THREE.Color(0x000000);
 
         this.camera = new THREE.PerspectiveCamera();
+        this.camera.position.set(0,3,20);
         this.camera.near = 1;
         this.camera.far = 100;
         this.camera.fov = 65;
@@ -71,8 +72,6 @@ class App {
         this.scene.add(gltf.scene);
         
         this.renderer.setAnimationLoop(this.render);
-
-        this.repositionCamera();
 
         MediaManager.playVideo(this.scene);
 
@@ -104,20 +103,6 @@ class App {
         this.camera.updateProjectionMatrix();
 
     }
-
-    repositionCamera = () => {
-
-        const box = new THREE.Box3().setFromObject(this.scene);
-        const length = box.getSize(new THREE.Vector3()).length();
-        const center = box.getCenter(new THREE.Vector3());
-
-        const pos = center.clone().setY(3).setZ(10);
-
-        this.camera.far = length;
-        this.camera.position.copy(pos);
-        this.camera.updateProjectionMatrix();
-
-    }
 }
 
 (function main() {
@@ -134,7 +119,7 @@ class App {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-        './asset/model/draco.gltf',
+        './asset/model/NSPA.glb',
 
         glft => {
             try {
