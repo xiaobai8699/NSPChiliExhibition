@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:01:40 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 19:11:04
+ * @Last Modified time: 2019-12-27 16:08:03
  */
 
  
@@ -37,19 +37,6 @@ import { Object3D } from 'three';
             Debuger.x().debugDirectionalLight(dLigth,"DirectionalLight");
         }
 
-        // {
-            
-        //     const dLigth = new THREE.DirectionalLight();
-        //     dLigth.position.set(0,0,-17.3);
-        //     scene.add(dLigth);
-            
-        //     const target: THREE.Object3D = new Object3D();
-        //     target.position.set(0.0,2.35,-18.7);
-        //     dLigth.target = target;
-        //     scene.add(target);
-
-        //     Debuger.x().debugDirectionalLight(dLigth,"TVDirectionalLight");
-        // }
 
         {
             var sLight = new THREE.SpotLight();

@@ -1,4 +1,12 @@
- enum RotationDirectionEnum {
+/*
+ * @Author: Li Hong (lh.work@qq.com) 
+ * @Date: 2019-12-27 15:51:25 
+ * @Last Modified by:   Li Hong (lh.work@qq.com) 
+ * @Last Modified time: 2019-12-27 15:51:25 
+ */
+
+ 
+enum RotationDirectionEnum {
     Landscape,  //横屏
     Portrait    //竖屏
 }

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 13:41:01
+ * @Last Modified time: 2019-12-27 16:13:19
  */
 
 
@@ -48,11 +48,11 @@ class App {
         this.scene.background = new THREE.Color(0x000000);
 
         this.camera = new THREE.PerspectiveCamera();
-        this.camera.position.set(0,3,20);
-        this.camera.near = 1;
+        this.camera.near = 0.1;
         this.camera.far = 100;
-        this.camera.fov = 65;
+        Utils.setCameraFOV(this.camera);
         Utils.setCameraAspect(this.camera);
+        this.camera.position.set(0,3,18);
         this.scene.add(this.camera);
 
         this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
@@ -63,7 +63,7 @@ class App {
 
         window.addEventListener("resize", this.onWindowResize, false);
 
-        Debuger.start(this.scene);
+        Debuger.start(this.scene, this.camera);
     }
 
 

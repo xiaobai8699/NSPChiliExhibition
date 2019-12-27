@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 13:55:35
+ * @Last Modified time: 2019-12-27 16:17:49
  */
 
 // https://github.com/mrdoob/stats.js
@@ -14,7 +14,7 @@ import * as THREE from 'three';
 
 let debuger: Debuger = null;
 
-let enable:boolean = true;
+let camera : THREE.PerspectiveCamera;
 
 export class Debuger {
 
@@ -26,9 +26,13 @@ export class Debuger {
 
     lightFolder: dat.GUI;
 
-    constructor(scene: THREE.Scene) {
+    camera: THREE.PerspectiveCamera;
+
+    constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera) {
 
         this.scene = scene;
+
+        this.camera = camera;
 
         this.stats = new Stats();
         this.stats.showPanel(0);
@@ -39,11 +43,12 @@ export class Debuger {
         this.lightFolder = this.gui.addFolder("Lights");
 
         this.debugVideo();
+        this.debugCamera();
     }
 
-    static start(scene: THREE.Scene): Debuger {
+    static start(scene: THREE.Scene, camera: THREE.PerspectiveCamera): Debuger {
         if (debuger == null) {
-            debuger = new Debuger(scene);
+            debuger = new Debuger(scene, camera);
         }
         return debuger;
     }
@@ -225,13 +230,19 @@ export class Debuger {
 
     }
 
+    cameraHelper: THREE.CameraHelper;;
 
+    debugCamera = () => {
+        
+        this.cameraHelper = new THREE.CameraHelper(this.camera);
+        this.scene.add(this.cameraHelper);
+    }
     
     update = (delta: number) => {
 
-        if (this.spotLightHelper) {
-            this.spotLightHelper.update();
-        }
+        this.spotLightHelper ? this.spotLightHelper.update() : undefined ;
+
+        this.cameraHelper ? this.cameraHelper.update() : undefined ;
 
     }
 }

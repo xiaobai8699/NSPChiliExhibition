@@ -108,7 +108,6 @@ export class PickupManager {
 
         }
      
-
         return pickPoint;
         
     }
