@@ -2,10 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 20:20:48
+ * @Last Modified time: 2019-12-27 20:23:13
  */
 
+ // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
+ // https://manu.ninja/webgl-three-js-annotations
 
+ 
  import * as THREE from 'three';
 
 let labelManager: LabelManager;
