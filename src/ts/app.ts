@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:13:19
+ * @Last Modified time: 2019-12-27 16:59:08
  */
 
 
@@ -38,9 +38,7 @@ class App {
 
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
-        let opt = Utils.isMobile() ? { canvas, antialias: false, logarithmicDepthBuffer: true } :  { canvas, antialias: true, logarithmicDepthBuffer: true }
-
-        this.renderer = new THREE.WebGLRenderer(opt);
+        this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: false });
         Utils.setRendererSize(this.renderer);
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
