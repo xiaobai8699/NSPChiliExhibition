@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 11:50:19
+ * @Last Modified time: 2019-12-27 12:33:59
  */
 
 
@@ -99,7 +99,7 @@ class MobileMoveControl implements IPlayerContol {
 
             this.swd.style.left = left.toString();
 
-            if (MobileRotationDirection.isLandscape) {
+            if (MobileRotationDirection.isLandscape()) {
 
                 if (left < this.lastLeft) {
 
@@ -118,12 +118,12 @@ class MobileMoveControl implements IPlayerContol {
                 if (left < this.lastLeft) {
 
                     this.moveLeft = true;
-                    this.moveForward = false;
+                    this.moveRight = false;
 
                 } else if (left > this.lastLeft) {
 
                     this.moveLeft = false;
-                    this.moveForward = true;
+                    this.moveRight = true;
 
                 }
 
@@ -185,7 +185,7 @@ class MobileMoveControl implements IPlayerContol {
 
     }
 
-    moveSpeed: number = 2.5;
+    moveSpeed: number = 3;
 
     update = (delta: number) => {
 
