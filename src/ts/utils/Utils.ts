@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:09:41
+ * @Last Modified time: 2019-12-27 17:35:05
  */
 
  import * as THREE from 'three';
@@ -63,8 +63,8 @@ class Utils {
 
         if(this.isMobile() && MobileRotationDirection.isLandscape()){
            
-            let w =  window.innerHeight;
-            let h =  window.innerWidth;
+            w =  window.innerHeight;
+            h =  window.innerWidth;
 
         }
 
@@ -87,8 +87,16 @@ class Utils {
 
     static setCameraFOV(camera: THREE.PerspectiveCamera) {
 
-        camera.fov = (this.isMobile() && MobileRotationDirection.isPortrait()) ? 45 : 65;
+        let fov: number = 65; // for PC
+
+        if(this.isMobile()) {
+
+            fov = MobileRotationDirection.isPortrait() ? 45 : 25;
+        }
         
+        camera.fov = fov;
+
+        console.log(fov);
     }
 }
 

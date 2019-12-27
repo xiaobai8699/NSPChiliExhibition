@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:21:40
+ * @Last Modified time: 2019-12-27 17:39:53
  */
 
 // https://github.com/mrdoob/stats.js
@@ -15,6 +15,8 @@ import * as THREE from 'three';
 let debuger: Debuger = null;
 
 let camera : THREE.PerspectiveCamera;
+
+let enableDebuger: boolean = true;
 
 export class Debuger {
 
@@ -36,11 +38,19 @@ export class Debuger {
 
         this.stats = new Stats();
         this.stats.showPanel(0);
-        document.body.appendChild(this.stats.dom);
 
-        this.gui = new dat.GUI();
+        if(enableDebuger) {
 
-        this.lightFolder = this.gui.addFolder("Lights");
+             document.body.appendChild(this.stats.dom);
+
+        }
+
+        if(enableDebuger) {
+
+          this.gui = new dat.GUI();
+          this.lightFolder = this.gui.addFolder("Lights");
+
+        }
 
         this.debugVideo();
         this.debugCamera();
@@ -59,6 +69,10 @@ export class Debuger {
 
 
     debugAmbientLight = (light: THREE.AmbientLight) => {
+
+        if(!enableDebuger) {
+            return;
+        }
 
         const floder: dat.GUI = this.lightFolder.addFolder("AmbientLight");
         
@@ -90,6 +104,10 @@ export class Debuger {
     spotLightHelper: THREE.SpotLightHelper;
 
     debugSpotLight = (spotLight: THREE.SpotLight, name:string) => {
+
+        if(!enableDebuger) {
+            return;
+        }
 
         const self = this;
 
@@ -155,6 +173,10 @@ export class Debuger {
 
     debugDirectionalLight= (directionalLight: THREE.DirectionalLight, name: string) => {
        
+        if(!enableDebuger) {
+            return;
+        }
+        
         const self = this;
 
         const floder: dat.GUI = this.lightFolder.addFolder(name);
@@ -208,6 +230,10 @@ export class Debuger {
 
     debugVideo = ()=> {
 
+        if(!enableDebuger) {
+            return;
+        }
+
         const video: HTMLVideoElement = document.querySelector("#video");
         video.volume = 1.0;
         video.muted = false;
@@ -233,12 +259,20 @@ export class Debuger {
 
     debugCamera = () => {
         
+        if(!enableDebuger) {
+            return;
+        }
+        
         this.cameraHelper = new THREE.CameraHelper(this.camera);
         this.scene.add(this.cameraHelper);
     }
     
     update = (delta: number) => {
 
+        if(!enableDebuger) {
+            return;
+        }
+        
         this.spotLightHelper ? this.spotLightHelper.update() : undefined ;
 
         this.cameraHelper ? this.cameraHelper.update() : undefined ;

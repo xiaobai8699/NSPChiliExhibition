@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:01:40 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:08:03
+ * @Last Modified time: 2019-12-27 17:15:53
  */
 
  
@@ -42,7 +42,7 @@ import { Object3D } from 'three';
             var sLight = new THREE.SpotLight();
             sLight.color = new THREE.Color().setRGB(70/255,70/255,70/255);
             sLight.position.set(0.6, 5, -4);
-            sLight.target = scene.getObjectByName("BigTV");
+            sLight.target = scene.getObjectByName("TV");
             sLight.distance = 0;
             sLight.intensity = 0.8;
             sLight.angle = 0.49;

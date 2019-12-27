@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 16:59:08
+ * @Last Modified time: 2019-12-27 18:43:30
  */
 
 
@@ -62,6 +62,9 @@ class App {
         window.addEventListener("resize", this.onWindowResize, false);
 
         Debuger.start(this.scene, this.camera);
+
+        MediaManager.init(this.scene);
+
     }
 
 
@@ -71,11 +74,10 @@ class App {
         
         this.renderer.setAnimationLoop(this.render);
 
-        MediaManager.playVideo(this.scene);
-
         //需要最后添加灯光
         LightManager.addLights(this.scene);
 
+        this.onWindowResize();
     }
 
     render = () => {
@@ -117,7 +119,7 @@ class App {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-        './asset/model/NSPA.glb',
+        './asset/model/nsp.glb',
 
         glft => {
             try {
@@ -130,6 +132,7 @@ class App {
                 }
             }
             catch (e) {
+                console.warn(e);
                 alert(`应用异常(${e})`);
             }
         },
