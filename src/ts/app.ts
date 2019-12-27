@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 12:01:51
+ * @Last Modified time: 2019-12-27 13:16:46
  */
 
 
@@ -38,16 +38,7 @@ class App {
 
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
-        let opt = null;
-        if (Utils.isMobile()) {
-
-            opt = { canvas, antialias: false, logarithmicDepthBuffer: true };
-
-        } else {
-
-            opt = { canvas, antialias: true, logarithmicDepthBuffer: true }
-
-        }
+        let opt = Utils.isMobile() ? { canvas, antialias: false, logarithmicDepthBuffer: true } :  { canvas, antialias: true, logarithmicDepthBuffer: true }
 
         this.renderer = new THREE.WebGLRenderer(opt);
         Utils.setRendererSize(this.renderer);
@@ -57,7 +48,7 @@ class App {
         this.scene.background = new THREE.Color(0x000000);
 
         this.camera = new THREE.PerspectiveCamera();
-        this.camera.fov = 65;
+        this.camera.fov = 45;
         Utils.setCameraAspect(this.camera);
         this.scene.add(this.camera);
 
