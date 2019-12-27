@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 14:18:21
+ * @Last Modified time: 2019-12-27 20:00:39
  */
 
 // 参考：
@@ -11,6 +11,8 @@
 
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
+
+let pickupManager: PickupManager;
 
 export class PickupManager {
 
@@ -33,6 +35,19 @@ export class PickupManager {
         this.canvas = canvas;
 
         this.addEventListener();
+    }
+
+
+    static init(camera: THREE.Camera, scene: THREE.Scene, canvas: HTMLCanvasElement){
+        if(pickupManager == null) {
+            pickupManager = new PickupManager(camera, scene, canvas);
+        }
+
+        return pickupManager;
+    }
+
+    static x(): PickupManager {
+        return pickupManager;
     }
 
     pickedObject: THREE.Object3D | any;

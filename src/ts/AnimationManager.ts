@@ -2,14 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 11:38:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 18:50:34
+ * @Last Modified time: 2019-12-27 19:54:31
  */
 
 import * as THREE from 'three';
 
 export class AnimationManager {
 
-    static start(scene: THREE.Scene) {
+    static update(scene: THREE.Scene) {
 
         AnimationManager.animateAd(scene);
         AnimationManager.animateChili(scene);

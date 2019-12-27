@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 17:39:53
+ * @Last Modified time: 2019-12-27 19:53:05
  */
 
 // https://github.com/mrdoob/stats.js
@@ -16,7 +16,7 @@ let debuger: Debuger = null;
 
 let camera : THREE.PerspectiveCamera;
 
-let enableDebuger: boolean = true;
+let enableDebuger: boolean = false;
 
 export class Debuger {
 
@@ -56,7 +56,7 @@ export class Debuger {
         this.debugCamera();
     }
 
-    static start(scene: THREE.Scene, camera: THREE.PerspectiveCamera): Debuger {
+    static init(scene: THREE.Scene, camera: THREE.PerspectiveCamera): Debuger {
         if (debuger == null) {
             debuger = new Debuger(scene, camera);
         }

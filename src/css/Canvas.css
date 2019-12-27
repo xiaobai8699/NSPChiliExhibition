@@ -1,0 +1,19 @@
+
+#canvas{
+    width:100%;
+    height: 100%;
+    background-image: url('../asset/image/shsst.jpg');
+    background-position: center;
+    background-repeat:no-repeat;
+}
+
+/* https://www.w3school.com.cn/cssref/pr_transform.asp */
+/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-origin */
+/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate */
+/* https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className */
+.canvas-rotation{
+    transform-origin: left top;
+    transform: rotate(90deg);   
+    -webkit-transform:rotate(90deg); 
+    margin-left: 100%;
+}

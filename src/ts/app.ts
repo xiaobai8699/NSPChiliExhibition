@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 18:43:30
+ * @Last Modified time: 2019-12-27 20:07:05
  */
 
 
@@ -14,6 +14,7 @@ import { PickupManager } from './PickupManager';
 import { AnimationManager } from './AnimationManager';
 import { LightManager } from './LightManager';
 import { MediaManager } from './MediaManager';
+import {LabelManager} from './LabelManager';
 import { Utils } from './utils/Utils';
 import { Debuger } from './Debuger';
 
@@ -28,10 +29,6 @@ class App {
     clock: THREE.Clock;
 
     loader: GLTFLoader;
-
-    pControl: PlayerContol;
-
-    pickupManager: PickupManager;
 
 
     public constructor() {
@@ -53,17 +50,19 @@ class App {
         this.camera.position.set(0,3,18);
         this.scene.add(this.camera);
 
-        this.pControl = new PlayerContol(this.camera, this.renderer.domElement);
-
-        this.pickupManager = new PickupManager(this.camera, this.scene, canvas);
-
         this.clock = new THREE.Clock();
 
         window.addEventListener("resize", this.onWindowResize, false);
 
-        Debuger.start(this.scene, this.camera);
+        PlayerContol.init(this.camera,this.renderer.domElement);
+
+        PickupManager.init(this.camera, this.scene, canvas);
 
         MediaManager.init(this.scene);
+
+        LabelManager.init(this.scene, this.camera);
+        
+        Debuger.init(this.scene, this.camera);
 
     }
 
@@ -85,11 +84,16 @@ class App {
         Debuger.x().stats.begin();
         {
             this.renderer.render(this.scene, this.camera);
-            AnimationManager.start(this.scene);
-            this.pControl.update(this.clock.getDelta());
-            Debuger.x().update(this.clock.getDelta());
-            //    var obj = this.scene.getObjectByName("plastic_KT_lajiao002");
-            //    obj.translateY(20 * this.clock.getDelta());
+
+            let delta = this.clock.getDelta();
+
+            AnimationManager.update(this.scene);
+
+            PlayerContol.x().update(delta);
+
+            Debuger.x().update(delta);
+            
+            LabelManager.x().update(delta);
 
         }
         Debuger.x().stats.end();

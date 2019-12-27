@@ -2,12 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:43:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-26 16:05:58
+ * @Last Modified time: 2019-12-27 19:45:13
  */
 
 
 html,
 body {
+    position: relative;
     background-color: #fff;
     color: #888;
     font-family: Helvetica;
@@ -16,61 +17,4 @@ body {
     overflow: hidden;
 }
 
-#canvas{
-    width:100%;
-    height: 100%;
-    background-image: url('../asset/image/shsst.jpg');
-    background-position: center;
-    background-repeat:no-repeat;
-}
 
-/* https://www.w3school.com.cn/cssref/pr_transform.asp */
-/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-origin */
-/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate */
-/* https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className */
-.canvas-rotation{
-    transform-origin: left top;
-    transform: rotate(90deg);   
-    -webkit-transform:rotate(90deg); 
-    margin-left: 100%;
-}
-
-#ui {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(8, 8, 8, 0.331);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#pogress-out{
-    width: 90%;
-    height: 40px;
-    border-width: 1px;
-    border-color: white;
-    background-color: rgba(245, 243, 243, 0.475);
-    padding: 0px;
-}
-
-#progres-fill{
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    width: 0px;
-    background-color: rgba(125, 214, 46, 0.886);
-}
-
-#progress-text{
-    margin-top: 8px;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-}
-
-#video{
-    display: none; 
-    left: 0px; top: 0px;
-}

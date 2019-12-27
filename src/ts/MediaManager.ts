@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 18:44:14
+ * @Last Modified time: 2019-12-27 18:59:59
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -27,7 +27,9 @@ export class MediaManager {
 
         this.video = document.querySelector("#video");
 
-        document.querySelector("#canvas").addEventListener("mousedown", this.playVideo,false);
+        const canvas =  document.querySelector("#canvas");
+        canvas.addEventListener("mousedown", this.playVideo, false);
+        canvas.addEventListener("touchstart", this.playVideo, false);
     }
 
     static init = (scene: THREE.Scene)=> {
