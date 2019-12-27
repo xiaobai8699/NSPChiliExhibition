@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 12:41:18
+ * @Last Modified time: 2019-12-27 14:06:26
  */
 
 
@@ -194,23 +194,23 @@ class MobileMoveControl implements IPlayerContol {
     update = (delta: number) => {
 
         if (this.moveForward) {
-            //  if(this.object.position.z >= -14000)
-            this.object.translateZ(-this.moveSpeed * delta);
+             if(this.object.position.z >= -7)
+                 this.object.translateZ(-this.moveSpeed * delta);
         }
 
         if (this.moveBackward) {
-            //if(this.object.position.z <= 19000)
-            this.object.translateZ(this.moveSpeed * delta);
+            if(this.object.position.z <= 19)
+                 this.object.translateZ(this.moveSpeed * delta);
         }
 
         if (this.moveLeft) {
-            //  if(this.object.position.x >= -14000)
-            this.object.translateX(-this.moveSpeed * delta);
+             if(this.object.position.x >= -14)
+                 this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (this.moveRight) {
-            // if(this.object.position.x <= 17400)
-            this.object.translateX(this.moveSpeed * delta);
+            if(this.object.position.x <= 17.4)
+                 this.object.translateX(this.moveSpeed * delta);
         }
     }
 

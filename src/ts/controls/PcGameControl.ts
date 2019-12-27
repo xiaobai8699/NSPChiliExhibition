@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 11:33:25
+ * @Last Modified time: 2019-12-27 14:05:23
  */
 
 
@@ -23,10 +23,10 @@ class PcGameControl implements IPlayerContol {
 
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
-        
+
         this.domElement = domElement;
         this.object = object;
-        
+
         this.domElement.addEventListener('mousedown', this.onMouseDown, false);
         this.domElement.addEventListener('mousemove', this.onMouseMove, false);
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);
@@ -113,7 +113,7 @@ class PcGameControl implements IPlayerContol {
     };
 
     onKeyUp = (event: KeyboardEvent) => {
-        
+
         event.preventDefault();
         event.stopPropagation();
 
@@ -134,34 +134,34 @@ class PcGameControl implements IPlayerContol {
 
     };
 
-    moveSpeed: number = 2.5;
+    moveSpeed: number = 5;
     rotationSpeed: number = 0.08;
 
     update = (delta: number) => {
 
-        if(this.isDrag){
+        if (this.isDrag) {
             this.object.rotation.y = THREE.Math.degToRad(this.xDelta * this.rotationSpeed);
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
 
         if (this.moveForward) {
-            //  if(this.object.position.z >= -14000)
-            this.object.translateZ(-this.moveSpeed * delta );
+            if (this.object.position.z >= -7)
+                this.object.translateZ(-this.moveSpeed * delta);
         }
 
         if (this.moveBackward) {
-            // if(this.object.position.z <= 19000)
-            this.object.translateZ(this.moveSpeed * delta );
+            if (this.object.position.z <= 19)
+                this.object.translateZ(this.moveSpeed * delta);
         }
 
         if (this.moveLeft) {
-            //  if(this.object.position.x >= -14000)
-            this.object.translateX(-this.moveSpeed * delta);
+            if (this.object.position.x >= -14)
+                this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (this.moveRight) {
-            // if(this.object.position.x <= 17400)
-            this.object.translateX(this.moveSpeed * delta);
+            if (this.object.position.x <= 17.4)
+                this.object.translateX(this.moveSpeed * delta);
         }
     }
 
