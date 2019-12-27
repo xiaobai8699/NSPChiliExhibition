@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 13:16:46
+ * @Last Modified time: 2019-12-27 13:41:01
  */
 
 
@@ -48,7 +48,9 @@ class App {
         this.scene.background = new THREE.Color(0x000000);
 
         this.camera = new THREE.PerspectiveCamera();
-        this.camera.fov = 45;
+        this.camera.near = 1;
+        this.camera.far = 100;
+        this.camera.fov = 65;
         Utils.setCameraAspect(this.camera);
         this.scene.add(this.camera);
 
@@ -95,8 +97,6 @@ class App {
 
     }
 
-
-
     onWindowResize = () => {
 
         Utils.setRendererSize(this.renderer);
@@ -113,7 +113,6 @@ class App {
 
         const pos = center.clone().setY(3).setZ(10);
 
-        this.camera.near = 0.3;
         this.camera.far = length;
         this.camera.position.copy(pos);
         this.camera.updateProjectionMatrix();
@@ -135,7 +134,7 @@ class App {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-        './asset/model/NSP.glb',
+        './asset/model/draco.gltf',
 
         glft => {
             try {

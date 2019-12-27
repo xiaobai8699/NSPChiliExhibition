@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 10:15:52
+ * @Last Modified time: 2019-12-27 13:55:35
  */
 
 // https://github.com/mrdoob/stats.js
@@ -24,6 +24,8 @@ export class Debuger {
 
     scene: THREE.Scene;
 
+    lightFolder: dat.GUI;
+
     constructor(scene: THREE.Scene) {
 
         this.scene = scene;
@@ -34,7 +36,9 @@ export class Debuger {
 
         this.gui = new dat.GUI();
 
-        this.createLightFolder();
+        this.lightFolder = this.gui.addFolder("Lights");
+
+        this.debugVideo();
     }
 
     static start(scene: THREE.Scene): Debuger {
@@ -48,13 +52,6 @@ export class Debuger {
         return debuger;
     }
 
-    lightFolder: dat.GUI;
-
-    createLightFolder = () => {
-
-        this.lightFolder = this.gui.addFolder("Lights");
-
-    }
 
     debugAmbientLight = (light: THREE.AmbientLight) => {
 
@@ -204,6 +201,32 @@ export class Debuger {
 
     }
 
+    debugVideo = ()=> {
+
+        const video: HTMLVideoElement = document.querySelector("#video");
+        video.volume = 1.0;
+        video.muted = false;
+
+        const controls = {
+            play:function(){
+                video.play();
+            },
+
+            pause:function(){
+                video.pause();
+            }
+        }
+
+        const floder: dat.GUI = this.gui.addFolder("Video");
+        floder.open();
+        
+        floder.add(controls, "play");
+        floder.add(controls, "pause");
+
+    }
+
+
+    
     update = (delta: number) => {
 
         if (this.spotLightHelper) {
