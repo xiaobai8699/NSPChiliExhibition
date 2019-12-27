@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 13:49:52
+ * @Last Modified time: 2019-12-27 14:46:48
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -33,10 +33,10 @@ export class MediaManager {
         const size: THREE.Vector3 = box3.getSize(new Vector3());
 
         const mat = new THREE.MeshStandardMaterial({map:texure});
-        const geo = new THREE.PlaneGeometry(size.x,size.y);
+        const geo = new THREE.BoxGeometry(size.x,size.y,1);
         const mesh = new THREE.Mesh(geo,mat);
         tvMesh.getWorldPosition(mesh.position);
-        mesh.position.z = -18.6;
+        mesh.position.z = -19.1;
         mesh.name = "BigTV";
         mesh.position.x += 4;
         mesh.position.y -= 0.5;
