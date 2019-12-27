@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 09:11:13 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 12:38:57
+ * @Last Modified time: 2019-12-27 12:57:10
  */
 
 
@@ -32,7 +32,7 @@
 
 /* 竖屏时方向盘的位置 */
 .steering-wheel-position-portrait {
-    bottom: 20px;
+    bottom: 30px;
 }
 
 #steering-wheel-dot{
