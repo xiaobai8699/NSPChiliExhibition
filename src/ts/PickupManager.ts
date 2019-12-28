@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 20:00:39
+ * @Last Modified time: 2019-12-28 08:58:50
  */
 
 // 参考：
@@ -111,6 +111,7 @@ export class PickupManager {
 
         // 屏幕坐标转世界坐标的推导过程:
         // http://note.youdao.com/noteshare?id=fa72f3c8ccacc54a8e7ad56fa4feba1a
+        // https://zhuanlan.zhihu.com/p/90295867?utm_source=wechat_session&utm_medium=social&utm_oi=615939963313983488
         if(Utils.isMobile()){
 
             pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
