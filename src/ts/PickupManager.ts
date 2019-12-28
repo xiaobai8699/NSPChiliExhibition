@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 08:58:50
+ * @Last Modified time: 2019-12-28 10:00:55
  */
 
 // 参考：
@@ -11,6 +11,7 @@
 
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
+import {World} from './World';
 
 let pickupManager: PickupManager;
 
@@ -24,29 +25,21 @@ export class PickupManager {
 
     canvas: HTMLCanvasElement;
 
-    constructor(camera: THREE.Camera, scene: THREE.Scene, canvas: HTMLCanvasElement) {
+    constructor() {
 
         this.raycaster = new THREE.Raycaster();
 
-        this.camera = camera;
+        this.camera = World.x().camera;
 
-        this.scene = scene;
+        this.scene =  World.x().scene;
 
-        this.canvas = canvas;
+        this.canvas = World.x().renderer.domElement;
 
         this.addEventListener();
     }
 
-
-    static init(camera: THREE.Camera, scene: THREE.Scene, canvas: HTMLCanvasElement){
-        if(pickupManager == null) {
-            pickupManager = new PickupManager(camera, scene, canvas);
-        }
-
-        return pickupManager;
-    }
-
     static x(): PickupManager {
+        pickupManager = pickupManager || new PickupManager();
         return pickupManager;
     }
 

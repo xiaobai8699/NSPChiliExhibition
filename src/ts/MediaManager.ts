@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 18:59:59
+ * @Last Modified time: 2019-12-28 09:44:32
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -11,6 +11,7 @@
 
 import * as THREE from 'three';
 import { Vector3 } from 'three';
+import {World} from './World';
 
 let mediaManager: MediaManager = null; 
 
@@ -22,8 +23,9 @@ export class MediaManager {
 
     isReadPlayVideo: boolean;
 
-    constructor(scene: THREE.Scene) {
-        this.scene = scene;
+    constructor() {
+
+        this.scene = World.x().scene;
 
         this.video = document.querySelector("#video");
 
@@ -32,16 +34,9 @@ export class MediaManager {
         canvas.addEventListener("touchstart", this.playVideo, false);
     }
 
-    static init = (scene: THREE.Scene)=> {
-        if(mediaManager == null) {
-
-            mediaManager = new MediaManager(scene);
-        }
-
-        return mediaManager;
-    }
 
     static x = () => {
+        mediaManager = mediaManager || new MediaManager();
         return mediaManager;
     }
 

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 19:53:05
+ * @Last Modified time: 2019-12-28 10:03:16
  */
 
 // https://github.com/mrdoob/stats.js
@@ -11,6 +11,7 @@
 import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
 import * as THREE from 'three';
+import {World} from './World';
 
 let debuger: Debuger = null;
 
@@ -30,11 +31,11 @@ export class Debuger {
 
     camera: THREE.PerspectiveCamera;
 
-    constructor(scene: THREE.Scene, camera: THREE.PerspectiveCamera) {
+    constructor() {
 
-        this.scene = scene;
+        this.scene = World.x().scene;
 
-        this.camera = camera;
+        this.camera = World.x().camera;
 
         this.stats = new Stats();
         this.stats.showPanel(0);
@@ -56,14 +57,8 @@ export class Debuger {
         this.debugCamera();
     }
 
-    static init(scene: THREE.Scene, camera: THREE.PerspectiveCamera): Debuger {
-        if (debuger == null) {
-            debuger = new Debuger(scene, camera);
-        }
-        return debuger;
-    }
-
     static x(): Debuger {
+        debuger = debuger || new Debuger();
         return debuger;
     }
 
@@ -259,15 +254,17 @@ export class Debuger {
 
     debugCamera = () => {
         
-        if(!enableDebuger) {
-            return;
-        }
+        // if(!enableDebuger) {
+        //     return;
+        // }
         
         this.cameraHelper = new THREE.CameraHelper(this.camera);
         this.scene.add(this.cameraHelper);
     }
     
     update = (delta: number) => {
+
+        this.cameraHelper ? this.cameraHelper.update() : undefined ;
 
         if(!enableDebuger) {
             return;

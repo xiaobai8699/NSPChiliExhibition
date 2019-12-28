@@ -2,24 +2,25 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:01:40 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 17:15:53
+ * @Last Modified time: 2019-12-28 09:48:41
  */
 
  
 import * as THREE from 'three';
 import { Debuger } from './Debuger';
 import { Object3D } from 'three';
+import {World} from './World';
 
  export class LightManager {
 
     static spotLightHelper: THREE.SpotLightHelper;
 
-    static addLights(scene: THREE.Scene){
+    static addLights( ){
 
         {
             const aLight = new THREE.AmbientLight("#FFFFFF");
             aLight.intensity = 1.5;
-            scene.add(aLight);
+            World.x().scene.add(aLight);
 
             Debuger.x().debugAmbientLight(aLight);
         }
@@ -27,12 +28,12 @@ import { Object3D } from 'three';
         {
             const dLigth = new THREE.DirectionalLight();
             dLigth.position.set(0,6,0);
-            scene.add(dLigth);
+            World.x().scene.add(dLigth);
             
             const target: THREE.Object3D = new Object3D();
             target.position.set(0,0,0);
             dLigth.target = target;
-            scene.add(target);
+            World.x().scene.add(target);
 
             Debuger.x().debugDirectionalLight(dLigth,"DirectionalLight");
         }
@@ -42,11 +43,11 @@ import { Object3D } from 'three';
             var sLight = new THREE.SpotLight();
             sLight.color = new THREE.Color().setRGB(70/255,70/255,70/255);
             sLight.position.set(0.6, 5, -4);
-            sLight.target = scene.getObjectByName("TV");
+            sLight.target = World.x().scene.getObjectByName("TV");
             sLight.distance = 0;
             sLight.intensity = 0.8;
             sLight.angle = 0.49;
-            scene.add(sLight);
+            World.x().scene.add(sLight);
 
             Debuger.x().debugSpotLight(sLight,"TV_SpotLight");
         }
