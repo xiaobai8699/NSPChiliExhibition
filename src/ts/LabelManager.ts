@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 14:23:15
+ * @Last Modified time: 2019-12-28 16:52:26
  */
 
  // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
@@ -27,13 +27,13 @@ let labelManager: LabelManager;
     }
 
     static x() : LabelManager {
+        
         labelManager = labelManager || new LabelManager();
         return labelManager;
     }
 
     update = (delta: number) => {
 
-       
        let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName("64mmA016");
 
         let v3: THREE.Vector3 = new THREE.Vector3();
