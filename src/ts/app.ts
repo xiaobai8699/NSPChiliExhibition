@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 14:35:12
+ * @Last Modified time: 2019-12-28 16:43:08
  */
 
 
@@ -52,6 +52,8 @@ class App {
         //需要最后添加灯光
         LightManager.addLights();
 
+        const div: HTMLDivElement = document.querySelector("#labels");
+        div.style.visibility = "visible";
     }
 
     animationLoop = () => {

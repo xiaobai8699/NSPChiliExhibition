@@ -5,7 +5,7 @@
     left: 0px;
     height: 100%;
     width: 100%;
-    background-color: rgba(8, 8, 8, 0.55);
+    background-color: rgba(8, 8, 8, 0.304);
     z-index: 2;
     display: flex;
     align-items: center;
@@ -21,6 +21,7 @@
     flex-direction: column;
     height: 50%;
     width: 80%;
+    max-width: 600px; /* 防止在PC机上显示过宽*/
     color: white;
     border-top-left-radius: 35px;
     border-bottom-right-radius: 35px;

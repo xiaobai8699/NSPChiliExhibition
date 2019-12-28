@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 15:22:22
+ * @Last Modified time: 2019-12-28 16:08:42
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
@@ -25,11 +25,13 @@ export class ProductManager {
 
     orbitControls: OrbitControls;
 
+    visible: boolean;
+
     constructor() {
 
+        this.visible = false;
+
         this.initRenderer();
-        
-        this.fitCanvasSize();
 
         this.initSence();
 
@@ -39,7 +41,6 @@ export class ProductManager {
 
         this.addEventListener();
 
-       // this.onWindowResize();
     }
 
     static x() {
@@ -54,7 +55,7 @@ export class ProductManager {
         let canvas: HTMLCanvasElement = document.querySelector("#product-canvas");
 
         //需要设置alpha: ture
-        this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: false ,alpha:true});
+        this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 
         this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
@@ -90,13 +91,17 @@ export class ProductManager {
         this.orbitControls.minDistance = 1;
         this.orbitControls.autoRotate = true;
         this.orbitControls.autoRotateSpeed = 8;
+        this.orbitControls.enableDamping = true;
     }
 
     animationLoop = () => {
 
-        this.renderer.render(this.scene, this.camera);
+        if (this.visible) {
 
-        this.orbitControls.update();
+            this.renderer.render(this.scene, this.camera);
+
+            this.orbitControls.update();
+        }
     }
 
     onWindowResize = () => {
@@ -112,24 +117,13 @@ export class ProductManager {
 
     }
 
-    fitCanvasSize = () => {
-
-        if (Utils.isMobile()) {
-
-            
-        }else {
-            
-        }
-        
-    }
-
     getObjectSize = (object: THREE.Object3D): THREE.Vector3 => {
 
         const box3 = new THREE.Box3();
         box3.setFromObject(object)
         const size: THREE.Vector3 = box3.getSize(new Vector3());
         return size;
-        
+
     }
 
     resetCameraPosition = (object: THREE.Object3D) => {
@@ -146,7 +140,10 @@ export class ProductManager {
 
     addedObject: THREE.Object3D = null;
 
+
     showProduct = (name: string) => {
+
+        this.visible = true;
 
         const div: HTMLDivElement = document.querySelector("#product-container");
         div.style.visibility = "visible";
@@ -166,23 +163,28 @@ export class ProductManager {
     //https://threejsfundamentals.org/threejs/lessons/threejs-cleanup.html
     hideProduct = () => {
 
-        if(this.addedObject) {
+        this.visible = false;
+
+        if (this.addedObject) {
             this.scene.remove(this.addedObject);
         }
-        
+
         this.scene.dispose();
+        this.renderer.clearColor();
+        this.renderer.clearDepth();
+        this.renderer.clearStencil();
 
         const div: HTMLDivElement = document.querySelector("#product-container");
         div.style.visibility = "hidden";
     }
 
 
-    addEventListener = ()=> {
-        
+    addEventListener = () => {
+
         window.addEventListener("resize", this.onWindowResize, false);
 
-        document.querySelector("#prodcut-close").addEventListener("mousedown", this.hideProduct,false);
-        document.querySelector("#prodcut-close").addEventListener("touchstart", this.hideProduct,false);
+        document.querySelector("#prodcut-close").addEventListener("mousedown", this.hideProduct, false);
+        document.querySelector("#prodcut-close").addEventListener("touchstart", this.hideProduct, false);
 
     }
 }

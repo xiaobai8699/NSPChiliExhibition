@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 09:57:59
+ * @Last Modified time: 2019-12-28 16:47:39
  */
 
 
@@ -56,8 +56,11 @@ export class World {
 
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
+        // 需要设置antialias:ture, logarithmicDepthBuffer:false 在移动端才不会闪烁
         this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: false });
+
         Utils.setRendererSize(this.renderer);
+        
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
     }
@@ -71,7 +74,9 @@ export class World {
 
         Utils.setRendererSize(this.renderer);
         Utils.setCameraAspect(this.camera);
-        this.camera.updateProjectionMatrix();
+
+        //Utils.setCameraAspect()中已经调用过updateProjectionMatrix方法了,这里不用再次调用
+        //this.camera.updateProjectionMatrix();
 
     }
 }

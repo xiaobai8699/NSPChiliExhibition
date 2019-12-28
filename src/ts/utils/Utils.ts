@@ -2,11 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 11:32:37
+ * @Last Modified time: 2019-12-28 16:40:12
  */
 
  import * as THREE from 'three';
 import { MobileRotationDirection } from '../controls/MobileRotationDirection';
+import { World } from '../World';
 
 
 class Utils {
@@ -69,6 +70,7 @@ class Utils {
         }
 
         renderer.setSize(w, h);
+ 
     }
 
     
@@ -82,21 +84,20 @@ class Utils {
         }
 
         camera.aspect = aspect;
-
+        camera.updateProjectionMatrix();
     }
 
     static setCameraFOV(camera: THREE.PerspectiveCamera) {
 
-        let fov: number = 65; // for PC
+        let fov: number = 70; // for PC
 
         if(this.isMobile()) {
 
-            fov = MobileRotationDirection.isPortrait() ? 45 : 35;
+            fov = MobileRotationDirection.isPortrait() ? 78 : 66;
         }
         
         camera.fov = fov;
-
-        console.log(fov);
+        camera.updateProjectionMatrix();
     }
 }
 
