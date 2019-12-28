@@ -31,14 +31,15 @@ export class AnimationManager {
 
     }
 
+    static bottles: THREE.Object3D[] = null;
 
     static animateChili(scene: THREE.Scene) {
 
-       const bottles = Utils.findAnimationChiliBottles();
-
-       bottles.forEach( (obj: THREE.Object3D) => {
+       this.bottles = this.bottles || Utils.findAnimationChiliBottles();
+ 
+       this.bottles.forEach( (obj: THREE.Object3D) => {
             obj.rotation.z += 0.02;
        });
-       
+
     }
 }
