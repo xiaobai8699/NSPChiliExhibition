@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-12-28 16:40:12
  */
 
- import * as THREE from 'three';
+import * as THREE from 'three';
 import { MobileRotationDirection } from '../controls/MobileRotationDirection';
 import { World } from '../World';
 
@@ -46,14 +46,14 @@ class Utils {
         lines.push(`${prefix}${dataPrefix}  scl: ${Utils.dumpVec3(obj.scale)}`);
 
         const newPrefix = prefix + (isLast ? '  ' : '│ ');
-        
+
         const lastNdx = obj.children.length - 1;
 
         obj.children.forEach((child: any, ndx: any) => {
             const isLast = ndx === lastNdx;
             Utils.dumpObject(child, lines, isLast, newPrefix);
         });
-        
+
         return lines;
     }
 
@@ -62,24 +62,24 @@ class Utils {
         let w = window.innerWidth;
         let h = window.innerHeight;
 
-        if(this.isMobile() && MobileRotationDirection.isLandscape()){
-           
-            w =  window.innerHeight;
-            h =  window.innerWidth;
+        if (this.isMobile() && MobileRotationDirection.isLandscape()) {
+
+            w = window.innerHeight;
+            h = window.innerWidth;
 
         }
 
         renderer.setSize(w, h);
- 
+
     }
 
-    
-    static setCameraAspect(camera: THREE.PerspectiveCamera){
-        
+
+    static setCameraAspect(camera: THREE.PerspectiveCamera) {
+
         let aspect = window.innerWidth / window.innerHeight;
 
-        if(this.isMobile() && MobileRotationDirection.isLandscape()){
-           
+        if (this.isMobile() && MobileRotationDirection.isLandscape()) {
+
             aspect = window.innerHeight / window.innerWidth;
         }
 
@@ -91,13 +91,29 @@ class Utils {
 
         let fov: number = 70; // for PC
 
-        if(this.isMobile()) {
+        if (this.isMobile()) {
 
             fov = MobileRotationDirection.isPortrait() ? 78 : 66;
         }
-        
+
         camera.fov = fov;
         camera.updateProjectionMatrix();
+    }
+
+
+    static findAnimationChiliBottles(): THREE.Object3D[] {
+
+        const bottles: THREE.Object3D[] = [];
+        const names = ["LJJ1", "LJJ2", "LJJ3", "LJJ4", "64mmA016", "64mmB016", "64mmC016"];
+
+        names.forEach(name => {
+
+            const object = World.x().scene.getObjectByName(name);
+            bottles.push(object);
+            
+        });
+
+        return bottles;
     }
 }
 

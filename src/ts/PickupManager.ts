@@ -52,7 +52,8 @@ export class PickupManager {
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
         // 计算物体和射线的焦点
-        const intersectedObjects = this.raycaster.intersectObjects(this.getIntersectedObjects(),true);
+        const objects = Utils.findAnimationChiliBottles();
+        const intersectedObjects = this.raycaster.intersectObjects(objects, true);
 
         if (intersectedObjects.length > 0) { 
 
@@ -137,36 +138,5 @@ export class PickupManager {
         event.preventDefault();
         this.pick(this.getPickPoint(event));
 
-    }
-
-
-    ljj1: THREE.Object3D = null;
-    ljj2: THREE.Object3D = null;
-    ljj3: THREE.Object3D = null;
-    ljj4: THREE.Object3D = null;
-    ljj5: THREE.Object3D = null;
-    ljj6: THREE.Object3D = null;
-    ljj7: THREE.Object3D = null;
-
-    getIntersectedObjects = ()=>{
-        
-        this.ljj1 = this.ljj1 || this.scene.getObjectByName("LJJ1");
-        this.ljj2 = this.ljj2 || this.scene.getObjectByName("LJJ2");
-        this.ljj3 = this.ljj3 || this.scene.getObjectByName("LJJ3");
-        this.ljj4 = this.ljj4 || this.scene.getObjectByName("LJJ4");
-        this.ljj5 = this.ljj5 || this.scene.getObjectByName("64mmA016");
-        this.ljj6 = this.ljj6 || this.scene.getObjectByName("64mmB016");
-        this.ljj7 = this.ljj7 || this.scene.getObjectByName("64mmC016");
-
-        const objects = [
-            this.ljj1, 
-            this.ljj2, 
-            this.ljj3,
-            this.ljj4, 
-            this.ljj5,
-            this.ljj6, 
-            this.ljj7];
-
-        return objects;
     }
 }

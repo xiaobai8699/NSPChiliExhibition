@@ -57,7 +57,11 @@ export class World {
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
         // 需要设置antialias:ture, logarithmicDepthBuffer:false 在移动端才不会闪烁
-        this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: false });
+        this.renderer = new THREE.WebGLRenderer({ 
+            canvas, 
+            antialias: true, 
+            logarithmicDepthBuffer: false
+        });
 
         Utils.setRendererSize(this.renderer);
         
