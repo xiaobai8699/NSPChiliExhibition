@@ -5,6 +5,7 @@
     background-image: url('../asset/image/shsst.jpg');
     background-position: center;
     background-repeat:no-repeat;
+    z-index: -1;
 }
 
 /* https://www.w3school.com.cn/cssref/pr_transform.asp */

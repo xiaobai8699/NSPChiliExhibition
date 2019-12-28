@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 10:00:55
+ * @Last Modified time: 2019-12-28 14:43:48
  */
 
 // 参考：
@@ -12,6 +12,7 @@
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
 import {World} from './World';
+import {ProductManager} from './ProductManager';
 
 let pickupManager: PickupManager;
 
@@ -53,14 +54,18 @@ export class PickupManager {
         // 计算物体和射线的焦点
         const intersectedObjects = this.raycaster.intersectObjects(this.getIntersectedObjects(),true);
 
-        if (intersectedObjects.length > 0) {    
+        if (intersectedObjects.length > 0) { 
+
             this.pickedObject = intersectedObjects[0];
 
             const obj:THREE.Object3D = this.pickedObject.object;
-            //output name of selected object
-            console.log(obj.parent.name );
-            alert(obj.parent.name);
-          
+
+            const name = obj.parent.name ? obj.parent.name : obj.name;
+            
+            ProductManager.x().showProduct(name);
+            
+            console.log(`selected object: ${name}`);
+
         } else {
 
             console.log("Not found!")

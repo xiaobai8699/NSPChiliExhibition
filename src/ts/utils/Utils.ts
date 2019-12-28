@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 17:35:05
+ * @Last Modified time: 2019-12-28 11:32:37
  */
 
  import * as THREE from 'three';
@@ -91,7 +91,7 @@ class Utils {
 
         if(this.isMobile()) {
 
-            fov = MobileRotationDirection.isPortrait() ? 45 : 25;
+            fov = MobileRotationDirection.isPortrait() ? 45 : 35;
         }
         
         camera.fov = fov;
