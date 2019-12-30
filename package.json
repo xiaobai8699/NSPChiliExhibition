@@ -4,8 +4,8 @@
   "description": "",
   "main": "NSPApp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build-test": "webpack --mode=development",
+    "build-production": "webpack --mode=production",
     "start": "webpack-dev-server --open"
   },
   "author": "Li Hong <lh.work@qq.com>",
