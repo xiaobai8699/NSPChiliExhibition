@@ -1,8 +1,10 @@
 const CopyPlugin = require("copy-webpack-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-module.exports = {
-  mode: "development",
+var config = {
+  // mode: "development",
+
+  mode: "production",
 
   entry: "./src/ts/App.ts",
 
@@ -10,9 +12,6 @@ module.exports = {
     filename: "app.js",
     path: __dirname + "/dist"
   },
-
-  // Enable sourcemaps for debugging webpack's output.
-  devtool: "source-map",
 
   devServer: {
     contentBase: "./dist",
@@ -45,4 +44,14 @@ module.exports = {
 
     new CleanWebpackPlugin()
   ]
+};
+
+module.exports = (env, argv) => {
+  
+  if (argv.mode == "development") {
+    // Enable sourcemaps for debugging webpack's output.
+    config.devtool = "source-map";
+  }
+
+  return config;
 };
