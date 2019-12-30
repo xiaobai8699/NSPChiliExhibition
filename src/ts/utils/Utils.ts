@@ -108,9 +108,19 @@ class Utils {
 
         names.forEach(name => {
 
-            const object = World.x().scene.getObjectByName(name);
+            const object: any = World.x().scene.getObjectByName(name);
             bottles.push(object);
             
+            // 设置辣椒瓶的透明效果
+            object.children.forEach((o: any) => {
+
+                if (o.material.name == "pingshenA") {
+
+                    o.material.transparent = true;
+                    o.material.opacity = 0.7;
+                }
+
+            });
         });
 
         return bottles;

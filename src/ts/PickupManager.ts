@@ -7,12 +7,12 @@
 
 // 参考：
 // https://threejsfundamentals.org/threejs/lessons/threejs-picking.html
- 
+
 
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
-import {World} from './World';
-import {ProductManager} from './ProductManager';
+import { World } from './World';
+import { ProductManager } from './ProductManager';
 
 let pickupManager: PickupManager;
 
@@ -32,7 +32,7 @@ export class PickupManager {
 
         this.camera = World.x().camera;
 
-        this.scene =  World.x().scene;
+        this.scene = World.x().scene;
 
         this.canvas = World.x().renderer.domElement;
 
@@ -55,17 +55,17 @@ export class PickupManager {
         const objects = Utils.findAnimationChiliBottles();
         const intersectedObjects = this.raycaster.intersectObjects(objects, true);
 
-        if (intersectedObjects.length > 0) { 
+        if (intersectedObjects.length > 0) {
 
             this.pickedObject = intersectedObjects[0];
 
-            const obj:THREE.Object3D = this.pickedObject.object;
+            const obj: any = this.pickedObject.object;
 
             const name = obj.parent.name ? obj.parent.name : obj.name;
-            
+
             ProductManager.x().showProduct(name);
-            
-            console.log(`selected object: ${name}`);
+
+        
 
         } else {
 
@@ -81,9 +81,9 @@ export class PickupManager {
 
         if (event instanceof MouseEvent) {
 
-            position.x = event.clientX ;
+            position.x = event.clientX;
             position.y = event.clientY;
-            
+
         }
 
         else if (event instanceof TouchEvent) {
@@ -106,25 +106,25 @@ export class PickupManager {
 
         const canvasPosition = this.getCanvasRelativePosition(event);
 
-        const pickPoint:THREE.Vector2 = new THREE.Vector2();
+        const pickPoint: THREE.Vector2 = new THREE.Vector2();
 
         // 屏幕坐标转世界坐标的推导过程:
         // http://note.youdao.com/noteshare?id=fa72f3c8ccacc54a8e7ad56fa4feba1a
         // https://zhuanlan.zhihu.com/p/90295867?utm_source=wechat_session&utm_medium=social&utm_oi=615939963313983488
-        if(Utils.isMobile()){
+        if (Utils.isMobile()) {
 
-            pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
+            pickPoint.x = (canvasPosition.x / window.innerWidth) * 2 - 1;
             pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
 
-        }else {
+        } else {
 
-            pickPoint.x = (canvasPosition.x / window.innerWidth ) *  2 - 1;
+            pickPoint.x = (canvasPosition.x / window.innerWidth) * 2 - 1;
             pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
 
         }
-     
+
         return pickPoint;
-        
+
     }
 
     addEventListener = () => {
