@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 17:14:36
+ * @Last Modified time: 2019-12-30 18:11:08
  */
 
 
@@ -17,6 +17,7 @@ import { Video } from './Video';
 import {Labels} from './Labels';
 import {World} from './World';
 import { Utils } from './Utils';
+import {Audio} from './Audio';
 import { Debuger } from './Debuger';
 
 class App {
@@ -56,6 +57,8 @@ class App {
 
         Labels.setVisible(true);
 
+        Audio.playNoise();
+        
     }
 
     animationLoop = () => {

@@ -2,14 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:40:12
+ * @Last Modified time: 2019-12-30 17:51:40
  */
 
 import * as THREE from 'three';
 import { Direction } from './controls/Direction';
 import { World } from './World';
-import { DragControls } from 'three/examples/jsm/controls/DragControls';
-import { TubeBufferGeometry, Vector3 } from 'three';
+import {Const } from './Const';
 
 class Utils {
 
@@ -146,9 +145,10 @@ class Utils {
 
     static replaceNspLog() {
 
-        const oldLog: any = World.x().scene.getObjectByName("logo_D");
+        
+        const oldLog: any = World.x().scene.getObjectByName(Const.nspLogName);
 
-        const size: Vector3 = Utils.getSize(oldLog);
+        const size: THREE.Vector3 = Utils.getSize(oldLog);
 
         const geometry = new THREE.PlaneBufferGeometry(size.x, size.y);
 
@@ -167,7 +167,8 @@ class Utils {
         });
 
         const newLog = new THREE.Mesh(geometry, material);
-        newLog.name = "NSP_Log";
+        
+        newLog.name = Const.nspLogName;
 
         oldLog.getWorldPosition(newLog.position);
 
