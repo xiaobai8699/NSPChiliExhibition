@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:47:39
+ * @Last Modified time: 2019-12-30 16:54:14
  */
 
 
@@ -78,9 +78,6 @@ export class World {
 
         Utils.setRendererSize(this.renderer);
         Utils.setCameraAspect(this.camera);
-
-        //Utils.setCameraAspect()中已经调用过updateProjectionMatrix方法了,这里不用再次调用
-        //this.camera.updateProjectionMatrix();
 
     }
 }

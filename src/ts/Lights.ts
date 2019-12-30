@@ -11,7 +11,7 @@ import { Debuger } from './Debuger';
 import { Object3D } from 'three';
 import { World } from './World';
 
-export class LightManager {
+export class Lights {
 
     static spotLightHelper: THREE.SpotLightHelper;
 

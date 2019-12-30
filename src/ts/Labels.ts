@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:52:26
+ * @Last Modified time: 2019-12-30 16:52:42
  */
 
  // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
@@ -12,9 +12,9 @@
  import * as THREE from 'three';
  import {World} from './World';
 
-let labelManager: LabelManager;
+let labelInstance: Labels;
 
- export  class LabelManager {
+ export  class Labels {
 
     scene: THREE.Scene;
 
@@ -26,10 +26,10 @@ let labelManager: LabelManager;
         this.camera = World.x().camera;
     }
 
-    static x() : LabelManager {
+    static x() : Labels {
         
-        labelManager = labelManager || new LabelManager();
-        return labelManager;
+        labelInstance = labelInstance || new Labels();
+        return labelInstance;
     }
 
 

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:40:36
+ * @Last Modified time: 2019-12-30 16:53:46
  */
 
 // https://github.com/mrdoob/stats.js
@@ -13,7 +13,7 @@ import * as Stats from 'stats.js';
 import * as THREE from 'three';
 import {World} from './World';
 
-let debuger: Debuger = null;
+let debugerInstance: Debuger = null;
 
 let camera : THREE.PerspectiveCamera;
 
@@ -58,8 +58,8 @@ export class Debuger {
     }
 
     static x(): Debuger {
-        debuger = debuger || new Debuger();
-        return debuger;
+        debugerInstance = debugerInstance || new Debuger();
+        return debugerInstance;
     }
 
 

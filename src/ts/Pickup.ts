@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 15:49:38
+ * @Last Modified time: 2019-12-30 16:52:30
  */
 
 // 参考：
@@ -12,11 +12,11 @@
 import * as THREE from 'three';
 import { Utils } from './Utils';
 import { World } from './World';
-import { ProductManager } from './ProductManager';
+import { Product } from './Product';
 
-let pickupManager: PickupManager;
+let pickupInstance: Pickup;
 
-export class PickupManager {
+export class Pickup {
 
     raycaster: THREE.Raycaster;
 
@@ -39,9 +39,9 @@ export class PickupManager {
         this.addEventListener();
     }
 
-    static x(): PickupManager {
-        pickupManager = pickupManager || new PickupManager();
-        return pickupManager;
+    static x(): Pickup {
+        pickupInstance = pickupInstance || new Pickup();
+        return pickupInstance;
     }
 
     pickedObject: THREE.Object3D | any;
@@ -63,7 +63,7 @@ export class PickupManager {
 
             const name = obj.parent.name ? obj.parent.name : obj.name;
 
-            ProductManager.x().showProduct(name);
+            Product.x().showProduct(name);
 
         
 

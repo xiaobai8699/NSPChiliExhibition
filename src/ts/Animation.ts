@@ -9,12 +9,12 @@ import * as THREE from 'three';
 import {World} from './World';
 import { Utils } from './Utils';
 
-export class AnimationManager {
+export class Animation {
 
     static update() {
 
-        AnimationManager.animateAd();
-        AnimationManager.animateChili(World.x().scene);
+        Animation.animateAd();
+        Animation.animateChili(World.x().scene);
     }
 
     static bigTV: THREE.Object3D = null;
@@ -23,11 +23,11 @@ export class AnimationManager {
 
     static animateAd() {
 
-        AnimationManager.bigTV = AnimationManager.bigTV || World.x().scene.getObjectByName("BIG_AD");
-        AnimationManager.smallTV = AnimationManager.smallTV || World.x().scene.getObjectByName("SMALL_AD");
+        Animation.bigTV = Animation.bigTV || World.x().scene.getObjectByName("BIG_AD");
+        Animation.smallTV = Animation.smallTV || World.x().scene.getObjectByName("SMALL_AD");
        
-        AnimationManager.bigTV.rotation.y -= AnimationManager.speed;
-        AnimationManager.smallTV.rotation.y += AnimationManager.speed;
+        Animation.bigTV.rotation.y -= Animation.speed;
+        Animation.smallTV.rotation.y += Animation.speed;
 
     }
 

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:08:42
+ * @Last Modified time: 2019-12-30 16:52:15
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
@@ -13,9 +13,9 @@ import { World } from './World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Vector3 } from 'three';
 
-let productManager: ProductManager;
+let productInstance: Product;
 
-export class ProductManager {
+export class Product {
 
     scene: THREE.Scene;
 
@@ -45,8 +45,8 @@ export class ProductManager {
 
     static x() {
 
-        productManager = productManager || new ProductManager();
-        return productManager;
+        productInstance = productInstance || new Product();
+        return productInstance;
 
     }
 

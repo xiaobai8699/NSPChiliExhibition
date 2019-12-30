@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 09:44:32
+ * @Last Modified time: 2019-12-30 16:53:05
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -13,9 +13,9 @@ import * as THREE from 'three';
 import { Vector3 } from 'three';
 import {World} from './World';
 
-let mediaManager: MediaManager = null; 
+let videoInstance: Video = null; 
 
-export class MediaManager {
+export class Video {
 
     scene: THREE.Scene;
 
@@ -36,8 +36,8 @@ export class MediaManager {
 
 
     static x = () => {
-        mediaManager = mediaManager || new MediaManager();
-        return mediaManager;
+        videoInstance = videoInstance || new Video();
+        return videoInstance;
     }
 
     readyPlayVideo = () => {

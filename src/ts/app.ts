@@ -10,11 +10,11 @@ import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { PlayerContol } from './controls/PlayerControl';
-import { PickupManager } from './PickupManager';
-import { AnimationManager } from './AnimationManager';
-import { LightManager } from './LightManager';
-import { MediaManager } from './MediaManager';
-import {LabelManager} from './LabelManager';
+import { Pickup } from './Pickup';
+import { Animation } from './Animation';
+import { Lights } from './Lights';
+import { Video } from './Video';
+import {Labels} from './Labels';
 import {World} from './World';
 import { Utils } from './Utils';
 import { Debuger } from './Debuger';
@@ -31,11 +31,11 @@ class App {
 
         PlayerContol.x();
 
-        PickupManager.x();
+        Pickup.x();
 
-        MediaManager.x();
+        Video.x();
 
-        LabelManager.x();
+        Labels.x();
 
         Debuger.x();
 
@@ -52,9 +52,9 @@ class App {
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
         //需要最后添加灯光
-        LightManager.addLights();
+        Lights.addLights();
 
-        LabelManager.setVisible(true);
+        Labels.setVisible(true);
 
     }
 
@@ -66,13 +66,13 @@ class App {
 
             let delta = this.clock.getDelta();
 
-            AnimationManager.update();
+            Animation.update();
 
             PlayerContol.x().update(delta);
 
             Debuger.x().update(delta);
             
-            LabelManager.x().update(delta);
+            Labels.x().update(delta);
 
         }
         Debuger.x().stats.end();
