@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 15:51:25 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:40:17
+ * @Last Modified time: 2019-12-30 17:04:20
  */
 
 
@@ -12,7 +12,7 @@ enum RotationDirectionEnum {
 }
 
 
-export class MobileRotationDirection {
+export class Direction {
 
     static direction: RotationDirectionEnum = RotationDirectionEnum.Portrait;
 

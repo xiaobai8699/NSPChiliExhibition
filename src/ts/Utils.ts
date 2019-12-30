@@ -6,7 +6,7 @@
  */
 
 import * as THREE from 'three';
-import { MobileRotationDirection } from './controls/MobileRotationDirection';
+import { Direction } from './controls/Direction';
 import { World } from './World';
 import { DragControls } from 'three/examples/jsm/controls/DragControls';
 import { TubeBufferGeometry, Vector3 } from 'three';
@@ -68,7 +68,7 @@ class Utils {
         let w = window.innerWidth;
         let h = window.innerHeight;
 
-        if (this.isMobile() && MobileRotationDirection.isLandscape()) {
+        if (this.isMobile() && Direction.isLandscape()) {
 
             w = window.innerHeight;
             h = window.innerWidth;
@@ -84,7 +84,7 @@ class Utils {
 
         let aspect = window.innerWidth / window.innerHeight;
 
-        if (this.isMobile() && MobileRotationDirection.isLandscape()) {
+        if (this.isMobile() && Direction.isLandscape()) {
 
             aspect = window.innerHeight / window.innerWidth;
         }
@@ -99,7 +99,7 @@ class Utils {
 
         if (this.isMobile()) {
 
-            fov = MobileRotationDirection.isPortrait() ? 78 : 66;
+            fov = Direction.isPortrait() ? 78 : 66;
         }
 
         camera.fov = fov;

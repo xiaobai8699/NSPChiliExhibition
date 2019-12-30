@@ -2,14 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-28 16:43:08
+ * @Last Modified time: 2019-12-30 17:14:36
  */
 
 
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { PlayerContol } from './controls/PlayerControl';
+import { Controls } from './controls/Controls';
 import { Pickup } from './Pickup';
 import { Animation } from './Animation';
 import { Lights } from './Lights';
@@ -29,7 +29,7 @@ class App {
 
         World.x();
 
-        PlayerContol.x();
+        Controls.x();
 
         Pickup.x();
 
@@ -68,7 +68,7 @@ class App {
 
             Animation.update();
 
-            PlayerContol.x().update(delta);
+            Controls.x().update(delta);
 
             Debuger.x().update(delta);
             

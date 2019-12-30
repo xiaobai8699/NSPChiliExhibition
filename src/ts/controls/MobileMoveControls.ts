@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 14:17:22
+ * @Last Modified time: 2019-12-30 17:08:15
  */
 
 
@@ -16,11 +16,11 @@
 //https://www.quirksmode.org/mobile/viewports2.html
 
 import * as THREE from 'three';
-import { IPlayerContol } from './IPlayerControl';
-import { MobileRotationDirection } from './MobileRotationDirection';
+import { IControls } from './IControls';
+import { Direction } from './Direction';
 
 
-class MobileMoveControl implements IPlayerContol {
+class MobileMoveControls implements IControls {
 
     object: THREE.Camera;
 
@@ -48,7 +48,7 @@ class MobileMoveControl implements IPlayerContol {
         this.domElement = domElement;
         this.object = object;
 
-        if (MobileRotationDirection.isLandscape()) {
+        if (Direction.isLandscape()) {
 
             // https://github.com/lh2lyc/ForceLandscape
             this.domElement.classList.add("canvas-rotation");
@@ -58,7 +58,7 @@ class MobileMoveControl implements IPlayerContol {
         }
 
         const steeringWheel = document.querySelector("#steering-wheel");
-        const cls = MobileRotationDirection.isLandscape() ? "steering-wheel-postion-landscape" : "steering-wheel-position-portrait";
+        const cls = Direction.isLandscape() ? "steering-wheel-postion-landscape" : "steering-wheel-position-portrait";
         steeringWheel.classList.add(cls)
 
         this.swd.addEventListener('touchstart', this.onTouchStart, false);
@@ -103,7 +103,7 @@ class MobileMoveControl implements IPlayerContol {
 
             this.swd.style.left = left.toString();
 
-            if (MobileRotationDirection.isLandscape()) {
+            if (Direction.isLandscape()) {
 
                 if (left < this.lastLeft) {
 
@@ -143,7 +143,7 @@ class MobileMoveControl implements IPlayerContol {
 
             this.swd.style.top = top.toString();
 
-            if (MobileRotationDirection.isLandscape()) {
+            if (Direction.isLandscape()) {
 
                 if (top < this.lastTop) {
 
@@ -221,4 +221,4 @@ class MobileMoveControl implements IPlayerContol {
 }
 
 
-export { MobileMoveControl };
+export { MobileMoveControls as MobileMoveControl };

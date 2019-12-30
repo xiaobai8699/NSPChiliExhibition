@@ -2,20 +2,20 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 14:05:23
+ * @Last Modified time: 2019-12-30 17:09:47
  */
 
 
 
 import * as THREE from 'three';
-import { IPlayerContol } from './IPlayerControl';
+import { IControls } from './IControls';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
 
-class PcGameControl implements IPlayerContol {
+ export class PcControls implements IControls {
 
     object: THREE.Camera;
 
@@ -172,4 +172,3 @@ class PcGameControl implements IPlayerContol {
 }
 
 
-export { PcGameControl };

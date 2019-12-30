@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:18 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-27 11:43:59
+ * @Last Modified time: 2019-12-30 17:12:48
  */
 
 
@@ -12,11 +12,11 @@
 // https://developer.mozilla.org/zh-CN/docs/Web/API/Touch_events
 
 import * as THREE from 'three';
-import { IPlayerContol } from './IPlayerControl';
-import { MobileRotationDirection } from './MobileRotationDirection';
+import { IControls } from './IControls';
+import { Direction } from './Direction';
 
 
-class MobileRotateControl implements IPlayerContol {
+export class MobileRotateControls implements IControls {
 
     object: THREE.Camera;
 
@@ -83,7 +83,7 @@ class MobileRotateControl implements IPlayerContol {
     update = (delta: number) => {
         
         if (this.isDrag) {
-            let delta =  MobileRotationDirection.isLandscape()? this.yDelta : this.xDelta;
+            let delta =  Direction.isLandscape()? this.yDelta : this.xDelta;
             this.object.rotation.y = THREE.Math.degToRad(delta * this.rotationSpeed);
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
@@ -97,4 +97,3 @@ class MobileRotateControl implements IPlayerContol {
 }
 
 
-export { MobileRotateControl };
