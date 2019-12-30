@@ -17,7 +17,7 @@ let debuger: Debuger = null;
 
 let camera : THREE.PerspectiveCamera;
 
-let enableDebuger: boolean = false;
+let enableDebuger: boolean = true;
 
 export class Debuger {
 
@@ -194,6 +194,106 @@ export class Debuger {
         floder.add(controls, 'distance', 0, 50).onChange(function (e) {
 
             spotLight.distance = e;
+
+        });
+    }
+
+    pointLightHelper: THREE.PointLightHelper;
+
+    debugPointLight = (pointLight: THREE.PointLight, name:string) => {
+
+        if(!enableDebuger) {
+            return;
+        }
+
+        const self = this;
+
+        const floder: dat.GUI = this.lightFolder.addFolder(name);
+
+        var controls = {
+            disable:false,
+
+            helper: false,
+
+            x: pointLight.position.x,
+
+            y: pointLight.position.y,
+
+            z: pointLight.position.z,
+
+            rotationX:pointLight.rotation.x,
+
+            intensity: pointLight.intensity,
+
+            pointColor: pointLight.color.getStyle(),
+
+            
+            distance: pointLight.distance
+        }
+
+        floder.add(controls, 'disable').onChange(function (e) {
+
+            pointLight.visible = !e;
+
+        });
+        
+        floder.add(controls, 'helper').onChange(function (e) {
+
+            self.pointLightHelper = self.pointLightHelper || new THREE.PointLightHelper(pointLight);
+
+            if (e) {
+
+                self.scene.add(self.pointLightHelper);
+
+            } else {
+
+                self.scene.remove(self.pointLightHelper);
+                self.pointLightHelper.dispose();
+                self.pointLightHelper = null;
+                
+            }
+        });
+
+        floder.add(controls, "x", -50, 50).onChange(function (e) {
+
+            pointLight.position.x = e;
+
+        });
+
+        floder.add(controls, "y", -50, 50).onChange(function (e) {
+
+            pointLight.position.y = e;
+
+        });
+
+        floder.add(controls, "z", -50, 50).onChange(function (e) {
+
+            pointLight.position.z = e;
+
+        });
+
+        floder.add(controls, "rotationX", -180,180).onChange(function(e){
+
+            pointLight.rotation.x = THREE.Math.degToRad(e);
+
+        });
+
+        floder.add(controls, "intensity", 0, 5).onChange(function (e) {
+
+            pointLight.intensity = e;
+
+        });
+
+        floder.addColor(controls, 'pointColor').onChange(function (e) {
+
+            pointLight.color = new THREE.Color(e);
+
+        });
+
+
+        floder.add(controls, 'distance', 0, 50).onChange(function (e) {
+
+            pointLight.distance = e;
 
         });
     }

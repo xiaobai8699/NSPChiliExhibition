@@ -16,7 +16,7 @@ import { LightManager } from './LightManager';
 import { MediaManager } from './MediaManager';
 import {LabelManager} from './LabelManager';
 import {World} from './World';
-import { Utils } from './utils/Utils';
+import { Utils } from './Utils';
 import { Debuger } from './Debuger';
 
 class App {
@@ -47,13 +47,15 @@ class App {
 
         World.x().scene.add(gltf.scene);
         
+        Utils.replaceNspLog();
+
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
         //需要最后添加灯光
         LightManager.addLights();
 
-        const div: HTMLDivElement = document.querySelector("#labels");
-        div.style.visibility = "visible";
+        LabelManager.setVisible(true);
+
     }
 
     animationLoop = () => {

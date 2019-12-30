@@ -48,8 +48,7 @@ export class MediaManager {
 
             this.isReadPlayVideo = true;
             
-            this.video.volume = 1.0;
-            this.video.muted = false;
+            this.video.muted = true;
 
             const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
             texure.minFilter = THREE.LinearFilter;
@@ -71,8 +70,7 @@ export class MediaManager {
             tvMesh.getWorldPosition(mesh.position);
             console.log(JSON.stringify(mesh.position))
             mesh.position.z = -19.14;
-            // mesh.position.x += 4;
-            // mesh.position.y -= 0.5;
+
             this.scene.add(mesh);
 
     }

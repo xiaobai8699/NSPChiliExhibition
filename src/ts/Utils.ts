@@ -6,15 +6,17 @@
  */
 
 import * as THREE from 'three';
-import { MobileRotationDirection } from '../controls/MobileRotationDirection';
-import { World } from '../World';
-
+import { MobileRotationDirection } from './controls/MobileRotationDirection';
+import { World } from './World';
+import { DragControls } from 'three/examples/jsm/controls/DragControls';
+import { TubeBufferGeometry, Vector3 } from 'three';
 
 class Utils {
 
     // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
     // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Browser_detection_using_the_user_agent
     static isMobile(): boolean {
+
         let userAgent = navigator.userAgent || navigator.vendor;
 
         return (/windows phone/i.test(userAgent)) ||
@@ -29,10 +31,13 @@ class Utils {
     }
 
     static dumpVec3(v3: any, precision = 3) {
+
         return `${v3.x.toFixed(precision)}, ${v3.y.toFixed(precision)}, ${v3.z.toFixed(precision)}`;
+
     }
 
     static dumpObject(obj: any, lines: any = [], isLast = true, prefix = ''): String[] {
+
         const localPrefix = isLast ? '└─' : '├─';
 
         lines.push(`${prefix}${prefix ? localPrefix : ''}${obj.name || '*no-name*'} [${obj.type}]`);
@@ -55,6 +60,7 @@ class Utils {
         });
 
         return lines;
+
     }
 
     static setRendererSize(renderer: THREE.WebGLRenderer) {
@@ -110,7 +116,7 @@ class Utils {
 
             const object: any = World.x().scene.getObjectByName(name);
             bottles.push(object);
-            
+
             // 设置辣椒瓶的透明效果
             object.children.forEach((o: any) => {
 
@@ -118,12 +124,59 @@ class Utils {
 
                     o.material.transparent = true;
                     o.material.opacity = 0.7;
+                    o.material.side = THREE.DoubleSide;
+
                 }
 
             });
         });
 
         return bottles;
+    }
+
+    static getSize(object: THREE.Object3D): THREE.Vector3 {
+
+        const box3 = new THREE.Box3();
+        box3.setFromObject(object)
+        const size: THREE.Vector3 = box3.getSize(new THREE.Vector3());
+
+        return size;
+
+    }
+
+    static replaceNspLog() {
+
+        const oldLog: any = World.x().scene.getObjectByName("logo_D");
+
+        const size: Vector3 = Utils.getSize(oldLog);
+
+        const geometry = new THREE.PlaneBufferGeometry(size.x, size.y);
+
+        const texture = new THREE.TextureLoader().load("./asset/image/nsplog.png");
+
+        // 如何绘制透明物体: https://threejsfundamentals.org/threejs/lessons/threejs-transparency.html
+        const material = new THREE.MeshPhongMaterial({
+
+            map: texture,
+
+            transparent: true,
+
+            alphaTest: .5,
+
+            side: THREE.DoubleSide,
+        });
+
+        const newLog = new THREE.Mesh(geometry, material);
+        newLog.name = "NSP_Log";
+
+        oldLog.getWorldPosition(newLog.position);
+
+        newLog.rotation.x += THREE.Math.degToRad(14.6);
+
+        oldLog.parent.remove(oldLog);
+
+        World.x().scene.add(newLog);
+
     }
 }
 

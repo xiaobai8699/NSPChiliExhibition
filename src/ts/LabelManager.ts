@@ -32,6 +32,12 @@ let labelManager: LabelManager;
         return labelManager;
     }
 
+
+    static setVisible(visible: boolean) {
+        const div: HTMLDivElement = document.querySelector("#labels");
+        div.style.visibility =  visible ? "visible" : "hidden";
+    }
+
     update = (delta: number) => {
 
        let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName("64mmA016");

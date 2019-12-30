@@ -10,7 +10,7 @@
 
 
 import * as THREE from 'three';
-import { Utils } from './utils/Utils';
+import { Utils } from './Utils';
 import { World } from './World';
 import { ProductManager } from './ProductManager';
 

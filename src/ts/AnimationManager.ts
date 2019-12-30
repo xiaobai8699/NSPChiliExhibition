@@ -7,7 +7,7 @@
 
 import * as THREE from 'three';
 import {World} from './World';
-import { Utils } from './utils/Utils';
+import { Utils } from './Utils';
 
 export class AnimationManager {
 
@@ -26,8 +26,8 @@ export class AnimationManager {
         AnimationManager.bigTV = AnimationManager.bigTV || World.x().scene.getObjectByName("BIG_AD");
         AnimationManager.smallTV = AnimationManager.smallTV || World.x().scene.getObjectByName("SMALL_AD");
        
-        AnimationManager.bigTV.rotation.y += AnimationManager.speed;
-        AnimationManager.smallTV.rotation.y -= AnimationManager.speed;
+        AnimationManager.bigTV.rotation.y -= AnimationManager.speed;
+        AnimationManager.smallTV.rotation.y += AnimationManager.speed;
 
     }
 
@@ -38,7 +38,7 @@ export class AnimationManager {
        this.bottles = this.bottles || Utils.findAnimationChiliBottles();
  
        this.bottles.forEach( (obj: THREE.Object3D) => {
-            obj.rotation.z += 0.02;
+            obj.rotation.z += 0.01;
        });
 
     }

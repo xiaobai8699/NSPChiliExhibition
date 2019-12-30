@@ -7,7 +7,7 @@
 
 
 import * as THREE from 'three';
-import { Utils } from './utils/Utils';
+import { Utils } from './Utils';
 
 let world: World;
 
@@ -60,7 +60,7 @@ export class World {
         this.renderer = new THREE.WebGLRenderer({ 
             canvas, 
             antialias: true, 
-            logarithmicDepthBuffer: false
+            logarithmicDepthBuffer: Utils.isMobile() ? false:  true, //PC端需要开启，否则辣椒瓶离摄像机远了闪烁
         });
 
         Utils.setRendererSize(this.renderer);

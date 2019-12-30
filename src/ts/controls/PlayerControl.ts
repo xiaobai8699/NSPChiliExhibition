@@ -9,7 +9,7 @@ import { IPlayerContol } from './IPlayerControl';
 import { PcGameControl } from './PcGameControl';
 import { MobileGameControl } from './MobileGameControl';
 import {World} from '../World';
-import { Utils } from '../utils/Utils';
+import { Utils } from '../Utils';
 
 let playerContol: PlayerContol;
 

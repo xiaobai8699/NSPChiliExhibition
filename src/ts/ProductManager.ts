@@ -8,7 +8,7 @@
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
 
 import * as THREE from 'three';
-import { Utils } from './utils/Utils';
+import { Utils } from './Utils';
 import { World } from './World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Vector3 } from 'three';
@@ -55,7 +55,11 @@ export class ProductManager {
         let canvas: HTMLCanvasElement = document.querySelector("#product-canvas");
 
         //需要设置alpha: ture
-        this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        this.renderer = new THREE.WebGLRenderer({ 
+            canvas, 
+            antialias: true, 
+            alpha: true 
+        });
 
         this.renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
@@ -90,7 +94,7 @@ export class ProductManager {
         this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
         this.orbitControls.minDistance = 1;
         this.orbitControls.autoRotate = true;
-        this.orbitControls.autoRotateSpeed = 8;
+        this.orbitControls.autoRotateSpeed = -4;
         this.orbitControls.enableDamping = true;
     }
 
@@ -117,18 +121,10 @@ export class ProductManager {
 
     }
 
-    getObjectSize = (object: THREE.Object3D): THREE.Vector3 => {
-
-        const box3 = new THREE.Box3();
-        box3.setFromObject(object)
-        const size: THREE.Vector3 = box3.getSize(new Vector3());
-        return size;
-
-    }
 
     resetCameraPosition = (object: THREE.Object3D) => {
 
-        const size: THREE.Vector3 = this.getObjectSize(object);
+        const size: THREE.Vector3 = Utils.getSize(object);
         const length: number = size.length();
 
         this.camera.position.set(0, size.y / 2, length);
