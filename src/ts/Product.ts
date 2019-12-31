@@ -83,7 +83,7 @@ export class Product {
 
         this.camera.near = 0.1;
 
-        this.camera.far = 5;
+        this.camera.far = 100;
 
         this.camera.fov = 15;
 
@@ -92,7 +92,7 @@ export class Product {
         this.scene.add(this.camera);
 
         this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
-        this.orbitControls.minDistance = 1;
+        this.orbitControls.minDistance = 3;
         this.orbitControls.autoRotate = true;
         this.orbitControls.autoRotateSpeed = -4;
         this.orbitControls.enableDamping = true;
@@ -127,11 +127,11 @@ export class Product {
         const size: THREE.Vector3 = Utils.getSize(object);
         const length: number = size.length();
 
-        this.camera.position.set(0, size.y / 2, length);
-        this.camera.lookAt(object.position);
-        // this.camera.updateProjectionMatrix();
+        this.camera.position.set(0, size.y / 2, length*3);
+        this.camera.updateProjectionMatrix();
 
-        this.orbitControls.maxDistance = length * 3;
+        this.orbitControls.target = object.position;
+        this.orbitControls.maxDistance = length * 5;
     }
 
     addedObject: THREE.Object3D = null;
