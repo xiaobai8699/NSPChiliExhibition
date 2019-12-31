@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 18:11:08
+ * @Last Modified time: 2019-12-31 11:38:27
  */
 
 
@@ -18,6 +18,7 @@ import {Labels} from './Labels';
 import {World} from './World';
 import { Utils } from './Utils';
 import {Audio} from './Audio';
+import {Visitor} from  './Visitor';
 import { Debuger } from './Debuger';
 
 class App {
@@ -48,10 +49,6 @@ class App {
 
         World.x().scene.add(gltf.scene);
         
-        Utils.replaceNspLog();
-
-        World.x().renderer.setAnimationLoop(this.animationLoop);
-
         //需要最后添加灯光
         Lights.addLights();
 
@@ -59,6 +56,12 @@ class App {
 
         Audio.playNoise();
         
+        Visitor.x().newAllVisitor();
+        
+        Utils.replaceNspLog();
+
+        World.x().renderer.setAnimationLoop(this.animationLoop);
+
     }
 
     animationLoop = () => {
@@ -76,6 +79,8 @@ class App {
             Debuger.x().update(delta);
             
             Labels.x().update(delta);
+
+            Visitor.x().update();
 
         }
         Debuger.x().stats.end();
