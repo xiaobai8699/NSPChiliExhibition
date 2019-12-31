@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 10:42:45
+ * @Last Modified time: 2019-12-31 11:48:34
  */
 
 import * as THREE from 'three';
@@ -165,7 +165,6 @@ class Utils {
 
         const texture = new THREE.TextureLoader().load("./asset/image/nsplog.png");
 
-        // 如何绘制透明物体: https://threejsfundamentals.org/threejs/lessons/threejs-transparency.html
         const material = new THREE.MeshPhongMaterial({
 
             map: texture,
