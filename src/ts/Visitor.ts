@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 11:46:11
+ * @Last Modified time: 2019-12-31 11:48:25
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -17,7 +17,6 @@ let visitorInstance: Visitor = null;
 
 export class Visitor {
 
-    //https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set
     visitors: Set<THREE.Mesh>;
 
     constructor() {
@@ -71,7 +70,6 @@ export class Visitor {
 
                 if (mesh) {
 
-                    // 如何绘制透明物体: https://threejsfundamentals.org/threejs/lessons/threejs-transparency.html
                     const material = new THREE.MeshStandardMaterial({
 
                         map: texture,
@@ -118,7 +116,7 @@ export class Visitor {
 
         this.visitors.forEach( v => {
 
-                // 实时让观众与摄像机方向保持一直
+                // 实时让观众与摄像机方向保持一直, 否则从观众侧面看，观众会是一条线
                 v.rotation.y = World.x().camera.rotation.y;
 
         });
