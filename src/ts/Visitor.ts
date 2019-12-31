@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 11:48:25
+ * @Last Modified time: 2019-12-31 17:48:11
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -35,22 +35,18 @@ export class Visitor {
 
         this.visitors.clear();
 
-        const names = new Set(["people01A"]);
+        const names = new Set();
 
-        names.forEach(name => {
+        for (let i = 1; i <= 21; i++){
 
-            const mesh: any = World.x().scene.getObjectByName(name);
+            names.add(`people0${i}A`)
 
-            this.visitors.add(mesh);
+        }
 
-            mesh.material.transparent = true;
+        names.forEach((name: string) => {
 
-            mesh.material.alphaTest = 0.5;
-
-            mesh.material.side = THREE.DoubleSide;
-
-            mesh.material.needsUpdate = true;
-
+            this.newVisitor(name);
+            
         });
 
     }
@@ -66,7 +62,7 @@ export class Visitor {
 
             texture => {
 
-                const mesh: any = <THREE.Mesh>World.x().scene.getObjectByName(name);
+                const mesh: any = World.x().scene.getObjectByName(name);
 
                 if (mesh) {
 
@@ -95,6 +91,7 @@ export class Visitor {
 
                     World.x().scene.add(visitor);
 
+                    this.visitors.add(visitor);
                 }
 
                 else {
@@ -107,7 +104,7 @@ export class Visitor {
             undefined,
 
             err => {
-                console.log(`Visitor: load texture failed! ${err}`)
+                console.log(`[Visitor]: load texture failed! ${err}`)
             });
     }
 
