@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 17:51:40
+ * @Last Modified time: 2019-12-31 10:42:45
  */
 
 import * as THREE from 'three';
@@ -142,10 +142,21 @@ class Utils {
         return size;
 
     }
-
+    
     static replaceNspLog() {
 
-        
+        /*
+        const mesh: any = <THREE.Mesh>World.x().scene.getObjectByName(Const.nspLogName);
+
+        mesh.material.transparent = true;
+
+        mesh.material.alphaTest = 0.5;
+
+        mesh.material.side = THREE.DoubleSide;
+
+        mesh.material.needsUpdate = true;
+        */
+
         const oldLog: any = World.x().scene.getObjectByName(Const.nspLogName);
 
         const size: THREE.Vector3 = Utils.getSize(oldLog);
