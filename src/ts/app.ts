@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 11:38:27
+ * @Last Modified time: 2020-01-02 17:48:34
  */
 
 
@@ -49,14 +49,13 @@ class App {
 
         World.x().scene.add(gltf.scene);
         
-        //需要最后添加灯光
         Lights.addLights();
 
-        Labels.setVisible(true);
+        //Labels.setVisible(true);
 
         Audio.playNoise();
         
-        Visitor.x().newAllVisitor();
+        Visitor.x().newAllVisitors();
         
         Utils.replaceNspLog();
 
@@ -78,9 +77,9 @@ class App {
 
             Debuger.x().update(delta);
             
-            Labels.x().update(delta);
+            //Labels.x().update(delta);
 
-            Visitor.x().update();
+            Visitor.x().update(delta);
 
         }
         Debuger.x().stats.end();
