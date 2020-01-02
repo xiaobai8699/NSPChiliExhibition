@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 17:50:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 09:49:34
+ * @Last Modified time: 2020-01-02 17:29:49
  */
 
 export class Const {
@@ -14,10 +14,16 @@ export class Const {
     static readonly videoUrl: string = "";
 
 
-    static visitorUrl(path: string): string {
+    static staticVisitorUrl(name: string): string {
 
-        return "./asset/image/visitor/"+ path + ".png";
+        return "./asset/image/visitor/static/"+ name + ".png";
         
     }
     
+
+    static dynamicVisitorUrl(name: string) {
+
+        return "./asset/image/visitor/dynamic/"+ name + ".png";
+
+    }
 }
