@@ -2,15 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-03 13:52:44 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-03 15:43:33
+ * @Last Modified time: 2020-01-03 15:44:49
  */
 
 //参考: https://docs.microsoft.com/zh-cn/windows/uwp/get-started/get-started-tutorial-game-js3d
 
 import * as THREE from 'three';
-import { Utils } from '../Utils';
 import { World } from '../World';
-import { Raycaster, Vector3 } from 'three';
 
 
 export class Collision {
@@ -56,7 +54,7 @@ export class Collision {
         World.x().camera.getWorldPosition(origin);
         origin.y = 0.2;
 
-        const rayCaster = new Raycaster(origin,direction);
+        const rayCaster = new THREE.Raycaster(origin,direction);
 
         const intersectedObjects = rayCaster.intersectObjects(World.x().scene.children, true);
 
