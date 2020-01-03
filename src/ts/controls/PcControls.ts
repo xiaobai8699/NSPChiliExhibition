@@ -30,9 +30,15 @@ import { IControls } from './IControls';
         this.domElement.addEventListener('mousedown', this.onMouseDown, false);
         this.domElement.addEventListener('mousemove', this.onMouseMove, false);
         this.domElement.addEventListener('mouseup', this.onMouseUp, false);
+        this.domElement.addEventListener('mouseleave', this.onMouseleave, false);
 
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
+
+        //需要调用focus方法后canvas元素才会响应keydown事件
+        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
+        this.domElement.focus();
+        
     }
 
     //鼠标上下左右转动
@@ -49,10 +55,6 @@ import { IControls } from './IControls';
     isDrag: boolean = false;
 
     onMouseDown = (e: MouseEvent) => {
-
-        //需要调用focus方法后canvas元素才会响应keydown事件
-        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
-        this.domElement.focus();
 
         e.preventDefault();
         e.stopPropagation();
@@ -78,6 +80,12 @@ import { IControls } from './IControls';
     }
 
     onMouseUp = (e: MouseEvent) => {
+
+        this.isDrag = false;
+    }
+
+    onMouseleave = (e: MouseEvent) => {
+
         this.isDrag = false;
     }
 
