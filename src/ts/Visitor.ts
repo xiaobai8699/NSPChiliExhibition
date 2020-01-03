@@ -84,7 +84,7 @@ export class Visitor {
 
     newAllDynamicVisitors = () => {
 
-        const names = ["people022A","people023A","people024A","people025A"];
+        const names = ["people022A","people023A","people024A","people025A", "people026A"];
         
         names.forEach( name => {
 
