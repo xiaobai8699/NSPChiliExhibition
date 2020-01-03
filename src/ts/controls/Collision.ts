@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-03 13:52:44 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-03 15:44:49
+ * @Last Modified time: 2020-01-03 15:54:13
  */
 
 //参考: https://docs.microsoft.com/zh-cn/windows/uwp/get-started/get-started-tutorial-game-js3d
@@ -10,32 +10,47 @@
 import * as THREE from 'three';
 import { World } from '../World';
 
+let collisionInstance: Collision;
 
 export class Collision {
 
+    rayCaster: THREE.Raycaster;
 
-    static detect(moveForward=false,moveBackward=false,moveLeft=false,moveRight=false): boolean {
+    constructor() {
+
+        this.rayCaster = new THREE.Raycaster();
+
+    }
+
+    static x(): Collision {
+
+        collisionInstance = collisionInstance || new Collision();
+        return collisionInstance;
+
+    }
+
+     detect= (moveForward = false, moveBackward = false, moveLeft = false, moveRight = false): boolean => {
 
         //不移动就不检测
-        if((moveBackward || moveBackward || moveLeft || moveRight) == false) {
+        if ((moveForward || moveBackward || moveLeft || moveRight) == false) {
             return;
         }
 
         let rotationMatrix: THREE.Matrix4;
 
-        if(moveBackward) {
+        if (moveBackward) {
 
             rotationMatrix = new THREE.Matrix4();
             rotationMatrix.makeRotationY(THREE.Math.degToRad(180));
         }
 
-        else if(moveLeft) {
+        else if (moveLeft) {
 
             rotationMatrix = new THREE.Matrix4();
             rotationMatrix.makeRotationY(THREE.Math.degToRad(90));
         }
 
-        else if(moveRight) {
+        else if (moveRight) {
 
             rotationMatrix = new THREE.Matrix4();
             rotationMatrix.makeRotationY(THREE.Math.degToRad(270));
@@ -43,8 +58,8 @@ export class Collision {
 
         let direction = new THREE.Vector3();
         World.x().camera.getWorldDirection(direction);
-        
-        if(rotationMatrix != undefined) {
+
+        if (rotationMatrix != undefined) {
             //将光线投射方向与移动方向保持一直
             direction.applyMatrix4(rotationMatrix);
         }
@@ -52,17 +67,16 @@ export class Collision {
 
         let origin = new THREE.Vector3();
         World.x().camera.getWorldPosition(origin);
-        origin.y = 0.2;
+        origin.y = 0.3;
 
-        const rayCaster = new THREE.Raycaster(origin,direction);
+        this.rayCaster.set(origin, direction);
+        const intersectedObjects = this.rayCaster.intersectObjects(World.x().scene.children, true);
+        
+        if (intersectedObjects.length > 0) {
 
-        const intersectedObjects = rayCaster.intersectObjects(World.x().scene.children, true);
+            for (let i = 0; i < intersectedObjects.length; i++) {
 
-        if( intersectedObjects.length > 0 ) {
-
-            for (let i = 0; i < intersectedObjects.length; i++ ){
-
-                if(intersectedObjects[i].distance < 2) {
+                if (intersectedObjects[i].distance < 2) {
 
                     return true;
                 }
@@ -71,7 +85,7 @@ export class Collision {
 
             return false;
 
-        }else {
+        } else {
 
             return false;
         }
