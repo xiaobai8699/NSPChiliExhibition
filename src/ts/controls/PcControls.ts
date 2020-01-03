@@ -2,21 +2,21 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-03 14:10:35
+ * @Last Modified time: 2020-01-03 15:40:06
  */
 
 
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import {Collision } from './Collision';
+import { Collision } from './Collision';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
 // https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js
 
 
- export class PcControls implements IControls {
+export class PcControls implements IControls {
 
     object: THREE.Camera;
 
@@ -35,7 +35,7 @@ import {Collision } from './Collision';
 
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
-        
+
     }
 
     //鼠标上下左右转动
@@ -153,28 +153,24 @@ import {Collision } from './Collision';
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
 
-        // if(Collision.detect()){
-        //     return;
-        // }
-        
+        if (Collision.detect(this.moveForward, this.moveBackward, this.moveLeft, this.moveRight)) {
+            return;
+        }
+
         if (this.moveForward) {
-            if (this.object.position.z >= -7)
-                this.object.translateZ(-this.moveSpeed * delta);
+            this.object.translateZ(-this.moveSpeed * delta);
         }
 
         if (this.moveBackward) {
-            if (this.object.position.z <= 19)
-                this.object.translateZ(this.moveSpeed * delta);
+            this.object.translateZ(this.moveSpeed * delta);
         }
 
         if (this.moveLeft) {
-            if (this.object.position.x >= -14)
-                this.object.translateX(-this.moveSpeed * delta);
+            this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (this.moveRight) {
-            if (this.object.position.x <= 17.4)
-                this.object.translateX(this.moveSpeed * delta);
+            this.object.translateX(this.moveSpeed * delta);
         }
     }
 
