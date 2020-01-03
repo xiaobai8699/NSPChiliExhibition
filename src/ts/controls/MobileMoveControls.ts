@@ -14,6 +14,7 @@
 //https://developer.mozilla.org/zh-CN/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
 //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
 //https://www.quirksmode.org/mobile/viewports2.html
+// H5游戏开发:横屏适配 https://zhuanlan.zhihu.com/p/30577906
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
