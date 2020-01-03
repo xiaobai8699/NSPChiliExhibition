@@ -221,7 +221,7 @@ class DynamicVisitorSprite {
         
 
         if(this.index == this.count) {
-            this.index = 1;
+            this.index = 0;
         }
 
         if(this.image) {
