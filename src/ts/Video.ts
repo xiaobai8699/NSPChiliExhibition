@@ -12,6 +12,7 @@
 import * as THREE from 'three';
 import { Vector3 } from 'three';
 import {World} from './World';
+import { Utils } from './Utils';
 
 let videoInstance: Video = null; 
 
@@ -21,7 +22,7 @@ export class Video {
 
     video: HTMLVideoElement;
 
-    isReadPlayVideo: boolean;
+    videoMesh: THREE.Mesh = null;
 
     constructor() {
 
@@ -30,8 +31,11 @@ export class Video {
         this.video = document.querySelector("#video");
 
         const canvas =  document.querySelector("#canvas");
-        canvas.addEventListener("mousedown", this.playVideo, false);
-        canvas.addEventListener("touchstart", this.playVideo, false);
+        canvas.addEventListener('keydown', this.onKeyDown, false);
+       // canvas.addEventListener("mousedown", this.playVideo, false);
+        //canvas.addEventListener("touchstart", this.playVideo, false);
+
+        this.video.addEventListener("ended",this.onVideoEnded, false);
     }
 
 
@@ -42,36 +46,26 @@ export class Video {
 
     readyPlayVideo = () => {
 
-            if(this.isReadPlayVideo) {
-                return;
-            }
-
-            this.isReadPlayVideo = true;
+            if(this.videoMesh) return;
             
-            this.video.muted = true;
-
             const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
-            texure.minFilter = THREE.LinearFilter;
-            texure.magFilter = THREE.LinearFilter;
-            texure.format = THREE.RGBAFormat;
-            texure.wrapS = texure.wrapT = THREE.ClampToEdgeWrapping;
             texure.needsUpdate = true;
 
             const tvMesh: any = this.scene.getObjectByName("TV");
 
-            const box3: THREE.Box3 = new THREE.Box3();
-            box3.setFromObject(tvMesh);
-            const size: THREE.Vector3 = box3.getSize(new Vector3());
+            const size: THREE.Vector3 = Utils.getSize(tvMesh);
 
             const mat = new THREE.MeshStandardMaterial({ map: texure });
             mat.side = THREE.FrontSide;
-            const geo = new THREE.BoxGeometry(size.x, size.y, 1);
-            const mesh = new THREE.Mesh(geo, mat);
-            tvMesh.getWorldPosition(mesh.position);
-            console.log(JSON.stringify(mesh.position))
-            mesh.position.z = -19.14;
 
-            this.scene.add(mesh);
+            const geo = new THREE.BoxGeometry(size.x, size.y, 1);
+
+            this.videoMesh = new THREE.Mesh(geo, mat);
+            tvMesh.getWorldPosition(this.videoMesh.position);
+          
+            this.videoMesh.position.z = -19.14;
+
+            this.scene.add(this.videoMesh);
 
     }
     
@@ -81,9 +75,34 @@ export class Video {
          
         this.readyPlayVideo();
 
+        this.video.volume = 1;
+        this.video.muted = false;
+
         this.video.play().then(xrh=>{
 
         });
+
+        
+    }
+
+    onKeyDown = (event: KeyboardEvent) => {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        //p
+        if(event.keyCode == 80) {
+
+            this.playVideo();
+
+        }
+
+    }
+
+    onVideoEnded = () => {
+
+       World.x().scene.remove(this.videoMesh);
+        this.videoMesh = null;
 
     }
 }

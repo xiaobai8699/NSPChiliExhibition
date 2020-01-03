@@ -94,7 +94,7 @@ export class Product {
         this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
         this.orbitControls.minDistance = 3;
         this.orbitControls.autoRotate = true;
-        this.orbitControls.autoRotateSpeed = -4;
+        this.orbitControls.autoRotateSpeed = -6;
         this.orbitControls.enableDamping = true;
     }
 
@@ -166,12 +166,10 @@ export class Product {
         }
 
         this.scene.dispose();
-        this.renderer.clearColor();
-        this.renderer.clearDepth();
-        this.renderer.clearStencil();
-
+ 
         const div: HTMLDivElement = document.querySelector("#product-container");
         div.style.visibility = "hidden";
+
     }
 
 

@@ -2,13 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 17:09:47
+ * @Last Modified time: 2020-01-03 14:10:35
  */
 
 
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
+import {Collision } from './Collision';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782
@@ -34,10 +35,6 @@ import { IControls } from './IControls';
 
         this.domElement.addEventListener('keydown', this.onKeyDown, false);
         this.domElement.addEventListener('keyup', this.onKeyUp, false);
-
-        //需要调用focus方法后canvas元素才会响应keydown事件
-        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
-        this.domElement.focus();
         
     }
 
@@ -58,6 +55,10 @@ import { IControls } from './IControls';
 
         e.preventDefault();
         e.stopPropagation();
+
+        //需要调用focus方法后canvas元素才会响应keydown事件
+        //https://github.com/mrdoob/three.js/blob/master/examples/js/controls/FirstPersonControls.js#L96
+        this.domElement.focus();
 
         this.isDrag = true;
         this.lastX = e.pageX;
@@ -142,7 +143,7 @@ import { IControls } from './IControls';
 
     };
 
-    moveSpeed: number = 5;
+    moveSpeed: number = 3;
     rotationSpeed: number = 0.08;
 
     update = (delta: number) => {
@@ -152,6 +153,10 @@ import { IControls } from './IControls';
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
 
+        // if(Collision.detect()){
+        //     return;
+        // }
+        
         if (this.moveForward) {
             if (this.object.position.z >= -7)
                 this.object.translateZ(-this.moveSpeed * delta);

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-02 18:02:04
+ * @Last Modified time: 2020-01-03 14:17:35
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -84,7 +84,7 @@ export class Visitor {
 
     newAllDynamicVisitors = () => {
 
-        const names = ["people022A"];
+        const names = ["people022A","people023A","people024A","people025A"];
         
         names.forEach( name => {
 
