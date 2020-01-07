@@ -114,7 +114,7 @@ export class Visitor {
 
         this.allVisitors.forEach(v => {
 
-            // 实时让观众与摄像机方向保持一直, 否则从观众侧面看，观众会是一条线
+            // 实时让观众与摄像机方向保持一直
             v.rotation.y = World.x().camera.rotation.y;
 
         });
@@ -122,7 +122,7 @@ export class Visitor {
 
         this.sprites.forEach(v => {
 
-            v.draw();
+            // v.draw();
 
         });
     }
@@ -136,7 +136,7 @@ export class Visitor {
 
             const material = new THREE.MeshStandardMaterial({
 
-                map: texture,
+                 map:  texture,
 
                 transparent: true,
 
