@@ -63,7 +63,7 @@ export class Video {
             this.videoMesh = new THREE.Mesh(geo, mat);
             tvMesh.getWorldPosition(this.videoMesh.position);
           
-            this.videoMesh.position.z = -19.14;
+             this.videoMesh.position.z = -19.14;
 
             this.scene.add(this.videoMesh);
 
