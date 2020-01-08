@@ -81,7 +81,7 @@ export class ControlMap {
 
         const canVerticalMove = (touch.clientY >= this.map.offsetTop && touch.clientY < this.map.offsetTop + this.map.clientHeight);
 
-        if (!canHorizontalMove && !canVerticalMove) {
+        if (!canHorizontalMove || !canVerticalMove) {
             return;
         }
 
