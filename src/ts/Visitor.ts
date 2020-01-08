@@ -34,7 +34,14 @@ export class Visitor {
     newAllVisitors = () => {
 
         this.newAllStaticVisitor();
+
+        // const isPC = Utils.isMobile() == false
+        // if (isPC) {
+        //     this.newAllDynamicVisitors();
+        // }
+
         this.newAllDynamicVisitors();
+
 
     }
 
@@ -84,12 +91,12 @@ export class Visitor {
 
     newAllDynamicVisitors = () => {
 
-        const names = ["people022A","people023A","people024A","people025A", "people026A"];
-        
-        names.forEach( name => {
+        const names = ["people022A", "people023A", "people024A", "people025A", "people026A"];
 
-          const s = this.newDynamicVisitorSprite(name);
-          this.sprites.add(s);
+        names.forEach(name => {
+
+            const s = this.newDynamicVisitorSprite(name);
+            this.sprites.add(s);
 
         });
     }
@@ -119,11 +126,9 @@ export class Visitor {
 
         });
 
-
+        const isPC = Utils.isMobile() == false
         this.sprites.forEach(v => {
-
-             v.draw();
-
+            v.draw();
         });
     }
 
@@ -136,7 +141,7 @@ export class Visitor {
 
             const material = new THREE.MeshStandardMaterial({
 
-                 map:  texture,
+                map: texture,
 
                 transparent: true,
 
@@ -200,7 +205,7 @@ class DynamicVisitorSprite {
         this.index = 0;
 
         this.count = 46;
-        
+
         this.image = null;
 
     }
@@ -209,22 +214,22 @@ class DynamicVisitorSprite {
 
     draw = () => {
 
-        if(this.loading) return;
+        if (this.loading) return;
 
         const now = Date.now();
         const interval = (now - this.lastFrameTime) / 1000;
         const fps = (1 / 15);
-        if(this.lastFrameTime != 0 && interval < fps) {
+        if (this.lastFrameTime != 0 && interval < fps) {
             return;
         }
         this.lastFrameTime = now;
-        
 
-        if(this.index == this.count) {
+
+        if (this.index == this.count) {
             this.index = 0;
         }
 
-        if(this.image) {
+        if (this.image) {
 
             const size = 512;
 
@@ -254,7 +259,7 @@ class DynamicVisitorSprite {
             image.src = Const.dynamicVisitorUrl(this.name);
 
             image.onload = () => {
-                
+
                 self.loading = false;
 
                 self.image = image;
