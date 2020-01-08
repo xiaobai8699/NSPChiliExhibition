@@ -28,9 +28,9 @@ export class Audio {
 
         const sound = new THREE.PositionalAudio(listener);
 
-        const url = Const.audioUrl + "./asset/audio/noise.mp3";
         const audioLoader = new THREE.AudioLoader();
-        audioLoader.load(url, (buffer: any) =>{
+        
+        audioLoader.load(Const.audioUrl, (buffer: any) =>{
             
             sound.setBuffer(buffer);
             sound.setRefDistance(10); // 距离声源10开始衰减

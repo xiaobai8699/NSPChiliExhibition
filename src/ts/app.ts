@@ -105,7 +105,7 @@ class App {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-        './asset/model/nsp.glb',
+        'http://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/model/nsp.glb',
 
         glft => {
             try {
@@ -118,14 +118,14 @@ class App {
                 }
             }
             catch (e) {
-                console.warn(e);
+                console.error(e);
                 alert(`应用异常(${e})`);
             }
         },
 
         xhr => {
             let p = (xhr.loaded / xhr.total) * 100;
-            progress.style.width = `${p}%`;
+            progress.style.width = `${100-p}%`;
             progressText.innerText = `${p.toFixed(2)}%`;
             if (p >= 100) {
                 progressText.innerText = "正在进入展馆，请稍候..";

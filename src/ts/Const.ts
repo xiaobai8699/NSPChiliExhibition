@@ -7,23 +7,26 @@
 
 export class Const {
 
+    static readonly osspath: string = "http://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/";
+
     static readonly nspLogName: string = "logo_D";
 
-    static readonly audioUrl: string = "";
+    static readonly audioUrl: string = `${Const.osspath}audio/noise.mp3`;
 
-    static readonly videoUrl: string = "";
+    static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
 
+    static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
     static staticVisitorUrl(name: string): string {
 
-        return "./asset/image/visitor/static/"+ name + ".png";
+        return `${this.osspath}image/visitor/static/${name}.png`;
         
     }
     
 
     static dynamicVisitorUrl(name: string) {
 
-        return "./asset/image/visitor/dynamic/"+ name + ".png";
+        return `${this.osspath}image/visitor/dynamic/${name}.png`;
 
     }
 }

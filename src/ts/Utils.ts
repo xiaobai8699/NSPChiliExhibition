@@ -146,17 +146,6 @@ class Utils {
     
     static replaceNspLog() {
 
-        /*
-        const mesh: any = <THREE.Mesh>World.x().scene.getObjectByName(Const.nspLogName);
-
-        mesh.material.transparent = true;
-
-        mesh.material.alphaTest = 0.5;
-
-        mesh.material.side = THREE.DoubleSide;
-
-        mesh.material.needsUpdate = true;
-        */
 
         const oldLog: any = World.x().scene.getObjectByName(Const.nspLogName);
 
@@ -164,7 +153,7 @@ class Utils {
 
         const geometry = new THREE.PlaneBufferGeometry(size.x, size.y);
 
-        const texture = new THREE.TextureLoader().load("./asset/image/nsplog.png");
+        const texture = new THREE.TextureLoader().load(Const.logoUrl);
 
         const material = new THREE.MeshPhongMaterial({
 
