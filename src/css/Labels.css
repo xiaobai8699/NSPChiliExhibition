@@ -3,8 +3,12 @@
     visibility: hidden;
     left: 0;
     top: 0;
-    color: red;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 3px;
+    border-radius: 5px;
     pointer-events: none;
+    text-align: center;
 }
 
 #labels > div:hover {
