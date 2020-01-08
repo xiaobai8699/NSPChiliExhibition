@@ -13,7 +13,7 @@ export class Const {
 
     static readonly audioUrl: string = `${Const.osspath}audio/plws.mp3`;
 
-    static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
+    static readonly videoUrl: string = './asset/video/nsp.mp4';//`${Const.osspath}video/nsp.mp4`;
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
