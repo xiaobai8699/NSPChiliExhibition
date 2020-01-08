@@ -97,7 +97,7 @@ class App {
     const loading: HTMLElement = document.querySelector("#loading");
     const progress: HTMLElement = document.querySelector("#progres-fill");
     const progressText: HTMLElement = document.querySelector("#progress-text");
-    const steeringWheel: HTMLElement = document.querySelector("#steering-wheel");
+    // const steeringWheel: HTMLElement = document.querySelector("#map-control");
 
     const loader = new GLTFLoader();
 
@@ -117,12 +117,12 @@ class App {
 
                 loading.style.display = "none";
                 if (Utils.isMobile()) {
-                    steeringWheel.style.visibility = "visible";
+                    // steeringWheel.style.visibility = "visible";
                 }
             }
             catch (e) {
                 console.error(e);
-                alert(`应用异常(${e})`);
+                alert(`应用异常, 请联系管理员!(${e})`);
             }
         },
 
@@ -147,7 +147,7 @@ class App {
 
         err => {
 
-            alert(`加载资源失败(${err})`);
+            alert(`加载资源失败,请刷新重试!(${err})`);
         }
     );
 

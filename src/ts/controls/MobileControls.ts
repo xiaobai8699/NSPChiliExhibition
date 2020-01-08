@@ -2,27 +2,27 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:11 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 17:14:07
+ * @Last Modified time: 2020-01-08 19:34:20
  */
 
 
 
 import { IControls } from './IControls';
 import { MobileRotateControls } from './MobileRotateControls';
-import { MobileMoveControl } from './MobileMoveControls';
+import { MobileMoveControls } from './MobileMoveControls';
 
 
 export class MobileControls implements IControls {
 
     rControl: MobileRotateControls;
     
-    mControl: MobileMoveControl;
+    mControl: MobileMoveControls;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
         this.rControl = new MobileRotateControls(object, domElement);
 
-        this.mControl = new MobileMoveControl(object, domElement);
+        this.mControl = new MobileMoveControls(object, domElement);
     }
 
     update = (delta: number) => {

@@ -11,7 +11,7 @@ export class Const {
 
     static readonly nspLogName: string = "logo_D";
 
-    static readonly audioUrl: string = `${Const.osspath}audio/noise.mp3`;
+    static readonly audioUrl: string = `${Const.osspath}audio/plws.mp3`;
 
     static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
 
