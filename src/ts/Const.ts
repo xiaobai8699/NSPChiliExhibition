@@ -29,4 +29,10 @@ export class Const {
         return `${this.osspath}image/visitor/dynamic/${name}.png`;
 
     }
+
+    static skyboxUrl(name: string) {
+
+        return `${this.osspath}image/skybox/${name}.png`;
+
+    }
 }
