@@ -140,7 +140,7 @@ class App {
            
             if (percent >= 100) {
 
-                progressText.innerText = "正在解压资源，请稍候..";
+                progressText.innerText = "解压资源，请稍候☕️..";
 
             }
         },
