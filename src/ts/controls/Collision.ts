@@ -9,7 +9,7 @@
 
 import * as THREE from 'three';
 import { World } from '../World';
-import {Labels} from '../Labels';
+import { Utils } from '../Utils';
 
 let collisionInstance: Collision;
 
@@ -75,35 +75,33 @@ export class Collision {
         origin.y = 0.4;
 
         this.rayCaster.set(origin, direction);
-        const intersectedObjects = this.rayCaster.intersectObjects(World.x().scene.children, true);
+
+        let objects:any = null;
+        if(Utils.isMobile()){
+            //手机端之检测围墙
+            objects = [World.x().scene.getObjectByName("paint_07A01")];
+
+        }else {
+
+            objects = World.x().scene.children;
+        }
+
+        const intersectedObjects = this.rayCaster.intersectObjects(objects, true);
         
         if (intersectedObjects.length > 0) {
 
             for (let i = 0; i < intersectedObjects.length; i++) {
 
-                const o = intersectedObjects[i];
-                const name = o.object.name;
-                
-                if (o.distance < 2) {
-
-                    Labels.setVisible(true);
-                    Labels.x().showTips(name);
-                    
+                if (intersectedObjects[i].distance < 2) {
                     return true;
-
-                }else {
-
-                    Labels.setVisible(false);
                 }
-
             }
 
             return false;
 
-        } else {
+        } 
 
-            return false;
-        }
+        return false;
     }
 
 }
