@@ -20,6 +20,7 @@ import { Utils } from './Utils';
 import {Audio} from './Audio';
 import {Visitor} from  './Visitor';
 import {Skybox} from './Skybox';
+import {Const} from './Const';
 import { Debuger } from './Debuger';
 
 class App {
@@ -93,7 +94,7 @@ class App {
 
 (function main() {
 
-    const ui: HTMLElement = document.querySelector("#ui");
+    const loading: HTMLElement = document.querySelector("#loading");
     const progress: HTMLElement = document.querySelector("#progres-fill");
     const progressText: HTMLElement = document.querySelector("#progress-text");
     const steeringWheel: HTMLElement = document.querySelector("#steering-wheel");
@@ -105,14 +106,16 @@ class App {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-        'http://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/model/nsp.glb',
+
+        Const.modelUrl,
 
         glft => {
+
             try {
                 const app = new App();
                 app.run(glft);
 
-                ui.style.display = "none";
+                loading.style.display = "none";
                 if (Utils.isMobile()) {
                     steeringWheel.style.visibility = "visible";
                 }
@@ -124,15 +127,26 @@ class App {
         },
 
         xhr => {
-            let p = (xhr.loaded / xhr.total) * 100;
-            progress.style.width = `${100-p}%`;
-            progressText.innerText = `${p.toFixed(2)}%`;
-            if (p >= 100) {
-                progressText.innerText = "正在进入展馆，请稍候..";
+
+            let percent = (xhr.loaded / xhr.total) * 100;
+            
+            progress.style.left = `${percent}%`;
+
+            const  M = 1048576;
+            let total = (xhr.total  / M).toFixed(2);
+            let loaded = (xhr.loaded / M).toFixed(2);
+
+            progressText.innerText = `载入资源 ${percent.toFixed(2)}% (${total}M / ${loaded}M)`;
+           
+            if (percent >= 100) {
+
+                progressText.innerText = "正在解压资源，请稍候..";
+
             }
         },
 
         err => {
+
             alert(`加载资源失败(${err})`);
         }
     );

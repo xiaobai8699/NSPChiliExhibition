@@ -1,4 +1,4 @@
-#ui {
+#loading {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -10,25 +10,27 @@
 }
 
 #pogress-out{
+    position: relative;
     width: 256px;
     height: 256px;
-    background-image: url('http://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.png');
+    background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.png');
     background-position: center;
     background-size: contain;
     padding: 0px;
 }
 
 #progres-fill{
+    position: absolute;
     margin: 0px;
     padding: 0px;
     height: 100%;
-    width: 100px;
+    width: 100%;
     background-color:white;
 }
 
 #progress-text{
     margin-top: 8px;
-    color: red;
+    color: black;
     font-weight: bold;
     text-align: center;
 }

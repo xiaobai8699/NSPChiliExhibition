@@ -7,7 +7,7 @@
 
 export class Const {
 
-    static readonly osspath: string = "http://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/";
+    static readonly osspath: string = "https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/";
 
     static readonly nspLogName: string = "logo_D";
 
@@ -16,6 +16,8 @@ export class Const {
     static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
+
+    static readonly modelUrl: string = `${Const.osspath}model/nsp.glb`;
 
     static staticVisitorUrl(name: string): string {
 
