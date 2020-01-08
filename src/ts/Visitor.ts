@@ -248,6 +248,9 @@ class DynamicVisitorSprite {
 
             const image = new Image();
 
+            // 跨域
+            image.setAttribute('crossOrigin', 'anonymous');
+
             image.src = Const.dynamicVisitorUrl(this.name);
 
             image.onload = () => {
