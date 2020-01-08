@@ -64,6 +64,8 @@ export class ControlMap {
     moveLeft: boolean = false;
     moveRight: boolean = false;
 
+    angle: number = 0;
+
     onTouchMove = (e: TouchEvent) => {
 
         e.preventDefault();
@@ -139,6 +141,8 @@ export class ControlMap {
         else {
         }
 
+        this.angle = angle2;
+        
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-07 13:23:50
+ * @Last Modified time: 2020-01-08 21:04:25
  */
 
 
@@ -21,6 +21,7 @@ import {Audio} from './Audio';
 import {Visitor} from  './Visitor';
 import {Skybox} from './Skybox';
 import {Const} from './Const';
+import {Mapping} from './Mapping';
 import { Debuger } from './Debuger';
 
 class App {
@@ -60,6 +61,8 @@ class App {
         Visitor.x().newAllVisitors();
         
         Utils.replaceNspLog();
+
+        Mapping.do();
 
         Skybox.enable();
         

@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-07 12:52:08
+ * @Last Modified time: 2020-01-08 20:56:08
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html

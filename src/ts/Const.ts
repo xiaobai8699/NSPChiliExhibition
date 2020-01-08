@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 17:50:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-02 17:29:49
+ * @Last Modified time: 2020-01-08 21:08:02
  */
 
 export class Const {
@@ -17,8 +17,8 @@ export class Const {
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = `${Const.osspath}model/nsp.glb`;
-
+    static readonly modelUrl: string = './asset/model/nsp.glb';//`${Const.osspath}model/nsp.glb`;
+    
     static staticVisitorUrl(name: string): string {
 
         return `${this.osspath}image/visitor/static/${name}.png`;
@@ -35,6 +35,12 @@ export class Const {
     static skyboxUrl(name: string) {
 
         return `${this.osspath}image/skybox/${name}.png`;
+
+    }
+
+    static mapUrl(name: string) {
+        
+        return `${this.osspath}image/map/${name}.png`;
 
     }
 }

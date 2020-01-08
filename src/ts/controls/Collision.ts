@@ -2,13 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-03 13:52:44 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-03 15:54:13
+ * @Last Modified time: 2020-01-08 21:47:39
  */
 
 //参考: https://docs.microsoft.com/zh-cn/windows/uwp/get-started/get-started-tutorial-game-js3d
 
 import * as THREE from 'three';
 import { World } from '../World';
+import {Labels} from '../Labels';
 
 let collisionInstance: Collision;
 
@@ -16,10 +17,14 @@ export class Collision {
 
     rayCaster: THREE.Raycaster;
 
+    // 模特小姐
+    models: Set<string>;
+
     constructor() {
 
         this.rayCaster = new THREE.Raycaster();
 
+        this.models = new Set(["people024A","people025A", "people026A"]);
     }
 
     static x(): Collision {
@@ -67,7 +72,7 @@ export class Collision {
 
         let origin = new THREE.Vector3();
         World.x().camera.getWorldPosition(origin);
-        origin.y = 0.3;
+        origin.y = 0.4;
 
         this.rayCaster.set(origin, direction);
         const intersectedObjects = this.rayCaster.intersectObjects(World.x().scene.children, true);
@@ -76,9 +81,19 @@ export class Collision {
 
             for (let i = 0; i < intersectedObjects.length; i++) {
 
-                if (intersectedObjects[i].distance < 2) {
+                const o = intersectedObjects[i];
+                const name = o.object.name;
+                
+                if (o.distance < 2) {
 
+                    Labels.setVisible(true);
+                    Labels.x().showTips(name);
+                    
                     return true;
+
+                }else {
+
+                    Labels.setVisible(false);
                 }
 
             }

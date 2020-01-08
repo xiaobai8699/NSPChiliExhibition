@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 16:52:42
+ * @Last Modified time: 2020-01-08 21:40:31
  */
 
  // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
@@ -20,10 +20,16 @@ let labelInstance: Labels;
 
     camera: THREE.PerspectiveCamera;
 
+    tips: HTMLElement = null;
+
+
     constructor() {
 
         this.scene = World.x().scene;
         this.camera = World.x().camera;
+
+        this.tips = document.querySelector("#tips");
+
     }
 
     static x() : Labels {
@@ -38,9 +44,12 @@ let labelInstance: Labels;
         div.style.visibility =  visible ? "visible" : "hidden";
     }
 
-    update = (delta: number) => {
+    
+    showTips = (name?: string) => {
 
-       let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName("64mmA016");
+        if(name == undefined) return;
+
+        let mesh: THREE.Mesh | THREE.Object3D = this.scene.getObjectByName(name);
 
         let v3: THREE.Vector3 = new THREE.Vector3();
 
@@ -51,11 +60,14 @@ let labelInstance: Labels;
 
         let x = (v3.x *  .5 + .5) * window.innerWidth;
         let y = (v3.y * -.5 + .5) * window.innerHeight;
+        y-= 200;
  
-        y -= 35;;
+        this.tips.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+    }
 
-        let label: HTMLElement = document.querySelector("#juhua");
-        label.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+    update = (delta: number) => {
+
+       this.showTips();
 
     }
  }

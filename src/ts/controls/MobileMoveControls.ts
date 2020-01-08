@@ -20,6 +20,8 @@ import * as THREE from 'three';
 import { IControls } from './IControls';
 import { Direction } from './Direction';
 import {ControlMap} from './ControlMap';
+import { World } from '../World';
+import { Collision } from './Collision';
 
 export class MobileMoveControls implements IControls {
 
@@ -53,23 +55,29 @@ export class MobileMoveControls implements IControls {
 
     update = (delta: number) => {
 
+        let isCollision = Collision.x().detect(
+            this.controlMap.moveForward, 
+            this.controlMap.moveBackward, 
+            this.controlMap.moveLeft, 
+            this.controlMap.moveRight);
+
+        if (isCollision) {
+            return;
+        }
+
         if (this.controlMap.moveForward) {
-             if(this.object.position.z >= -6)
-                 this.object.translateZ(-this.moveSpeed * delta);
+            this.object.translateZ(-this.moveSpeed * delta);
         }
 
         if (this.controlMap.moveBackward) {
-            if(this.object.position.z <= 19)
-                 this.object.translateZ(this.moveSpeed * delta);
+            this.object.translateZ(this.moveSpeed * delta);
         }
 
         if (this.controlMap.moveLeft) {
-             if(this.object.position.x >= -14)
                  this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (this.controlMap.moveRight) {
-            if(this.object.position.x <= 17.4)
                  this.object.translateX(this.moveSpeed * delta);
         }
     }
