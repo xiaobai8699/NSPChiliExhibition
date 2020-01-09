@@ -23,6 +23,9 @@ class Utils {
             (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
     }
 
+    static isPc(): boolean {
+        return !Utils.isMobile();
+    }
 
     static devicePixelRatio(): number {
         //手机统一设置为2
