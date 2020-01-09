@@ -255,8 +255,6 @@ class DynamicVisitorSprite {
 
                 self.image = image;
 
-                self.draw();
-
             };
 
             image.onerror = (err) => {
