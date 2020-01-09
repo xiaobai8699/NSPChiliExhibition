@@ -36,8 +36,8 @@ export class MobileRotateControls implements IControls {
     lastX: number;
     lastY: number;
 
-    xDelta: number = 0;
-    yDelta: number = 0;
+    xDistance: number = 0;
+    yDistance: number = 0;
 
     isDrag: boolean = false;
 
@@ -61,8 +61,9 @@ export class MobileRotateControls implements IControls {
 
         var evt = e.changedTouches[0];
 
-        this.xDelta += (evt.clientX - this.lastX);
-        this.yDelta += (evt.clientY - this.lastY);
+        this.xDistance += (evt.clientX - this.lastX);
+        this.yDistance += (evt.clientY - this.lastY);
+
         this.lastX = evt.clientX;
         this.lastY = evt.clientY;
 
@@ -83,11 +84,13 @@ export class MobileRotateControls implements IControls {
     update = (delta: number) => {
         
         if (this.isDrag) {
-            let delta =  Direction.isLandscape()? this.yDelta : this.xDelta;
-            this.object.rotation.y = THREE.Math.degToRad(delta * this.rotationSpeed);
-            // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
-        }
 
+            let distance =  Direction.isLandscape()? this.yDistance : this.xDistance;
+            const rad = THREE.Math.degToRad(distance * this.rotationSpeed);
+            this.object.rotation.y = rad;
+
+        }
+        
     }
 
     dispose = () => {
