@@ -44,7 +44,7 @@ export class World {
 
         this.camera = new THREE.PerspectiveCamera();
         this.camera.near = 0.1;
-        this.camera.far = 44;
+        this.camera.far = 64;
         Utils.setCameraFOV(this.camera);
         Utils.setCameraAspect(this.camera);
         this.camera.position.set(0,1.7,18);
