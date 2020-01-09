@@ -139,6 +139,9 @@ export class Product {
 
     showProduct = (name: string) => {
 
+        var buyBtn = document.querySelector("#product-buy");
+        buyBtn.setAttribute('nspname',name);
+
         this.visible = true;
 
         const div: HTMLDivElement = document.querySelector("#product-container");
@@ -158,6 +161,9 @@ export class Product {
 
     //https://threejsfundamentals.org/threejs/lessons/threejs-cleanup.html
     hideProduct = () => {
+
+        var buyBtn = document.querySelector("#product-buy");
+        buyBtn.setAttribute('nspname',undefined);
 
         this.visible = false;
 
