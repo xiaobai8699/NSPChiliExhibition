@@ -111,7 +111,7 @@ export class ControlMap {
         //5、将y2转换为单位圆上的点ny
         const ny = y2 / R;
 
-        //6、在单位圆上有ny=cos0,所有可以将ny作为反余弦函数中求得角度(注意:Math.asin返回的弧度，需要转为角度)
+        //6、在单位圆上有ny=cos0,可以将ny作为反余弦函数中求得角度(注意:Math.asin返回的弧度，需要转为角度)
         const degree = Math.asin(ny) * (180 / Math.PI);
 
         //7、判断点击点位于象限的位置计算出最终角度
