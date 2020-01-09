@@ -40,8 +40,6 @@ class App {
 
         Video.x();
 
-        Labels.x();
-
         Debuger.x();
 
         this.clock = new THREE.Clock();
@@ -54,9 +52,10 @@ class App {
         
         Lights.addLights();
 
-        //Labels.setVisible(true);
-
-        Audio.playNoise();
+        if(Utils.isPc()){
+            
+            Audio.play();
+        }
         
         Visitor.x().newAllVisitors();
         
