@@ -52,7 +52,7 @@ export class MobileMoveControls implements IControls {
     }
 
 
-    moveSpeed: number = 1.5;
+    moveSpeed: number = 2;
 
     update = (delta: number) => {
 
