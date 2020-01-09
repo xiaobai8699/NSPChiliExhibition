@@ -44,7 +44,7 @@ export class World {
 
         this.camera = new THREE.PerspectiveCamera();
         this.camera.near = 0.1;
-        this.camera.far = 100;
+        this.camera.far = 44;
         Utils.setCameraFOV(this.camera);
         Utils.setCameraAspect(this.camera);
         this.camera.position.set(0,1.7,18);
@@ -57,11 +57,15 @@ export class World {
         let canvas: HTMLCanvasElement = document.querySelector("#canvas");
 
         // 需要设置antialias:ture, logarithmicDepthBuffer:false 在移动端才不会闪烁
-        this.renderer = new THREE.WebGLRenderer({ 
+        const opt = { 
             canvas, 
             antialias: true, 
-            logarithmicDepthBuffer: Utils.isMobile() ? false:  true, //PC端需要开启，否则辣椒瓶离摄像机远了闪烁
-        });
+            logarithmicDepthBuffer: Utils.isMobile() ? false:  true,
+            autoUpdate:false
+        };
+
+        this.renderer = new THREE.WebGLRenderer(opt);
+
 
         Utils.setRendererSize(this.renderer);
         
