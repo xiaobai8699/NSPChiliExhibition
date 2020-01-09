@@ -33,13 +33,13 @@ export class Visitor {
 
     newAllVisitors = () => {
 
+        this.allVisitors.clear();
+
         this.newAllStaticVisitor();
         this.newAllDynamicVisitors();
     }
 
     newAllStaticVisitor = () => {
-
-        this.allVisitors.clear();
 
         const names = new Set();
 
@@ -79,7 +79,7 @@ export class Visitor {
             });
     }
 
-    sprites = new Set<DynamicVisitorSprite>();
+    dynamicVisitorSpriteSet = new Set<DynamicVisitorSprite>();
 
     newAllDynamicVisitors = () => {
 
@@ -88,7 +88,8 @@ export class Visitor {
         names.forEach(name => {
 
             const s = this.newDynamicVisitorSprite(name);
-            this.sprites.add(s);
+
+            this.dynamicVisitorSpriteSet.add(s);
 
         });
     }
@@ -118,7 +119,8 @@ export class Visitor {
 
         });
 
-        this.sprites.forEach(v => {
+        this.dynamicVisitorSpriteSet.forEach(v => {
+
             v.draw();
         });
     }
@@ -160,7 +162,7 @@ export class Visitor {
 
         else {
 
-            console.error(`not found visitor:${name}`);
+            console.error(`[Visitor] not found visitor:${name}`);
 
         }
     }
@@ -179,7 +181,9 @@ class DynamicVisitorSprite {
 
     count: number;
 
-    image: HTMLImageElement = null;
+    sprites: Array<any> = null;
+
+    imageSize: number = 512;
 
     loading: boolean = false;
 
@@ -197,45 +201,42 @@ class DynamicVisitorSprite {
 
         this.count = 46;
 
-        this.image = null;
-
     }
-
-
 
     draw = () => {
 
-        if (this.loading) return;
+        if (this.loading) {
+            return;
+        }
 
         const now = Date.now();
         const interval = (now - this.lastFrameTime) / 1000;
         const fps = (1 / 15);
+
         if (this.lastFrameTime != 0 && interval < fps) {
             return;
         }
+        
         this.lastFrameTime = now;
 
 
-        if (this.index == this.count) {
+        if (this.index == this.count-1) {
             this.index = 0;
         }
 
-        if (this.image) {
-
-            const size = 512;
-
-            const sx = this.index * size;
-
-            this.index++;
+        if (!this.loading && this.sprites && this.sprites.length > 0) {
 
             this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 
             //https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-            this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
+            this.context.drawImage(this.sprites[this.index], 0, 0, this.imageSize, this.imageSize, 0, 0, this.imageSize, this.imageSize);
+
+            this.index++;
 
             this.texture.needsUpdate = true;
 
         }
+
         else {
 
             this.loading = true;
@@ -251,11 +252,22 @@ class DynamicVisitorSprite {
 
             image.onload = () => {
 
-                self.loading = false;
+                const promiseArr = [];
 
-                self.image = image;
+                for(let i = 0; i < this.count; i++) {
 
-                self.draw();
+                    const promise = createImageBitmap(image, i * this.imageSize, 0, this.imageSize, this.imageSize);
+
+                    promiseArr.push(promise);
+                }
+
+                Promise.all(promiseArr).then(sprites => {
+
+                    this.sprites = sprites;
+
+                    this.loading = false;
+
+                });
 
             };
 
