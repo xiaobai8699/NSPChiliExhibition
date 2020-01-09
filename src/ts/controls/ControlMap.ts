@@ -77,15 +77,14 @@ export class ControlMap {
 
         const touch = e.changedTouches.item(0);
 
+        //1、限制移动范围
         const canHorizontalMove = (touch.clientX >= this.map.offsetLeft && touch.clientX <= this.map.offsetLeft + this.map.clientWidth);
-
         const canVerticalMove = (touch.clientY >= this.map.offsetTop && touch.clientY < this.map.offsetTop + this.map.clientHeight);
-
         if (!canHorizontalMove || !canVerticalMove) {
             return;
         }
 
-        //移动控制点
+        //2、移动控制点
         const pointOffsetLeft = touch.clientX - this.point.clientWidth / 2 - this.map.offsetLeft;
         this.point.style.left = `${pointOffsetLeft}`;
         this.lastPointOffsetLeft = pointOffsetLeft;
@@ -95,7 +94,7 @@ export class ControlMap {
         this.lastPointOffsetLeft = pointOffsetTop;
 
 
-        //计算点击点在map control中的坐标。这里将点击的屏幕坐标转换为map control坐标
+        //3、转换触摸点的坐标为以map中心为坐标原点的坐标
         const x = touch.clientX - (this.map.offsetLeft + this.map.clientWidth / 2);
         const y = (this.map.offsetTop + this.map.clientHeight / 2) - touch.clientY;
 
@@ -105,66 +104,63 @@ export class ControlMap {
         const px = Math.abs(x);
         const py = Math.abs(y);
 
-        //将用户点击的在y轴的任意点转换为以R为半径的圆的圆周上点
+        //4、将用户点击的在y轴的任意点转换为以R为半径的圆的圆周上点y2
         const r = Math.sqrt(px * px + py * py);
         const y2 = R * (py / r);
 
-        //将圆周上点进行归一化为单位圆上的点
+        //5、将y2转换为单位圆上的点ny
         const ny = y2 / R;
 
-        //计算用户点击点在单位圆上角度
-        const angle = Math.asin(ny) * (180 / Math.PI);
+        //6、在单位圆上有ny=cos0,所有可以将ny作为反余弦函数中求得角度(注意:Math.asin返回的弧度，需要转为角度)
+        const degree = Math.asin(ny) * (180 / Math.PI);
 
-        let angle2 = 0;
-
-        // 判断点击点位于象限的位置计算出最终角度
+        //7、判断点击点位于象限的位置计算出最终角度
+        
         if (x > 0 && y > 0) {
 
-            angle2 = angle;
+            this.angle = degree;
         }
 
         else if (x < 0 && y >= 0) {
 
-            angle2 = 180 - angle;
+            this.angle = 180 - degree;
         }
 
         else if (x < 0 && y < 0) {
 
-            angle2 = 180 + angle;
+            this.angle = 180 + degree;
         }
 
         else if (x >= 0 && y < 0) {
 
-            angle2 = 360 - angle;
+            this.angle = 360 - degree;
         }
 
         else {
         }
-
-        this.angle = angle2;
         
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;
         this.moveRight = false;
         
-        // 判断角度范围确定移动的方向
-        if (angle2 > 45 && angle2 < 135) {
+        //8、 判断角度范围确定移动的方向
+        if (this.angle > 45 && this.angle < 135) {
 
             this.moveForward = true;
         }
 
-        else if (angle2 > 135 && angle2 < 225) {
+        else if (this.angle > 135 && this.angle < 225) {
 
             this.moveLeft = true;
         }
 
-        else if (angle2 > 225 && angle2 < 315) {
+        else if (this.angle > 225 && this.angle < 315) {
 
             this.moveBackward = true;
         }
 
-        else if (angle2 > 315 || angle2 < 45) {
+        else if (this.angle > 315 || this.angle < 45) {
 
             this.moveRight = true;
         }
@@ -184,7 +180,7 @@ export class ControlMap {
     }
 
     reset = () => {
-
+        
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;
