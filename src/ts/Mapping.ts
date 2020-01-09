@@ -46,7 +46,7 @@ import { LightProbe } from 'three';
              Mapping.newStaticVisitor("shufu_A",name);
         }
 
-        for(let i = 1; i <= 7; i++){
+        for(let i = 1; i <= 6; i++){
 
             let name = `ZSYXC_A_0${i}`;
              Mapping.newStaticVisitor("ZSYXC_A",name);
@@ -70,7 +70,7 @@ import { LightProbe } from 'three';
             undefined,
 
             err => {
-                console.log(`[Visitor]: load texture failed! ${err}`)
+                console.log(`[Mapping]: load texture failed! ${err}`)
             });
     }
     
@@ -109,7 +109,7 @@ import { LightProbe } from 'three';
 
         else {
 
-            console.error(`not found visitor:${name}`);
+            console.error(`[Mapping]: not found visitor:${name}`);
 
         }
     }
