@@ -22,6 +22,7 @@ import { Direction } from './Direction';
 import {ControlMap} from './ControlMap';
 import { World } from '../World';
 import { Collision } from './Collision';
+import { Vector3, Object3D } from 'three';
 
 export class MobileMoveControls implements IControls {
 
@@ -51,7 +52,7 @@ export class MobileMoveControls implements IControls {
     }
 
 
-    moveSpeed: number = 3;
+    moveSpeed: number = 1.5;
 
     update = (delta: number) => {
 
@@ -64,7 +65,7 @@ export class MobileMoveControls implements IControls {
         if (isCollision) {
             return;
         }
-
+          
         if (this.controlMap.moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);
         }
