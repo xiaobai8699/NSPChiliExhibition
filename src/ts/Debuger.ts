@@ -17,7 +17,7 @@ let debugerInstance: Debuger = null;
 
 let camera : THREE.PerspectiveCamera;
 
-let enableDebuger: boolean = false;
+let enableDebuger: boolean = true;
 
 export class Debuger {
 
