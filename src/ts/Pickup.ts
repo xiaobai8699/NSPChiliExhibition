@@ -65,12 +65,7 @@ export class Pickup {
 
             Product.x().showProduct(name);
 
-        
-
-        } else {
-
-            console.log("Not found!")
-        }
+        } 
     }
 
     getCanvasRelativePosition = (event: MouseEvent | TouchEvent) => {
