@@ -21,7 +21,7 @@ export class Audio {
 
     }
 
-    static playNoise(): void {
+    static play(): void {
 
         const listener = new THREE.AudioListener();
         World.x().camera.add(listener);
@@ -33,7 +33,7 @@ export class Audio {
         audioLoader.load(Const.audioUrl, (buffer: any) =>{
             
             sound.setBuffer(buffer);
-            sound.setRefDistance(20); // 距离声源10开始衰减
+            sound.setRefDistance(10); // 距离声源10开始衰减
             sound.setRolloffFactor(5);
             sound.setLoop(true);
             sound.play();
