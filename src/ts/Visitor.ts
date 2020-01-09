@@ -34,15 +34,7 @@ export class Visitor {
     newAllVisitors = () => {
 
         this.newAllStaticVisitor();
-
-        // const isPC = Utils.isMobile() == false
-        // if (isPC) {
-        //     this.newAllDynamicVisitors();
-        // }
-
         this.newAllDynamicVisitors();
-
-
     }
 
     newAllStaticVisitor = () => {
@@ -121,12 +113,11 @@ export class Visitor {
 
         this.allVisitors.forEach(v => {
 
-            // 实时让观众与摄像机方向保持一直
+            // 让观众与摄像机方向保持一致
             v.rotation.y = World.x().camera.rotation.y;
 
         });
 
-        const isPC = Utils.isMobile() == false
         this.sprites.forEach(v => {
             v.draw();
         });
