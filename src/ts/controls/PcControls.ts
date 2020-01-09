@@ -143,7 +143,7 @@ export class PcControls implements IControls {
 
     };
 
-    moveSpeed: number = 3;
+    moveSpeed: number = 1.8;
     rotationSpeed: number = 0.08;
 
     update = (delta: number) => {
