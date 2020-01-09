@@ -53,7 +53,7 @@ class App {
         Lights.addLights();
 
         if(Utils.isPc()){
-            
+
             Audio.play();
         }
         
@@ -69,6 +69,9 @@ class App {
 
     }
 
+    lowestFps: number = 1 / 12;
+    hasTips: boolean = false;
+
     animationLoop = () => {
 
         Debuger.x().stats.begin();
@@ -83,10 +86,18 @@ class App {
 
             Debuger.x().update(delta);
             
-            //Labels.x().update(delta);
-
             Visitor.x().update(delta);
 
+    
+            // if(Utils.isMobile() &&
+            //    this.clock.running &&
+            //    this.clock.elapsedTime >= 5 && 
+            //    delta >= this.lowestFps && 
+            //    !this.hasTips) {
+
+            //     this.hasTips = true;
+            //     alert('检测到你的手机卡顿,估计会影响使用此APP😭!');
+            // }
         }
         Debuger.x().stats.end();
 
