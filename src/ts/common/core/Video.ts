@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 18:37:57
+ * @Last Modified time: 2020-01-10 19:06:58
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -29,9 +29,9 @@ export class Video {
         const canvas = document.querySelector("#canvas");
         canvas.addEventListener('keydown', this.onKeyDown, false);
 
-        //在微信里面必须通过用户点击触发视频播放，否则放不了视频
+        //在移动端必须通过用户点击触发视频播放，否则放不了视频
         if (Utils.isMobile()) {
-            document.querySelector("#map-control").addEventListener("touchstart", this.play, false);
+            document.querySelector("#map-control").addEventListener("touchstart", this.touchPlay, false);
         }
 
     }
@@ -73,8 +73,17 @@ export class Video {
 
     //https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
 
+    touchPlay = () => {
+        const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
+        let canPlay = (distance <= 30);
+        if(canPlay && this.video.paused && this.video.currentTime == 0){
+            this.video.play();
+        }
+    }
+
     play = () => {
-        if(this.video.paused) {
+
+        if (this.video.paused) {
             this.videoMesh.visible = true;
             this.video.play();
         }
@@ -83,7 +92,7 @@ export class Video {
 
     end = () => {
 
-        if(this.videoMesh) {
+        if (this.videoMesh) {
             this.video.pause();
             this.videoMesh.visible = false;
         }
@@ -104,12 +113,7 @@ export class Video {
     update = (delta: number) => {
 
         const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
-        if (distance <= 30) {
-            this.play();
-
-        } else {
-            this.end();
-        }
-
+        let canPlay = (distance <= 30);
+        canPlay ? this.play() : this.end();
     }
 }
