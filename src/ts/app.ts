@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 18:17:19
+ * @Last Modified time: 2020-01-10 21:09:57
  */
 
 
@@ -21,10 +21,9 @@ import { Audio } from './common/core/Audio';
 import { Visitor } from './business/Visitor';
 import { Skybox } from './common/core/Skybox';
 import { Const } from './business/Const';
-import { Mapping } from './business/fix/Mapping';
 import { Debuger } from './common/Debuger';
-import { Logo } from './business/fix/Logo';
 import { Chili } from './business/Chili';
+import {FixMaterial} from './business/fix/FixMaterial';
 
 class App {
 
@@ -50,6 +49,8 @@ class App {
 
         World.x().scene.add(gltf.scene);
 
+        FixMaterial.do();
+
         Lights.addLights();
 
         if (Utils.isPc()) {
@@ -58,10 +59,6 @@ class App {
         }
 
         Visitor.x().newAllVisitors();
-
-        Logo.do();
-
-        Mapping.do();
 
         Skybox.enable();
 

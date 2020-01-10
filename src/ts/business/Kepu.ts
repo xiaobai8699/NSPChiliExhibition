@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 10:56:32 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 15:25:04
+ * @Last Modified time: 2020-01-10 21:25:22
  */
 
 import * as THREE from 'three';
@@ -52,22 +52,27 @@ export class Kepu {
         }
 
         const kepuDiv: HTMLDivElement = document.querySelector("#kepu");
+        const kepuContentDiv: HTMLDivElement = document.querySelector("#kepu-content");
+        const kepuClose: HTMLDivElement = document.querySelector("#kepu-close");
+
         kepuDiv.style.visibility = "visible";
 
-        const kepuContentDiv: HTMLDivElement = document.querySelector("#kepu-content");
-        
         //妈妈的拿手菜科普
         if(name == "jiatingjucanA01"){
             
             if(this.motherImage) {
                 
                 kepuContentDiv.appendChild(this.motherImage);
+                kepuContentDiv.style.visibility = "visible";
+                kepuClose.style.visibility = "visible";
 
             }else {
                 const image  = new Image();
                 image.onload = () => {
                     this.motherImage = <any>image;
                     kepuContentDiv.appendChild(this.motherImage);
+                    kepuContentDiv.style.visibility = "visible";
+                    kepuClose.style.visibility = "visible";
                 }
                 image.src = Const.kepuUrl("mamadeweidao");
             }
@@ -79,12 +84,16 @@ export class Kepu {
             if(this.chiliImage) {
 
                 kepuContentDiv.appendChild(this.chiliImage);
+                kepuContentDiv.style.visibility = "visible";
+                kepuClose.style.visibility = "visible";
             } else {
 
                 const image  = new Image();
                 image.onload = () => {
                     this.chiliImage = <any>image;
                     kepuContentDiv.appendChild(this.chiliImage);
+                    kepuContentDiv.style.visibility = "visible";
+                    kepuClose.style.visibility = "visible";
                 }
                 const name = Utils.isMobile() ? "kepu_mobile" : "kepu_pc";
                 image.src = Const.kepuUrl(name);
@@ -101,7 +110,9 @@ export class Kepu {
         const self = this;
 
         const kepuDiv: HTMLDivElement = document.querySelector("#kepu");
-
+        const kepuContentDiv: HTMLDivElement = document.querySelector("#kepu-content");
+        const kepuClose: HTMLDivElement = document.querySelector("#kepu-close");
+        
         function hide(e: MouseEvent|TouchEvent){
 
             e.preventDefault();
@@ -116,6 +127,8 @@ export class Kepu {
             }
 
             kepuDiv.style.visibility = "hidden";
+            kepuContentDiv.style.visibility = "hidden";
+            kepuClose.style.visibility = "hidden";
         }
 
 

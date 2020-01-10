@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 09:24:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 19:11:11
+ * @Last Modified time: 2020-01-10 21:13:26
  */
 
 import * as THREE from 'three';
@@ -53,9 +53,8 @@ export class Chili {
                 if (o.material.name == "pingshenA") {
 
                     o.material.transparent = true;
-                    o.material.opacity = 0.7;
-                    o.material.side = THREE.FrontSide;
-
+                    o.material.opacity = 0.6;
+                    o.material.side = THREE.DoubleSide;
                 }
             });
         });

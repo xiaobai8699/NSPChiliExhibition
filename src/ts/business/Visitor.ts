@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:16:47
+ * @Last Modified time: 2020-01-10 21:03:41
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -17,11 +17,12 @@ let visitorInstance: Visitor = null;
 
 export class Visitor {
 
-    allVisitors: Set<THREE.Mesh>;
+    staticVisitors: Set<THREE.Mesh>;
+    dynamicVisitors: Set<THREE.Mesh>;
 
     constructor() {
-
-        this.allVisitors = new Set();
+        this.staticVisitors = new Set();
+        this.dynamicVisitors = new Set();
     }
 
     static x(): Visitor {
@@ -32,65 +33,34 @@ export class Visitor {
     }
 
     newAllVisitors = () => {
-
-        this.allVisitors.clear();
-
-        this.newAllStaticVisitor();
+        this.getStaticVisitors();
         this.newAllDynamicVisitors();
     }
 
-    newAllStaticVisitor = () => {
-
+    getStaticVisitors = () => {
 
         const names = new Set();
-
         for (let i = 1; i <= 21; i++) {
-
             names.add(`people0${i}A`)
-
         }
 
         names.forEach((name: string) => {
-
-            this.newStaticVisitor(name);
-
+            const visitor:THREE.Mesh = <THREE.Mesh>World.x().scene.getObjectByName(name);
+            this.staticVisitors.add(visitor);
         });
 
     }
 
 
-    newStaticVisitor = (textureName: string) => {
-
-        const loader: THREE.TextureLoader = new THREE.TextureLoader();
-
-        loader.load(
-
-            Const.staticVisitorUrl(textureName),
-
-            texture => {
-
-                this.newTransparentMesh(textureName, texture);
-
-            },
-
-            undefined,
-
-            err => {
-                console.log(`[Visitor]: load texture failed! ${err}`)
-            });
-    }
 
     sprites = new Set<DynamicVisitorSprite>();
 
     newAllDynamicVisitors = () => {
 
         const names = ["people022A", "people023A", "people024A", "people025A", "people026A"];
-
         names.forEach(name => {
-
             const s = this.newDynamicVisitorSprite(name);
             this.sprites.add(s);
-
         });
     }
 
@@ -104,7 +74,8 @@ export class Visitor {
 
         const texture = new THREE.CanvasTexture(ctx.canvas);
 
-        this.newTransparentMesh(name, texture);
+        const mesh = this.newTransparentMesh(name, texture);
+        this.dynamicVisitors.add(mesh);
 
         return new DynamicVisitorSprite(texture, ctx, name);
 
@@ -112,20 +83,21 @@ export class Visitor {
 
     update = (detal: number) => {
 
-        this.allVisitors.forEach(v => {
-
-            // 让观众与摄像机方向保持一致
-            v.rotation.y = World.x().camera.rotation.y;
-
+        this.staticVisitors.forEach(v => {
+            v.rotation.z = -World.x().camera.rotation.y;
         });
 
+        this.dynamicVisitors.forEach(v => {
+            v.rotation.y = World.x().camera.rotation.y;
+        });
+        
         this.sprites.forEach(v => {
             v.draw();
         });
     }
 
 
-    newTransparentMesh = (meshName: string, texture: THREE.Texture) => {
+    newTransparentMesh = (meshName: string, texture: THREE.Texture): THREE.Mesh => {
 
         const mesh: any = World.x().scene.getObjectByName(meshName);
 
@@ -156,7 +128,7 @@ export class Visitor {
 
             World.x().scene.add(visitor);
 
-            this.allVisitors.add(visitor);
+           return visitor;
         }
 
         else {

@@ -2,13 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:08:40
+ * @Last Modified time: 2020-01-10 20:07:33
  */
 
 import * as THREE from 'three';
 import { Direction } from './controls/Direction';
 import { World } from './World';
-import {Const } from '../business/Const';
+import { Const } from '../business/Const';
 
 class Utils {
 
@@ -65,6 +65,8 @@ class Utils {
         return lines;
 
     }
+
+ 
 
     static setRendererSize(renderer: THREE.WebGLRenderer) {
 
