@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 18:22:54
+ * @Last Modified time: 2020-01-10 18:37:57
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -46,6 +46,8 @@ export class Video {
     newVideoMesh = () => {
 
         this.video = document.querySelector("#video");
+        this.video.muted = false;
+        this.video.volume = 1;
         this.video.addEventListener("ended", this.end, false);
 
         const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
@@ -72,8 +74,7 @@ export class Video {
     //https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
 
     play = () => {
-        let  noPlay= (this.video.currentTime == 0); 
-        if (noPlay) {
+        if(this.video.paused) {
             this.videoMesh.visible = true;
             this.video.play();
         }
@@ -83,7 +84,7 @@ export class Video {
     end = () => {
 
         if(this.videoMesh) {
-            this.video.currentTime = 0;
+            this.video.pause();
             this.videoMesh.visible = false;
         }
     }
