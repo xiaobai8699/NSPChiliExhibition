@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 19:33:00
+ * @Last Modified time: 2020-01-10 21:31:44
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -113,8 +113,10 @@ export class Video {
 
     update = (delta: number) => {
 
-        const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
-        let canPlay = (distance <= 30);
-        canPlay ? this.play() : this.end();
+        if(Utils.isMobile()){
+            const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
+            let canPlay = (distance <= 30);
+            canPlay ? this.play() : this.end();
+        }
     }
 }
