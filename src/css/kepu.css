@@ -1,0 +1,40 @@
+#kepu{
+
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    visibility: hidden;
+}
+
+#kepu-content {
+    border: 10px solid white;
+    border-radius: 5px;
+    max-height: 80%;
+    max-width: 85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+#kepu-content > img {
+    max-width: 100%;
+}
+
+#kepu-close {
+    background-color:white; 
+    color: black;
+    width: 80px;
+    font-size: 17px;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}

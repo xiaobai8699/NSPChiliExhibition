@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 09:32:11
+ * @Last Modified time: 2020-01-10 13:44:45
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
@@ -12,6 +12,7 @@ import { Utils } from '../common/Utils';
 import { World } from '../common/World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Vector3 } from 'three';
+import {Chili} from './Chili';
 
 let productInstance: Product;
 
@@ -137,7 +138,11 @@ export class Product {
     addedObject: THREE.Object3D = null;
 
 
-    showProduct = (name: string) => {
+    show = (name: string) => {
+
+        if(Chili.x().nameArr.indexOf(name) == -1) {
+            return;
+        }
 
         var buyBtn = document.querySelector("#product-buy");
         buyBtn.setAttribute('nspname',name);
@@ -160,7 +165,7 @@ export class Product {
     }
 
     //https://threejsfundamentals.org/threejs/lessons/threejs-cleanup.html
-    hideProduct = () => {
+    hide = () => {
 
         var buyBtn = document.querySelector("#product-buy");
         buyBtn.setAttribute('nspname',undefined);
@@ -183,8 +188,8 @@ export class Product {
 
         window.addEventListener("resize", this.onWindowResize, false);
 
-        document.querySelector("#prodcut-close").addEventListener("mousedown", this.hideProduct, false);
-        document.querySelector("#prodcut-close").addEventListener("touchstart", this.hideProduct, false);
+        document.querySelector("#prodcut-close").addEventListener("mousedown", this.hide, false);
+        document.querySelector("#prodcut-close").addEventListener("touchstart", this.hide, false);
 
     }
 }

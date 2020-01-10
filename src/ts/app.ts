@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:22:02
+ * @Last Modified time: 2020-01-10 10:26:44
  */
 
 
@@ -14,17 +14,17 @@ import { Pickup } from './common/core/Pickup';
 import { LED } from './business/LED';
 import { Lights } from './common/Lights';
 import { Video } from './common/core/Video';
-import {Labels} from './common/core/Labels';
-import {World} from './common/World';
+import { Labels } from './common/core/Labels';
+import { World } from './common/World';
 import { Utils } from './common/Utils';
-import {Audio} from './common/core/Audio';
-import {Visitor} from  './business/Visitor';
-import {Skybox} from './common/core/Skybox';
-import {Const} from './business/Const';
-import {Mapping} from './business/fix/Mapping';
+import { Audio } from './common/core/Audio';
+import { Visitor } from './business/Visitor';
+import { Skybox } from './common/core/Skybox';
+import { Const } from './business/Const';
+import { Mapping } from './business/fix/Mapping';
 import { Debuger } from './common/Debuger';
-import {Logo} from './business/fix/Logo';
-import {Chili} from './business/Chili';
+import { Logo } from './business/fix/Logo';
+import { Chili } from './business/Chili';
 
 class App {
 
@@ -51,22 +51,22 @@ class App {
     run = (gltf: GLTF) => {
 
         World.x().scene.add(gltf.scene);
-        
+
         Lights.addLights();
 
-        if(Utils.isPc()){
+        if (Utils.isPc()) {
 
             Audio.play();
         }
-        
+
         Visitor.x().newAllVisitors();
-        
+
         Logo.do();
 
         Mapping.do();
 
         Skybox.enable();
-        
+
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
     }
@@ -85,14 +85,14 @@ class App {
             LED.update();
 
             Chili.x().update(delta);
-            
+
             Controls.x().update(delta);
 
             Debuger.x().update(delta);
-            
+
             Visitor.x().update(delta);
 
-    
+
             // if(Utils.isMobile() &&
             //    this.clock.running &&
             //    this.clock.elapsedTime >= 5 && 
@@ -114,7 +114,6 @@ class App {
     const loading: HTMLElement = document.querySelector("#loading");
     const progress: HTMLElement = document.querySelector("#progres-fill");
     const progressText: HTMLElement = document.querySelector("#progress-text");
-    // const steeringWheel: HTMLElement = document.querySelector("#map-control");
 
     const loader = new GLTFLoader();
 
@@ -133,9 +132,6 @@ class App {
                 app.run(glft);
 
                 loading.style.display = "none";
-                if (Utils.isMobile()) {
-                    // steeringWheel.style.visibility = "visible";
-                }
             }
             catch (e) {
                 console.error(e);
@@ -146,15 +142,15 @@ class App {
         xhr => {
 
             let percent = (xhr.loaded / xhr.total) * 100;
-            
+
             progress.style.left = `${percent}%`;
 
-            const  M = 1048576;
-            let total = (xhr.total  / M).toFixed(2);
+            const M = 1048576;
+            let total = (xhr.total / M).toFixed(2);
             let loaded = (xhr.loaded / M).toFixed(2);
 
             progressText.innerText = `载入资源 ${percent.toFixed(2)}% (${total}M / ${loaded}M)`;
-           
+
             if (percent >= 100) {
 
                 progressText.innerText = "解压资源，请稍候☕️..";

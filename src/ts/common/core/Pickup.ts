@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:20:48
+ * @Last Modified time: 2020-01-10 14:20:05
  */
 
 // 参考：
@@ -14,6 +14,7 @@ import { Utils } from '../Utils';
 import { World } from '../World';
 import { Product } from '../../business/Product';
 import {Chili} from '../../business/Chili';
+import { Kepu } from '../../business/Kepu';
 
 let pickupInstance: Pickup;
 
@@ -53,7 +54,7 @@ export class Pickup {
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
         // 计算物体和射线的焦点
-        const objects = Chili.x().rotatedBottles;
+        const objects = [...Chili.x().rotatedBottles,...Kepu.x().objects];
         const intersectedObjects = this.raycaster.intersectObjects(objects, true);
 
         if (intersectedObjects.length > 0) {
@@ -64,8 +65,8 @@ export class Pickup {
 
             const name = obj.parent.name ? obj.parent.name : obj.name;
 
-            Product.x().showProduct(name);
-
+            Product.x().show(name);
+            Kepu.x().show(name);
         } 
     }
 

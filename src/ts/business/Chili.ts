@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 09:24:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:20:14
+ * @Last Modified time: 2020-01-10 13:50:09
  */
 
 import * as THREE from 'three';
@@ -13,6 +13,8 @@ let chili: Chili;
 export class Chili {
 
     rotatedBottles: THREE.Object3D[] = [];
+
+    nameArr: Array<string> = ["LJJ1", "LJJ2", "LJJ3", "LJJ4", "64mmA016", "64mmB016", "64mmC016"];
 
     constructor() {
 
@@ -30,13 +32,13 @@ export class Chili {
     //获取需要旋转的辣椒瓶
     getRotatedBottles = () => {
 
-        const nameArr = ["LJJ1", "LJJ2", "LJJ3", "LJJ4", "64mmA016", "64mmB016", "64mmC016"];
 
-        nameArr.forEach((name) => {
+        this.nameArr.forEach((name) => {
 
             const object: any = World.x().scene.getObjectByName(name);
-
-            this.rotatedBottles.push(object);
+            if(object){
+                 this.rotatedBottles.push(object);
+            }
 
         });
     }
