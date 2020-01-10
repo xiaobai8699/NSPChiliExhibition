@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 09:30:52
+ * @Last Modified time: 2020-01-10 17:13:20
  */
 
 // https://github.com/mrdoob/stats.js
@@ -12,6 +12,7 @@ import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
 import * as THREE from 'three';
 import {World} from './World';
+import {Video} from './core/Video';
 
 let debugerInstance: Debuger = null;
 
@@ -395,11 +396,12 @@ export class Debuger {
         const controls = {
 
             play:function(){
-                video.play();
+                Video.x().play();
+              
             },
 
             pause:function(){
-                video.pause();
+                Video.x().end();
             }
         }
 
