@@ -33,13 +33,14 @@ export class Visitor {
 
     newAllVisitors = () => {
 
+        this.allVisitors.clear();
+
         this.newAllStaticVisitor();
         this.newAllDynamicVisitors();
     }
 
     newAllStaticVisitor = () => {
 
-        this.allVisitors.clear();
 
         const names = new Set();
 
@@ -58,17 +59,17 @@ export class Visitor {
     }
 
 
-    newStaticVisitor = (name: string) => {
+    newStaticVisitor = (textureName: string) => {
 
         const loader: THREE.TextureLoader = new THREE.TextureLoader();
 
         loader.load(
 
-            Const.staticVisitorUrl(name),
+            Const.staticVisitorUrl(textureName),
 
             texture => {
 
-                this.newTransparentVisitor(name, texture);
+                this.newTransparentMesh(textureName, texture);
 
             },
 
@@ -103,7 +104,7 @@ export class Visitor {
 
         const texture = new THREE.CanvasTexture(ctx.canvas);
 
-        this.newTransparentVisitor(name, texture);
+        this.newTransparentMesh(name, texture);
 
         return new DynamicVisitorSprite(texture, ctx, name);
 
@@ -124,9 +125,9 @@ export class Visitor {
     }
 
 
-    newTransparentVisitor = (name: string, texture: THREE.Texture) => {
+    newTransparentMesh = (meshName: string, texture: THREE.Texture) => {
 
-        const mesh: any = World.x().scene.getObjectByName(name);
+        const mesh: any = World.x().scene.getObjectByName(meshName);
 
         if (mesh) {
 
@@ -160,7 +161,7 @@ export class Visitor {
 
         else {
 
-            console.error(`not found visitor:${name}`);
+            console.error(`not found visitor:${meshName}`);
 
         }
     }
@@ -173,7 +174,7 @@ class DynamicVisitorSprite {
 
     context: CanvasRenderingContext2D;
 
-    name: string;
+    textureName: string;
 
     index: number;
 
@@ -185,13 +186,13 @@ class DynamicVisitorSprite {
 
     lastFrameTime: number = 0;
 
-    constructor(texture: THREE.CanvasTexture, ctx: CanvasRenderingContext2D, name: string) {
+    constructor(texture: THREE.CanvasTexture, ctx: CanvasRenderingContext2D, textureName: string) {
 
         this.texture = texture;
 
         this.context = ctx;
 
-        this.name = name;
+        this.textureName = textureName;
 
         this.index = 0;
 
@@ -247,7 +248,7 @@ class DynamicVisitorSprite {
             // 跨域
             image.setAttribute('crossOrigin', 'anonymous');
 
-            image.src = Const.dynamicVisitorUrl(this.name);
+            image.src = Const.dynamicVisitorUrl(this.textureName);
 
             image.onload = () => {
 
