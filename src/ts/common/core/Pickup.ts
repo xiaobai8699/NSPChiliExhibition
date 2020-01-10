@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 16:52:30
+ * @Last Modified time: 2020-01-10 10:20:48
  */
 
 // 参考：
@@ -10,9 +10,10 @@
 
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
-import { World } from './World';
-import { Product } from './Product';
+import { Utils } from '../Utils';
+import { World } from '../World';
+import { Product } from '../../business/Product';
+import {Chili} from '../../business/Chili';
 
 let pickupInstance: Pickup;
 
@@ -52,7 +53,7 @@ export class Pickup {
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
         // 计算物体和射线的焦点
-        const objects = Utils.findAnimationChiliBottles();
+        const objects = Chili.x().rotatedBottles;
         const intersectedObjects = this.raycaster.intersectObjects(objects, true);
 
         if (intersectedObjects.length > 0) {

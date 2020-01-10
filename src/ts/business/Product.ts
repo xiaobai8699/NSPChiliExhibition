@@ -2,14 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 16:52:15
+ * @Last Modified time: 2020-01-10 09:32:11
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
-import { World } from './World';
+import { Utils } from '../common/Utils';
+import { World } from '../common/World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Vector3 } from 'three';
 

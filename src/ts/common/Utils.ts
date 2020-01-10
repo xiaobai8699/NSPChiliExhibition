@@ -2,13 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-31 11:48:34
+ * @Last Modified time: 2020-01-10 10:08:40
  */
 
 import * as THREE from 'three';
 import { Direction } from './controls/Direction';
 import { World } from './World';
-import {Const } from './Const';
+import {Const } from '../business/Const';
 
 class Utils {
 
@@ -110,33 +110,6 @@ class Utils {
     }
 
 
-    static findAnimationChiliBottles(): THREE.Object3D[] {
-
-        const bottles: THREE.Object3D[] = [];
-        const names = ["LJJ1", "LJJ2", "LJJ3", "LJJ4", "64mmA016", "64mmB016", "64mmC016"];
-
-        names.forEach(name => {
-
-            const object: any = World.x().scene.getObjectByName(name);
-            bottles.push(object);
-
-            // 设置辣椒瓶的透明效果
-            object.children.forEach((o: any) => {
-
-                if (o.material.name == "pingshenA") {
-
-                    o.material.transparent = true;
-                    o.material.opacity = 0.7;
-                    o.material.side = THREE.DoubleSide;
-
-                }
-
-            });
-        });
-
-        return bottles;
-    }
-
     static getSize(object: THREE.Object3D): THREE.Vector3 {
 
         const box3 = new THREE.Box3();
@@ -144,42 +117,6 @@ class Utils {
         const size: THREE.Vector3 = box3.getSize(new THREE.Vector3());
 
         return size;
-
-    }
-    
-    static replaceNspLog() {
-
-
-        const oldLog: any = World.x().scene.getObjectByName(Const.nspLogName);
-
-        const size: THREE.Vector3 = Utils.getSize(oldLog);
-
-        const geometry = new THREE.PlaneBufferGeometry(size.x, size.y);
-
-        const texture = new THREE.TextureLoader().load(Const.logoUrl);
-
-        const material = new THREE.MeshPhongMaterial({
-
-            map: texture,
-
-            transparent: true,
-
-            alphaTest: .5,
-
-            side: THREE.DoubleSide,
-        });
-
-        const newLog = new THREE.Mesh(geometry, material);
-        
-        newLog.name = Const.nspLogName;
-
-        oldLog.getWorldPosition(newLog.position);
-
-        newLog.rotation.x += THREE.Math.degToRad(14.6);
-
-        oldLog.parent.remove(oldLog);
-
-        World.x().scene.add(newLog);
 
     }
 }

@@ -2,13 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 20:54:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 21:20:24
+ * @Last Modified time: 2020-01-10 10:13:28
  */
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
-import { World } from './World';
-import { Const } from './Const';
+import { Utils } from '../../common/Utils';
+import { World } from '../../common/World';
+import { Const } from '../Const';
 
 export class Mapping {
 

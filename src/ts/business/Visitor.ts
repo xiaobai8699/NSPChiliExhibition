@@ -2,15 +2,15 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 20:56:08
+ * @Last Modified time: 2020-01-10 10:16:47
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
 //https://threejsfundamentals.org/threejs/lessons/threejs-canvas-textures.html
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
-import { World } from './World';
+import { Utils } from '../common/Utils';
+import { World } from '../common/World';
 import { Const } from './Const';
 
 let visitorInstance: Visitor = null;

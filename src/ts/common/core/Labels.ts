@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-27 19:48:36 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 21:40:31
+ * @Last Modified time: 2020-01-10 09:30:08
  */
 
  // https://threejsfundamentals.org/threejs/lessons/threejs-align-html-elements-to-3d.html
@@ -10,7 +10,7 @@
 
 
  import * as THREE from 'three';
- import {World} from './World';
+ import {World} from '../World';
 
 let labelInstance: Labels;
 

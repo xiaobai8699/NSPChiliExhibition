@@ -2,27 +2,29 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 21:59:05
+ * @Last Modified time: 2020-01-10 10:22:02
  */
 
 
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { Controls } from './controls/Controls';
-import { Pickup } from './Pickup';
-import { Animation } from './Animation';
-import { Lights } from './Lights';
-import { Video } from './Video';
-import {Labels} from './Labels';
-import {World} from './World';
-import { Utils } from './Utils';
-import {Audio} from './Audio';
-import {Visitor} from  './Visitor';
-import {Skybox} from './Skybox';
-import {Const} from './Const';
-import {Mapping} from './Mapping';
-import { Debuger } from './Debuger';
+import { Controls } from './common/controls/Controls';
+import { Pickup } from './common/core/Pickup';
+import { LED } from './business/LED';
+import { Lights } from './common/Lights';
+import { Video } from './common/core/Video';
+import {Labels} from './common/core/Labels';
+import {World} from './common/World';
+import { Utils } from './common/Utils';
+import {Audio} from './common/core/Audio';
+import {Visitor} from  './business/Visitor';
+import {Skybox} from './common/core/Skybox';
+import {Const} from './business/Const';
+import {Mapping} from './business/fix/Mapping';
+import { Debuger } from './common/Debuger';
+import {Logo} from './business/fix/Logo';
+import {Chili} from './business/Chili';
 
 class App {
 
@@ -59,7 +61,7 @@ class App {
         
         Visitor.x().newAllVisitors();
         
-        Utils.replaceNspLog();
+        Logo.do();
 
         Mapping.do();
 
@@ -80,8 +82,10 @@ class App {
 
             let delta = this.clock.getDelta();
 
-            Animation.update();
+            LED.update();
 
+            Chili.x().update(delta);
+            
             Controls.x().update(delta);
 
             Debuger.x().update(delta);
