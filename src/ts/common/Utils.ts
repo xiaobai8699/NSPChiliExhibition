@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 20:07:33
+ * @Last Modified time: 2020-01-10 21:34:54
  */
 
 import * as THREE from 'three';
@@ -17,10 +17,11 @@ class Utils {
     static isMobile(): boolean {
 
         let userAgent = navigator.userAgent || navigator.vendor;
+        return  (/windows phone/i.test(userAgent))  ||
+                (/android/i.test(userAgent))        ||
+                (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
 
-        return (/windows phone/i.test(userAgent)) ||
-            (/android/i.test(userAgent)) ||
-            (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
+      
     }
 
     static isPc(): boolean {
