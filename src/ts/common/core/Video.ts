@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 16:53:05
+ * @Last Modified time: 2020-01-10 18:22:54
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -10,15 +10,13 @@
 // https://www.google.com/search?sxsrf=ACYBGNSWYbUUOlnNjrq-USPBftDSpPX1Kw%3A1576825687684&source=hp&ei=V3P8XYydJ5iSr7wP-tWggAE&q=can+video+autoplay+on+mobile&oq=video+can%27t+autoplay&gs_l=psy-ab.1.6.0i13i30j0i13i5i30l2j0i8i13i30l5.2832.15948..24624...4.0..0.195.3646.0j22......0....1..gws-wiz.....10..35i362i39j0j0i10j0i13j0i10i30j0i19j0i12i30i19j0i12i10i30i19j33i160.1-ba9bWx3VU
 
 import * as THREE from 'three';
-import { Vector3 } from 'three';
-import {World} from '../World';
+import { Vector3, Object3D } from 'three';
+import { World } from '../World';
 import { Utils } from '../Utils';
 
-let videoInstance: Video = null; 
+let videoInstance: Video = null;
 
 export class Video {
-
-    scene: THREE.Scene;
 
     video: HTMLVideoElement;
 
@@ -26,63 +24,68 @@ export class Video {
 
     constructor() {
 
-        this.scene = World.x().scene;
+        this.newVideoMesh();
 
-        this.video = document.querySelector("#video");
-
-        const canvas =  document.querySelector("#canvas");
+        const canvas = document.querySelector("#canvas");
         canvas.addEventListener('keydown', this.onKeyDown, false);
-       // canvas.addEventListener("mousedown", this.playVideo, false);
-        //canvas.addEventListener("touchstart", this.playVideo, false);
 
-        this.video.addEventListener("ended",this.onVideoEnded, false);
+        //在微信里面必须通过用户点击触发视频播放，否则放不了视频
+        if (Utils.isMobile()) {
+            document.querySelector("#map-control").addEventListener("touchstart", this.play, false);
+        }
+
     }
 
 
     static x = () => {
+
         videoInstance = videoInstance || new Video();
         return videoInstance;
     }
 
-    readyPlayVideo = () => {
+    newVideoMesh = () => {
 
-            if(this.videoMesh) return;
-            
-            const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
-            texure.needsUpdate = true;
+        this.video = document.querySelector("#video");
+        this.video.addEventListener("ended", this.end, false);
 
-            const tvMesh: any = this.scene.getObjectByName("TV");
+        const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
+        texure.needsUpdate = true;
 
-            const size: THREE.Vector3 = Utils.getSize(tvMesh);
+        const tvMesh: any = World.x().scene.getObjectByName("TV");
 
-            const mat = new THREE.MeshStandardMaterial({ map: texure });
-            mat.side = THREE.FrontSide;
+        const size: THREE.Vector3 = Utils.getSize(tvMesh);
 
-            const geo = new THREE.BoxGeometry(size.x, size.y, 1);
+        const mat = new THREE.MeshStandardMaterial({ map: texure });
+        mat.side = THREE.FrontSide;
 
-            this.videoMesh = new THREE.Mesh(geo, mat);
-            tvMesh.getWorldPosition(this.videoMesh.position);
-          
-             this.videoMesh.position.z = -19.14;
+        const geo = new THREE.BoxGeometry(size.x, size.y, 1);
 
-            this.scene.add(this.videoMesh);
+        this.videoMesh = new THREE.Mesh(geo, mat);
+        this.videoMesh.visible = false;
+        tvMesh.getWorldPosition(this.videoMesh.position);
+        this.videoMesh.position.z = -19.14;
+
+        World.x().scene.add(this.videoMesh);
 
     }
-    
-     //https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
 
-     playVideo = () => {
-         
-        this.readyPlayVideo();
+    //https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
 
-        this.video.volume = 1;
-        this.video.muted = false;
+    play = () => {
+        let  noPlay= (this.video.currentTime == 0); 
+        if (noPlay) {
+            this.videoMesh.visible = true;
+            this.video.play();
+        }
+    }
 
-        this.video.play().then(xrh=>{
 
-        });
+    end = () => {
 
-        
+        if(this.videoMesh) {
+            this.video.currentTime = 0;
+            this.videoMesh.visible = false;
+        }
     }
 
     onKeyDown = (event: KeyboardEvent) => {
@@ -90,19 +93,22 @@ export class Video {
         event.preventDefault();
         event.stopPropagation();
 
-        //p
-        if(event.keyCode == 80) {
-
-            this.playVideo();
-
+        //Press p key to play
+        if (event.keyCode == 80) {
+            this.play();
         }
-
     }
 
-    onVideoEnded = () => {
 
-       World.x().scene.remove(this.videoMesh);
-        this.videoMesh = null;
+    update = (delta: number) => {
+
+        const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
+        if (distance <= 30) {
+            this.play();
+
+        } else {
+            this.end();
+        }
 
     }
 }
