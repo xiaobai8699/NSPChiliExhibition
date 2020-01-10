@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 10:26:44
+ * @Last Modified time: 2020-01-10 18:17:19
  */
 
 
@@ -39,8 +39,6 @@ class App {
         Controls.x();
 
         Pickup.x();
-
-        Video.x();
 
         Debuger.x();
 
@@ -92,6 +90,7 @@ class App {
 
             Visitor.x().update(delta);
 
+            Video.x().update(delta);
 
             // if(Utils.isMobile() &&
             //    this.clock.running &&
