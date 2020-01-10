@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 17:52:35 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 19:23:13
+ * @Last Modified time: 2020-01-10 17:32:42
  */
 
 
@@ -94,9 +94,9 @@ export class ControlMap {
         this.lastPointOffsetLeft = pointOffsetTop;
 
 
-        //3、转换触摸点的坐标为以map中心为坐标原点的坐标
-        const x = touch.clientX - (this.map.offsetLeft + this.map.clientWidth / 2);
-        const y = (this.map.offsetTop + this.map.clientHeight / 2) - touch.clientY;
+        //3、转换触摸点的坐标为以map中心为坐标原点的坐标系中的点
+        const x =  touch.clientX - (this.map.offsetLeft + this.map.clientWidth  / 2);
+        const y = -touch.clientY + (this.map.offsetTop  + this.map.clientHeight / 2) ;
 
         // 以map control直径的一半作为圆的半径
         const R = this.map.clientWidth / 2;
@@ -111,10 +111,10 @@ export class ControlMap {
         //5、将y2转换为单位圆上的点ny
         const ny = y2 / R;
 
-        //6、在单位圆上有ny=cos0,可以将ny作为反余弦函数中求得角度(注意:Math.asin返回的弧度，需要转为角度)
+        //6、在单位圆上有ny=cos0,可以将ny作为反余弦函数的输入值来求角度
         const degree = Math.asin(ny) * (180 / Math.PI);
 
-        //7、判断点击点位于象限的位置计算出最终角度
+        //7、判断点击点处于那个象限以计算出最终角度
         
         if (x > 0 && y > 0) {
 
