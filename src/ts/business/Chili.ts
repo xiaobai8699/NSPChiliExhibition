@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 09:24:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 13:50:09
+ * @Last Modified time: 2020-01-10 19:11:11
  */
 
 import * as THREE from 'three';
@@ -67,7 +67,7 @@ export class Chili {
 
         this.rotatedBottles.forEach( (obj: THREE.Object3D) => {
 
-            obj.rotation.z += 0.01;
+            obj.rotation.z += (delta*0.5)
        });
 
     }
