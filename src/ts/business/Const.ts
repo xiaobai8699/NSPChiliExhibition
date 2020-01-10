@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 17:50:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 14:11:44
+ * @Last Modified time: 2020-01-10 16:49:05
  */
 
 export class Const {
@@ -13,7 +13,7 @@ export class Const {
 
     static readonly audioUrl: string = `${Const.osspath}audio/plws.mp3`;
 
-    static readonly videoUrl: string = './asset/video/nsp.mp4';//`${Const.osspath}video/nsp.mp4`;
+    static readonly videoUrl: string = /*'./asset/video/nsp.mp4';*/`${Const.osspath}video/nsp.mp4`;
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
