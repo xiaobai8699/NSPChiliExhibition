@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 17:50:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 13:57:26
+ * @Last Modified time: 2020-01-11 16:08:46
  */
 
 export class Const {
@@ -17,7 +17,7 @@ export class Const {
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = './asset/model/nsp_test.glb';/*`${Const.osspath}model/nsp.glb`*/;
+    static readonly modelUrl: string = './asset/model/nsp.glb';/*`${Const.osspath}model/nsp.glb`*/;
     
     static staticVisitorUrl(name: string): string {
 

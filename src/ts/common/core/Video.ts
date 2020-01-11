@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 15:55:05
+ * @Last Modified time: 2020-01-11 15:56:13
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -113,7 +113,6 @@ export class Video {
         event.preventDefault();
         event.stopPropagation();
 
-        console.log(event.keyCode);
         switch(event.keyCode){
             case 80: //press p
                 this.play();

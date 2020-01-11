@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 20:07:06 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 14:14:27
+ * @Last Modified time: 2020-01-11 16:19:08
  */
 
 
@@ -87,7 +87,7 @@ people026A01`;
             if (mat) {
                 mat.transparent = true;
                 mat.side = THREE.FrontSide;
-                mat.depthTest = false;
+                mat.depthTest = true;
             }
         }
 

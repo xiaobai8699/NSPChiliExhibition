@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 14:16:18
+ * @Last Modified time: 2020-01-11 16:11:05
  */
 
 
@@ -47,7 +47,7 @@ export class World {
         this.camera.far = 64;
         Utils.setCameraFOV(this.camera);
         Utils.setCameraAspect(this.camera);
-        this.camera.position.set(0,1.7,15);
+        this.camera.position.set(0,1.7,26);
         this.scene.add(this.camera);
 
     }

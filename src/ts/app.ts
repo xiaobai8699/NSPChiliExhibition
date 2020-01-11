@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 15:29:55
+ * @Last Modified time: 2020-01-11 15:58:03
  */
 
 
@@ -51,7 +51,7 @@ class App {
 
         Lights.addLights();
 
-         //Visitor.x().newAllVisitors();
+         Visitor.x().newAllVisitors();
 
         if (Utils.isPc()) {
 
@@ -83,17 +83,8 @@ class App {
 
             Debuger.x().update(delta);
 
-           // Visitor.x().update(delta);
+            Visitor.x().update(delta);
 
-            // if(Utils.isMobile() &&
-            //    this.clock.running &&
-            //    this.clock.elapsedTime >= 5 && 
-            //    delta >= this.lowestFps && 
-            //    !this.hasTips) {
-
-            //     this.hasTips = true;
-            //     alert('检测到你的手机卡顿,估计会影响使用此APP😭!');
-            // }
         }
         Debuger.x().stats.end();
 
