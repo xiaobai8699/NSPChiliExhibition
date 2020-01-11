@@ -3,3 +3,5 @@
 [TypeScript教程](https://www.tslang.cn/docs/home.html)
 
 gltf-pipeline -i NSP_C.gltf -o nsp2.glb -d
+
+[FBX to gltf](https://github.com/facebookincubator/FBX2glTF)
