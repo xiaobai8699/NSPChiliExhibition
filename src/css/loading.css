@@ -15,7 +15,7 @@
     height: 256px;
     background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.png');
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     padding: 0px;
 }
 
