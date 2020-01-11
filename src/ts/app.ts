@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 15:58:03
+ * @Last Modified time: 2020-01-11 18:30:48
  */
 
 
@@ -22,6 +22,7 @@ import { Const } from './business/Const';
 import { Debuger } from './common/Debuger';
 import { Chili } from './business/Chili';
 import {FixMaterial} from './business/fix/FixMaterial';
+import {VisitorSpriteLoader} from './business/Visitor';
 
 class App {
 
@@ -30,6 +31,8 @@ class App {
     loader: GLTFLoader;
 
     constructor() {
+
+        THREE.Cache.enabled = true;
 
         World.x();
 
@@ -51,7 +54,7 @@ class App {
 
         Lights.addLights();
 
-         Visitor.x().newAllVisitors();
+          Visitor.x().newAllVisitors();
 
         if (Utils.isPc()) {
 
@@ -113,8 +116,7 @@ class App {
             try {
                 const app = new App();
                 app.run(glft);
-
-                loading.style.display = "none";
+                //loading.style.display = "none";
             }
             catch (e) {
                 console.error(e);
@@ -138,6 +140,11 @@ class App {
 
                 progressText.innerText = "解压资源，请稍候☕️..";
 
+                VisitorSpriteLoader.load((e:any) => {
+                    console.error(`创建模特精灵失败 ${e}`);
+                    loading.style.display = "none";
+
+                });
             }
         },
 
