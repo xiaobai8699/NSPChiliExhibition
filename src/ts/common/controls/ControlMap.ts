@@ -2,9 +2,10 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 17:52:35 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 17:32:42
+ * @Last Modified time: 2020-01-11 10:12:58
  */
 
+ let controlMapInstance: ControlMap = null;
 
 export class ControlMap {
 
@@ -14,6 +15,11 @@ export class ControlMap {
 
     pointInitOffsetTop: number;
     pointInitOffsetLeft: number;
+
+    static x(): ControlMap {
+        controlMapInstance = controlMapInstance || new ControlMap();
+        return controlMapInstance;
+    }
 
     constructor() {
 
@@ -188,5 +194,9 @@ export class ControlMap {
 
         this.point.style.left = `${this.pointInitOffsetLeft}`;
         this.point.style.top = `${this.pointInitOffsetTop}`;
+    }
+
+    isMoving = ()=>{
+        return this.moveForward || this.moveLeft || this.moveRight || this.moveBackward ;
     }
 }

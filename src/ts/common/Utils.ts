@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 09:55:58
+ * @Last Modified time: 2020-01-11 10:16:38
  */
 
 import * as THREE from 'three';
@@ -15,8 +15,8 @@ class Utils {
     // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
     // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Browser_detection_using_the_user_agent
 
-    // isMobile()被在不同的地方调用，缓存检测结果以提高性能
-    static isMobileCache:any = undefined;
+    // isMobile()被在不同的地方频繁调用，缓存检测结果以提高性能
+    static  isMobileCache:any = undefined;
 
     static isMobile(): boolean {
 
@@ -24,9 +24,11 @@ class Utils {
         return this.isMobileCache;
         
         let userAgent = navigator.userAgent || navigator.vendor;
+        
         this.isMobileCache = (/windows phone/i.test(userAgent))  ||
                              (/android/i.test(userAgent))        ||
                              (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
+
         return this.isMobileCache;      
     }
 

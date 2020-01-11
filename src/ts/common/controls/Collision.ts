@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-03 13:52:44 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 21:47:39
+ * @Last Modified time: 2020-01-11 10:15:14
  */
 
 //参考: https://docs.microsoft.com/zh-cn/windows/uwp/get-started/get-started-tutorial-game-js3d
@@ -37,7 +37,7 @@ export class Collision {
      detect= (moveForward = false, moveBackward = false, moveLeft = false, moveRight = false): boolean => {
 
         //不移动就不检测
-        if ((moveForward || moveBackward || moveLeft || moveRight) == false) {
+        if ((moveForward  || moveLeft || moveRight ||  moveBackward) == false) {
             return;
         }
 
@@ -78,7 +78,7 @@ export class Collision {
 
         let objects:any = null;
         if(Utils.isMobile()){
-            //手机端之检测围墙
+            //手机端只检测围墙
             objects = [World.x().scene.getObjectByName("paint_07A01")];
 
         }else {

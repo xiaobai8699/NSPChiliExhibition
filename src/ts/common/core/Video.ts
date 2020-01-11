@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 21:31:44
+ * @Last Modified time: 2020-01-11 10:20:20
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -10,7 +10,7 @@
 // https://www.google.com/search?sxsrf=ACYBGNSWYbUUOlnNjrq-USPBftDSpPX1Kw%3A1576825687684&source=hp&ei=V3P8XYydJ5iSr7wP-tWggAE&q=can+video+autoplay+on+mobile&oq=video+can%27t+autoplay&gs_l=psy-ab.1.6.0i13i30j0i13i5i30l2j0i8i13i30l5.2832.15948..24624...4.0..0.195.3646.0j22......0....1..gws-wiz.....10..35i362i39j0j0i10j0i13j0i10i30j0i19j0i12i30i19j0i12i10i30i19j33i160.1-ba9bWx3VU
 
 import * as THREE from 'three';
-import { Vector3, Object3D } from 'three';
+import {ControlMap} from '../controls/ControlMap';
 import { World } from '../World';
 import { Utils } from '../Utils';
 
@@ -110,13 +110,20 @@ export class Video {
         }
     }
 
-
+    distanceCache: number = 0;
+    
     update = (delta: number) => {
 
         if(Utils.isMobile()){
-            const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
-            let canPlay = (distance <= 30);
-            canPlay ? this.play() : this.end();
+            
+            if(ControlMap.x().isMoving()){ // 移动时才做检测，否则每一帧都计算距离，影响性能
+
+                const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
+
+                let needPlay = (distance <= 30);
+
+                needPlay ? this.play() : this.end();
+            }
         }
     }
 }

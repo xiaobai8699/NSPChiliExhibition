@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-08 19:35:53
+ * @Last Modified time: 2020-01-11 10:05:57
  */
 
 
@@ -22,7 +22,6 @@ import { Direction } from './Direction';
 import {ControlMap} from './ControlMap';
 import { World } from '../World';
 import { Collision } from './Collision';
-import { Vector3, Object3D } from 'three';
 
 export class MobileMoveControls implements IControls {
 
@@ -30,15 +29,12 @@ export class MobileMoveControls implements IControls {
 
     domElement: HTMLElement;
 
-    controlMap: ControlMap;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
         this.domElement = domElement;
         
         this.object = object;
-
-        this.controlMap = new ControlMap();
         
         if (Direction.isLandscape()) {
 
@@ -57,28 +53,28 @@ export class MobileMoveControls implements IControls {
     update = (delta: number) => {
 
         let isCollision = Collision.x().detect(
-            this.controlMap.moveForward, 
-            this.controlMap.moveBackward, 
-            this.controlMap.moveLeft, 
-            this.controlMap.moveRight);
+            ControlMap.x().moveForward, 
+            ControlMap.x().moveBackward, 
+            ControlMap.x().moveLeft, 
+            ControlMap.x().moveRight);
 
         if (isCollision) {
             return;
         }
           
-        if (this.controlMap.moveForward) {
+        if (ControlMap.x().moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);
         }
 
-        if (this.controlMap.moveBackward) {
+        if (ControlMap.x().moveBackward) {
             this.object.translateZ(this.moveSpeed * delta);
         }
 
-        if (this.controlMap.moveLeft) {
+        if (ControlMap.x().moveLeft) {
                  this.object.translateX(-this.moveSpeed * delta);
         }
 
-        if (this.controlMap.moveRight) {
+        if (ControlMap.x().moveRight) {
                  this.object.translateX(this.moveSpeed * delta);
         }
     }
