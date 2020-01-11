@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 17:42:51
+ * @Last Modified time: 2020-01-11 18:28:58
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -15,7 +15,6 @@ import { Const } from './Const';
 
 let visitorInstance: Visitor = null;
 
-const spriteCount = 46;
 const spriteSize = 512;
 const spriteNameArr = ["people022A", "people023A", "people024A", "people025A", "people026A"];
 
@@ -153,10 +152,6 @@ class VisitorSprite {
 
     count: number;
 
-    image: HTMLImageElement = null;
-
-    loading: boolean = false;
-
     lastFrameTime: number = 0;
 
     constructor(texture: THREE.CanvasTexture, ctx: CanvasRenderingContext2D, textureName: string) {
@@ -169,17 +164,14 @@ class VisitorSprite {
 
         this.index = 0;
 
-        this.count = 46;
-
-        this.image = null;
-
     }
 
 
-
     draw = () => {
-
-        if (this.loading) return;
+        const sprites = VisitorSpriteLoader.memoryCache[this.textureName];
+        if(!sprites){
+            return;
+        }
 
         const now = Date.now();
         const interval = (now - this.lastFrameTime) / 1000;
@@ -189,55 +181,16 @@ class VisitorSprite {
         }
         this.lastFrameTime = now;
 
-
-        if (this.index == this.count) {
+        if (this.index == 45) {
             this.index = 0;
         }
 
-        if (this.image) {
+        const image  = sprites[this.index];
+        this.index++;
 
-            const size = 512;
-
-            const sx = this.index * size;
-
-            this.index++;
-
-            this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-
-            //https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-             this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
-
-            this.texture.needsUpdate = true;
-
-        }
-        else {
-
-            this.loading = true;
-
-            const self = this;
-
-            const image = new Image();
-
-            // 跨域
-            image.setAttribute('crossOrigin', 'anonymous');
-
-            image.src = Const.dynamicVisitorUrl(this.textureName);
-
-            image.onload = () => {
-
-                self.loading = false;
-
-                self.image = image;
-
-            };
-
-            image.onerror = (err) => {
-
-                console.error(`[DynamicVisitorSprite] load image error: ${err}`);
-
-            }
-        }
-
+        this.context.clearRect(0, 0, spriteSize,spriteSize);
+        this.context.drawImage(image, 0, 0, spriteSize, spriteSize, 0, 0, spriteSize, spriteSize);
+        this.texture.needsUpdate = true;
     }
 }
 
@@ -245,6 +198,8 @@ class VisitorSprite {
 export class VisitorSpriteLoader {
 
   static  counter:number = 0;
+
+  static memoryCache:any = {};
 
    static load(callback:Function) {
        
@@ -257,7 +212,7 @@ export class VisitorSpriteLoader {
                 }else {
                     
                     this.counter++;
-                    if(this.counter == spriteSize){
+                    if(this.counter >= spriteNameArr.length-1){
                         callback();
                     }
                 }
@@ -279,14 +234,14 @@ export class VisitorSpriteLoader {
                 let promiseArr = [];
 
                 for (let i = 0; i < 46; i++) {
-                    let promise = createImageBitmap(image, i * spriteSize, 0, spriteSize, spriteSize);
+                    const x = i * spriteSize;
+                    let promise = createImageBitmap(image, x, 0, spriteSize, spriteSize);
                     promiseArr.push(promise);
                 }
 
                 Promise.all(promiseArr)
                     .then(sprites => {
-                        console.log(`[VisitorSpriteLoader] ${sprites}`);
-                        THREE.Cache.add(imageName, sprites);
+                        VisitorSpriteLoader.memoryCache[imageName] = sprites;
                         callback();
                     })
                     .catch(e => {

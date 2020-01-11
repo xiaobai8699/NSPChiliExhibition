@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 17:41:53
+ * @Last Modified time: 2020-01-11 18:30:48
  */
 
 
@@ -54,7 +54,7 @@ class App {
 
         Lights.addLights();
 
-        //  Visitor.x().newAllVisitors();
+          Visitor.x().newAllVisitors();
 
         if (Utils.isPc()) {
 
@@ -86,7 +86,7 @@ class App {
 
             Debuger.x().update(delta);
 
-            // Visitor.x().update(delta);
+            Visitor.x().update(delta);
 
         }
         Debuger.x().stats.end();
@@ -141,14 +141,8 @@ class App {
                 progressText.innerText = "解压资源，请稍候☕️..";
 
                 VisitorSpriteLoader.load((e:any) => {
-                    
-                    if(e){
-                        progressText.innerText = `载入资源失败,无法进入应用。${e}`;
-
-                    }else {
-                        loading.style.display = "none";
-
-                    }
+                    console.error(`创建模特精灵失败 ${e}`);
+                    loading.style.display = "none";
 
                 });
             }
