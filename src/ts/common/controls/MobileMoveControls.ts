@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 10:05:57
+ * @Last Modified time: 2020-01-11 15:29:27
  */
 
 
@@ -22,6 +22,7 @@ import { Direction } from './Direction';
 import {ControlMap} from './ControlMap';
 import { World } from '../World';
 import { Collision } from './Collision';
+import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export class MobileMoveControls implements IControls {
 
@@ -32,6 +33,8 @@ export class MobileMoveControls implements IControls {
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
+        ControlMap.x();
+        
         this.domElement = domElement;
         
         this.object = object;
