@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 16:02:41
+ * @Last Modified time: 2020-01-11 17:42:51
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -14,6 +14,10 @@ import { World } from '../common/World';
 import { Const } from './Const';
 
 let visitorInstance: Visitor = null;
+
+const spriteCount = 46;
+const spriteSize = 512;
+const spriteNameArr = ["people022A", "people023A", "people024A", "people025A", "people026A"];
 
 export class Visitor {
 
@@ -34,7 +38,7 @@ export class Visitor {
 
     newAllVisitors = () => {
         this.getStaticVisitors();
-        this.newAllDynamicVisitors();
+        this.newAllVisitorsSprites();
     }
 
     getStaticVisitors = () => {
@@ -45,27 +49,24 @@ export class Visitor {
         }
 
         names.forEach((name: string) => {
-            const visitor:THREE.Mesh = <THREE.Mesh>World.x().scene.getObjectByName(name);
+            const visitor: THREE.Mesh = <THREE.Mesh>World.x().scene.getObjectByName(name);
             this.staticVisitors.add(visitor);
         });
 
     }
 
+    sprites = new Set<VisitorSprite>();
 
+    newAllVisitorsSprites = () => {
 
-    sprites = new Set<DynamicVisitorSprite>();
-
-    newAllDynamicVisitors = () => {
-
-        const names = ["people022A", "people023A", "people024A", "people025A", "people026A"];
-        names.forEach(name => {
-            const s = this.newDynamicVisitorSprite(name);
+        spriteNameArr.forEach(name => {
+            const s = this.newVisitorSprite(name);
             this.sprites.add(s);
         });
     }
 
 
-    newDynamicVisitorSprite = (name: string): DynamicVisitorSprite => {
+    newVisitorSprite = (name: string): VisitorSprite => {
 
         const ctx = document.createElement('canvas').getContext('2d');
 
@@ -77,7 +78,7 @@ export class Visitor {
         const mesh = this.newTransparentMesh(name, texture);
         this.dynamicVisitors.add(mesh);
 
-        return new DynamicVisitorSprite(texture, ctx, name);
+        return new VisitorSprite(texture, ctx, name);
 
     }
 
@@ -90,7 +91,7 @@ export class Visitor {
         this.dynamicVisitors.forEach(v => {
             v.rotation.y = World.x().camera.rotation.y;
         });
-        
+
         this.sprites.forEach(v => {
             v.draw();
         });
@@ -128,7 +129,7 @@ export class Visitor {
 
             World.x().scene.add(visitor);
 
-           return visitor;
+            return visitor;
         }
 
         else {
@@ -140,7 +141,7 @@ export class Visitor {
 }
 
 
-class DynamicVisitorSprite {
+class VisitorSprite {
 
     texture: THREE.CanvasTexture;
 
@@ -204,7 +205,7 @@ class DynamicVisitorSprite {
             this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 
             //https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-           // this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
+             this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
 
             this.texture.needsUpdate = true;
 
@@ -238,4 +239,70 @@ class DynamicVisitorSprite {
         }
 
     }
+}
+
+
+export class VisitorSpriteLoader {
+
+  static  counter:number = 0;
+
+   static load(callback:Function) {
+       
+        spriteNameArr.forEach(name => {
+
+            this._load(name, (e?:any)=>{
+                
+                if(e){
+                    callback(e);
+                }else {
+                    
+                    this.counter++;
+                    if(this.counter == spriteSize){
+                        callback();
+                    }
+                }
+            })
+
+        });
+    }
+
+   static _load = (imageName: string, callback:Function) => {
+
+        const loader = new THREE.ImageLoader();
+
+        loader.load(
+
+            Const.dynamicVisitorUrl(imageName),
+
+            (image) => {
+
+                let promiseArr = [];
+
+                for (let i = 0; i < 46; i++) {
+                    let promise = createImageBitmap(image, i * spriteSize, 0, spriteSize, spriteSize);
+                    promiseArr.push(promise);
+                }
+
+                Promise.all(promiseArr)
+                    .then(sprites => {
+                        console.log(`[VisitorSpriteLoader] ${sprites}`);
+                        THREE.Cache.add(imageName, sprites);
+                        callback();
+                    })
+                    .catch(e => {
+                        callback(e);
+                        console.error(`[VisitorSpriteDownloader]${e}`);
+                    });
+            },
+
+            undefined,
+
+            (err) => {
+                callback(err);
+                console.error(`[VisitorSpriteDownloader] ${err}`);
+            }
+        );
+
+    }
+
 }
