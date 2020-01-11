@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 17:46:05
+ * @Last Modified time: 2020-01-11 16:02:41
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -204,7 +204,7 @@ class DynamicVisitorSprite {
             this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 
             //https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage
-            this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
+           // this.context.drawImage(this.image, sx, 0, size, size, 0, 0, size, size);
 
             this.texture.needsUpdate = true;
 
