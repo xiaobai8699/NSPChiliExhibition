@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:05:05 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 10:20:20
+ * @Last Modified time: 2020-01-11 15:46:34
  */
 
 // 为什么在移动设备上无法自动播放视频:
@@ -15,6 +15,7 @@ import { World } from '../World';
 import { Utils } from '../Utils';
 
 let videoInstance: Video = null;
+
 
 export class Video {
 
@@ -46,7 +47,9 @@ export class Video {
     newVideoMesh = () => {
 
         this.video = document.querySelector("#video");
-        this.video.addEventListener("ended", this.end, false);
+        // this.video.addEventListener("ended", this.end, false);
+        this.video.muted = false;
+        this.video.volume = 1;
 
         const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
         texure.needsUpdate = true;
@@ -71,32 +74,38 @@ export class Video {
 
     //https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
 
-    isTouched: boolean = false;
+    notTouched: boolean = true;
     
     touchPlay = () => {
-        if(!this.isTouched){
-            this.isTouched = true;
-            this.video.play();
+        if(this.notTouched){
+            this.notTouched = false;
+            this.play();
         }
     }
 
     play = () => {
+        
+        //在安卓机上，如果不是在小程序内，则不启用视频播放功能。因为腾讯X5浏览器的限制，导致只能全屏幕播放视频。见:
+         //https://www.cnblogs.com/macliu/p/10956824.html
+        //https://www.cnblogs.com/-867259206/p/10864479.html
+        if(Utils.isAndroid() && Utils.inWxMiniApp() == false){
+            return;
+        }
 
         if (this.video.paused) {
             this.videoMesh.visible = true;
             this.video.play();
-            this.video.muted = false;
-            this.video.volume = 1;
         }
     }
 
 
     end = () => {
+        this.video.pause();
 
-        if (this.videoMesh) {
-            this.video.pause();
-            this.videoMesh.visible = false;
-        }
+        // if (this.videoMesh) {
+        //     this.video.pause();
+        //     this.videoMesh.visible = false;
+        // }
     }
 
     onKeyDown = (event: KeyboardEvent) => {
@@ -107,23 +116,6 @@ export class Video {
         //Press p key to play
         if (event.keyCode == 80) {
             this.play();
-        }
-    }
-
-    distanceCache: number = 0;
-    
-    update = (delta: number) => {
-
-        if(Utils.isMobile()){
-            
-            if(ControlMap.x().isMoving()){ // 移动时才做检测，否则每一帧都计算距离，影响性能
-
-                const distance = this.videoMesh.position.distanceTo(World.x().camera.position);
-
-                let needPlay = (distance <= 30);
-
-                needPlay ? this.play() : this.end();
-            }
         }
     }
 }
