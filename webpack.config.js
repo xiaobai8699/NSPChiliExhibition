@@ -16,7 +16,10 @@ var config = {
 
   devServer: {
     contentBase: "./dist",
-    index: "app.html"
+    index: "app.html",
+    host: "0.0.0.0",
+    disableHostCheck:true,
+    useLocalIp:true
   },
 
   resolve: {
