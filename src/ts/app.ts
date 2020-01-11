@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 21:09:57
+ * @Last Modified time: 2020-01-11 15:29:55
  */
 
 
@@ -14,12 +14,10 @@ import { Pickup } from './common/core/Pickup';
 import { LED } from './business/LED';
 import { Lights } from './common/Lights';
 import { Video } from './common/core/Video';
-import { Labels } from './common/core/Labels';
 import { World } from './common/World';
 import { Utils } from './common/Utils';
 import { Audio } from './common/core/Audio';
 import { Visitor } from './business/Visitor';
-import { Skybox } from './common/core/Skybox';
 import { Const } from './business/Const';
 import { Debuger } from './common/Debuger';
 import { Chili } from './business/Chili';
@@ -40,7 +38,7 @@ class App {
         Pickup.x();
 
         Debuger.x();
-
+        
         this.clock = new THREE.Clock();
 
     }
@@ -53,14 +51,14 @@ class App {
 
         Lights.addLights();
 
+         //Visitor.x().newAllVisitors();
+
         if (Utils.isPc()) {
 
             Audio.play();
         }
 
-        Visitor.x().newAllVisitors();
-
-        Skybox.enable();
+        Video.x();
 
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
@@ -85,9 +83,7 @@ class App {
 
             Debuger.x().update(delta);
 
-            Visitor.x().update(delta);
-
-            Video.x().update(delta);
+           // Visitor.x().update(delta);
 
             // if(Utils.isMobile() &&
             //    this.clock.running &&
