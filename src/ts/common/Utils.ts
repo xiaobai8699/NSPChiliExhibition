@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 10:16:38
+ * @Last Modified time: 2020-01-11 15:33:09
  */
 
 import * as THREE from 'three';
@@ -20,18 +20,46 @@ class Utils {
 
     static isMobile(): boolean {
 
-        if(this.isMobileCache != undefined) 
-        return this.isMobileCache;
+        if(this.isMobileCache != undefined) {
+            return this.isMobileCache;
+        }
         
         let userAgent = navigator.userAgent || navigator.vendor;
         
         this.isMobileCache = (/windows phone/i.test(userAgent))  ||
-                             (/android/i.test(userAgent))        ||
+                             this.isAndroid()                    ||
                              (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream);
 
         return this.isMobileCache;      
     }
 
+    static isAndroidCache:any = undefined;
+
+    static isAndroid():boolean {
+        if(this.isAndroidCache != undefined) {
+            return this.isAndroidCache;
+        }
+        
+        let userAgent = navigator.userAgent || navigator.vendor;
+        this.isAndroidCache = (/android/i.test(userAgent));
+
+       return this.isAndroidCache;
+    }
+
+    static inWxMiniAppCache:any = undefined;
+
+    static inWxMiniApp() {
+        if(this.inWxMiniAppCache) {
+            return this.inWxMiniAppCache;
+        }
+
+        let userAgent = navigator.userAgent || navigator.vendor;
+        const w:any = window; // 忽略TS类型检测
+        this.inWxMiniAppCache = w.__wxjs_environment === 'miniprogram' || /miniProgram/i.test(userAgent);
+
+        return this.inWxMiniAppCache;
+    }
+    
     static isPc(): boolean {
         return !Utils.isMobile();
     }
