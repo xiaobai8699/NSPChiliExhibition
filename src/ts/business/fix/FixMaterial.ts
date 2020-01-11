@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-10 20:07:06 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 21:07:43
+ * @Last Modified time: 2020-01-11 14:14:27
  */
 
 
@@ -86,8 +86,8 @@ people026A01`;
             const mat: any = mesh.material;
             if (mat) {
                 mat.transparent = true;
-                mat.side = THREE.DoubleSide;
-                mat.depthTest = true;
+                mat.side = THREE.FrontSide;
+                mat.depthTest = false;
             }
         }
 
