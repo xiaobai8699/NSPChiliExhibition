@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 16:50:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 09:32:54
+ * @Last Modified time: 2020-01-11 11:52:06
  */
 
 import * as THREE from 'three';
@@ -23,7 +23,6 @@ export class Audio {
 
     static play(): void {
 
-        return;
         
         const listener = new THREE.AudioListener();
         World.x().camera.add(listener);
