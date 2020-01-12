@@ -110,8 +110,8 @@ export class Pickup {
         // https://zhuanlan.zhihu.com/p/90295867?utm_source=wechat_session&utm_medium=social&utm_oi=615939963313983488
         if (Utils.isMobile()) {
 
-            pickPoint.x = (canvasPosition.x / window.innerWidth) * 2 - 1;
-            pickPoint.y = (canvasPosition.y / window.innerHeight) * -2 + 1;
+            pickPoint.x = ((2 * canvasPosition.y) - window.innerHeight) / window.innerHeight;
+            pickPoint.y = ((2 * canvasPosition.x) - window.innerWidth) / window.innerWidth;
 
         } else {
 
