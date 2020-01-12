@@ -212,7 +212,8 @@ export class VisitorSpriteLoader {
                 }else {
                     
                     this.counter++;
-                    if(this.counter >= spriteNameArr.length-1){
+                    if(this.counter == spriteNameArr.length){
+                        console.log(`[VisitorSpriteDownloader]完成精灵创建${this.counter}`);
                         callback();
                     }
                 }
@@ -235,6 +236,9 @@ export class VisitorSpriteLoader {
 
                 for (let i = 0; i < 46; i++) {
                     const x = i * spriteSize;
+
+                    //createImageBitmap在Safari浏览器上不被支持，因此会导致在iPhone上无法显示精灵图
+                    //https://caniuse.com/#feat=createimagebitmap
                     let promise = createImageBitmap(image, x, 0, spriteSize, spriteSize);
                     promiseArr.push(promise);
                 }
@@ -242,19 +246,20 @@ export class VisitorSpriteLoader {
                 Promise.all(promiseArr)
                     .then(sprites => {
                         VisitorSpriteLoader.memoryCache[imageName] = sprites;
+                        console.log(`[VisitorSpriteDownloader]创建精灵${imageName}:${sprites.length}`);
                         callback();
                     })
                     .catch(e => {
-                        callback(e);
                         console.error(`[VisitorSpriteDownloader]${e}`);
+                        callback(e);
                     });
             },
 
             undefined,
 
             (err) => {
-                callback(err);
                 console.error(`[VisitorSpriteDownloader] ${err}`);
+                callback(err);
             }
         );
 

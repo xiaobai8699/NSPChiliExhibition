@@ -138,7 +138,9 @@ class App {
                 progressText.innerText = "解压资源，请稍候☕️..";
 
                 VisitorSpriteLoader.load((e: any) => {
-                    console.error(`创建模特精灵失败 ${e}`);
+                    if(e){
+                        console.error(`创建模特精灵失败 ${e}`);
+                    }
                     loading.style.display = "none";
 
                 });
