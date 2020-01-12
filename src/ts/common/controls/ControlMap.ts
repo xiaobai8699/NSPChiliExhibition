@@ -40,6 +40,8 @@ export class ControlMap {
         this.map.setAttribute("id", "map-control");
         this.map.classList.add("map-control");
         this.map.classList.add("map-control-portrait");
+        const cls = this.layout == ControlMapLayout.Landscape ? "map-control-landscape" : "map-control-portrait";
+        this.map.classList.add(cls);
 
         this.map.addEventListener('touchstart', this.onTouchStart, false);
         this.map.addEventListener('touchmove', this.onTouchMove, false);
