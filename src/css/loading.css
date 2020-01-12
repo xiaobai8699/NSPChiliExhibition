@@ -11,9 +11,9 @@
 
 #pogress-out{
     position: relative;
-    width: 256px;
-    height: 256px;
-    background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.png');
+    width: 388px;
+    height: 448px;
+    background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.jpg');
     background-position: center;
     background-size: cover;
     padding: 0px;
