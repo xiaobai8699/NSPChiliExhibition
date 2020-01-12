@@ -5,13 +5,20 @@
  * @Last Modified time: 2020-01-11 10:12:58
  */
 
- let controlMapInstance: ControlMap = null;
+let controlMapInstance: ControlMap = null;
+
+export enum ControlMapLayout {
+    Landscape,  //横屏
+    Portrait    //竖屏
+}
 
 export class ControlMap {
 
     map: HTMLDivElement = null;
 
     point: HTMLDivElement = null;
+
+    layout: ControlMapLayout = ControlMapLayout.Landscape;
 
     pointInitOffsetTop: number;
     pointInitOffsetLeft: number;
@@ -30,7 +37,7 @@ export class ControlMap {
         }
 
         this.map = document.createElement('div');
-        this.map.setAttribute("id","map-control");
+        this.map.setAttribute("id", "map-control");
         this.map.classList.add("map-control");
         this.map.classList.add("map-control-portrait");
 
@@ -38,7 +45,7 @@ export class ControlMap {
         this.map.addEventListener('touchmove', this.onTouchMove, false);
         this.map.addEventListener('touchend', this.onTouchEnd, false);
         this.map.addEventListener('touchcancle', this.onTouchCancle, false);
-        
+
         this.point = document.createElement('div');
         this.point.classList.add("map-control-point");
 
@@ -58,7 +65,7 @@ export class ControlMap {
 
     }
 
-  
+
     moveForward: boolean = false;
     moveBackward: boolean = false;
 
@@ -94,8 +101,8 @@ export class ControlMap {
 
 
         //3、转换触摸点的坐标为以map中心为坐标原点的坐标系中的点
-        const x =  touch.clientX - (this.map.offsetLeft + this.map.clientWidth  / 2);
-        const y = -touch.clientY + (this.map.offsetTop  + this.map.clientHeight / 2) ;
+        const x = touch.clientX - (this.map.offsetLeft + this.map.clientWidth / 2);
+        const y = -touch.clientY + (this.map.offsetTop + this.map.clientHeight / 2);
 
         // 以map control直径的一半作为圆的半径
         const R = this.map.clientWidth / 2;
@@ -114,7 +121,7 @@ export class ControlMap {
         const degree = Math.asin(ny) * (180 / Math.PI);
 
         //7、判断点击点处于那个象限以计算出最终角度
-        
+
         if (x > 0 && y > 0) {
 
             this.angle = degree;
@@ -137,36 +144,34 @@ export class ControlMap {
 
         else {
         }
-        
+
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;
         this.moveRight = false;
-        
-        //8、 判断角度范围确定移动的方向
-        if (this.angle > 45 && this.angle < 135) {
 
-            this.moveForward = true;
+        //8、 判断角度范围确定移动的方向
+
+        let isLandscape = (this.layout == ControlMapLayout.Landscape);
+
+        if (this.angle > 45 && this.angle < 135) {
+            isLandscape ? this.moveLeft = true : this.moveForward = true;
         }
 
         else if (this.angle > 135 && this.angle < 225) {
-
-            this.moveLeft = true;
+            isLandscape ? this.moveBackward = true : this.moveLeft = true;
         }
 
         else if (this.angle > 225 && this.angle < 315) {
-
-            this.moveBackward = true;
+           isLandscape ? this.moveRight = true : this.moveBackward = true;
         }
 
         else if (this.angle > 315 || this.angle < 45) {
-
-            this.moveRight = true;
+           isLandscape ? this.moveForward = true : this.moveRight = true;
         }
-
     }
 
- 
+
 
     onTouchEnd = (e: TouchEvent) => {
 
@@ -179,7 +184,7 @@ export class ControlMap {
     }
 
     reset = () => {
-        
+
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;
@@ -189,7 +194,7 @@ export class ControlMap {
         this.point.style.top = `${this.pointInitOffsetTop}`;
     }
 
-    isMoving = ()=>{
-        return this.moveForward || this.moveLeft || this.moveRight || this.moveBackward ;
+    isMoving = () => {
+        return this.moveForward || this.moveLeft || this.moveRight || this.moveBackward;
     }
 }
