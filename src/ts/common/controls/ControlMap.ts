@@ -50,16 +50,11 @@ export class ControlMap {
 
     }
 
-    lastPointOffsetLeft: number = 0;
-    lastPointOffsetTop: number = 0;
 
     onTouchStart = (e: TouchEvent) => {
 
         e.preventDefault();
         e.stopPropagation();
-
-        this.lastPointOffsetLeft = 0;
-        this.lastPointOffsetTop = 0;
 
     }
 
@@ -93,11 +88,9 @@ export class ControlMap {
         //2、移动控制点
         const pointOffsetLeft = touch.clientX - this.point.clientWidth / 2 - this.map.offsetLeft;
         this.point.style.left = `${pointOffsetLeft}`;
-        this.lastPointOffsetLeft = pointOffsetLeft;
 
         const pointOffsetTop = touch.clientY - this.point.clientHeight / 2 - this.map.offsetTop;
         this.point.style.top = `${pointOffsetTop}`;
-        this.lastPointOffsetLeft = pointOffsetTop;
 
 
         //3、转换触摸点的坐标为以map中心为坐标原点的坐标系中的点
