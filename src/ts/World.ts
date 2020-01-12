@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 15:42:15
+ * @Last Modified time: 2020-01-12 16:44:29
  */
 
 
@@ -63,7 +63,7 @@ export class World {
 
         this.renderer = new THREE.WebGLRenderer(opt);
         
-        this.renderer.setPixelRatio(Utils.devicePixelRatio());
+        this.renderer.setPixelRatio(window.devicePixelRatio);
 
     }
 

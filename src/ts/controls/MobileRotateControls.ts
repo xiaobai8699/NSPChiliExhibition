@@ -13,14 +13,14 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import {LayoutEnum} from '../Layout';
+import {LayoutDirection} from '../Layout';
 import {World} from '../World';
 
 let mrcInstance: MobileRotateControls;
 
 export class MobileRotateControls implements IControls {
 
-    direction: LayoutEnum = LayoutEnum.Horizontal;
+    direction: LayoutDirection = LayoutDirection.Horizontal;
     
     object: THREE.Camera;
 
@@ -42,7 +42,7 @@ export class MobileRotateControls implements IControls {
 
     }
 
-    updateDirection = (dir:LayoutEnum) => {
+    updateDirection = (dir:LayoutDirection) => {
         this.direction = dir;
     }
 
@@ -98,7 +98,7 @@ export class MobileRotateControls implements IControls {
         
         if (this.isDrag) {
 
-            let distance = (this.direction == LayoutEnum.Horizontal ? this.yDistance : this.xDistance);
+            let distance = (this.direction == LayoutDirection.Horizontal ? this.yDistance : this.xDistance);
             const rad = THREE.Math.degToRad(distance * this.rotationSpeed);
             this.object.rotation.y = rad;
         }

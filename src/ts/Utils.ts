@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 16:01:37
+ * @Last Modified time: 2020-01-12 16:44:41
  */
 
 import * as THREE from 'three';
@@ -65,12 +65,6 @@ class Utils {
 
     static isPc(): boolean {
         return !Utils.isMobile();
-    }
-
-    static devicePixelRatio(): number {
-        //手机统一设置为2
-        // return Utils.isMobile() ? 2 : devicePixelRatio;
-        return window.devicePixelRatio;
     }
 
     static dumpVec3(v3: any, precision = 3) {
