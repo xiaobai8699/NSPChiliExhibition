@@ -6,8 +6,8 @@
  */
 
 import * as THREE from 'three';
-import { World } from '../common/World';
-import { Utils} from '../common/Utils';
+import { World } from './World';
+import { Utils} from './Utils';
 import {Const } from './Const';
 
 let kepuInstance: Kepu = null;

@@ -7,9 +7,9 @@
 
 import * as THREE from 'three';
 import { Vector3, AudioLoader } from 'three';
-import {World} from '../World';
-import { Const } from '../../business/Const';
-import { Utils } from '../Utils';
+import {World} from './World';
+import { Const } from './Const';
+import { Utils } from './Utils';
 
 let audioInstance: Audio;
 

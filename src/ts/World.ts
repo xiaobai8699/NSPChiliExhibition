@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 16:11:05
+ * @Last Modified time: 2020-01-12 15:42:15
  */
 
 
@@ -25,7 +25,6 @@ export class World {
         this.initSence();
         this.initCamera(); 
 
-        window.addEventListener("resize", this.onWindowResize, false);
     }
 
     static x(): World {
@@ -45,8 +44,6 @@ export class World {
         this.camera = new THREE.PerspectiveCamera();
         this.camera.near = 0.1;
         this.camera.far = 64;
-        Utils.setCameraFOV(this.camera);
-        Utils.setCameraAspect(this.camera);
         this.camera.position.set(0,1.7,23);
         this.scene.add(this.camera);
 
@@ -65,9 +62,6 @@ export class World {
         };
 
         this.renderer = new THREE.WebGLRenderer(opt);
-
-
-        Utils.setRendererSize(this.renderer);
         
         this.renderer.setPixelRatio(Utils.devicePixelRatio());
 
@@ -76,12 +70,5 @@ export class World {
     render = () => {
         
         this.renderer.render(this.scene, this.camera);
-    }
-
-    onWindowResize = () => {
-
-        Utils.setRendererSize(this.renderer);
-        Utils.setCameraAspect(this.camera);
-
     }
 }

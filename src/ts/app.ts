@@ -2,27 +2,28 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 18:30:48
+ * @Last Modified time: 2020-01-12 15:42:32
  */
 
 
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { Controls } from './common/controls/Controls';
-import { Pickup } from './common/core/Pickup';
-import { LED } from './business/LED';
-import { Lights } from './common/Lights';
-import { Video } from './common/core/Video';
-import { World } from './common/World';
-import { Utils } from './common/Utils';
-import { Audio } from './common/core/Audio';
-import { Visitor } from './business/Visitor';
-import { Const } from './business/Const';
-import { Debuger } from './common/Debuger';
-import { Chili } from './business/Chili';
-import { FixMaterial } from './business/fix/FixMaterial';
-import { VisitorSpriteLoader } from './business/Visitor';
+import { Controls } from './controls/Controls';
+import { Pickup } from './Pickup';
+import { LED } from './LED';
+import { Lights } from './Lights';
+import { Video } from './Video';
+import { World } from './World';
+import { Utils } from './Utils';
+import { Audio } from './Audio';
+import { Visitor } from './Visitor';
+import { Const } from './Const';
+import { Debuger } from './Debuger';
+import { Chili } from './Chili';
+import { FixMaterial } from './FixMaterial';
+import { VisitorSpriteLoader } from './Visitor';
+import { Layout } from './Layout';
 
 class App {
 
@@ -33,7 +34,7 @@ class App {
     constructor() {
 
         THREE.Cache.enabled = true;
-
+        
         World.x();
 
         Controls.x();
@@ -59,6 +60,8 @@ class App {
         Audio.play();
 
         Video.x();
+
+        Layout.x();
 
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
@@ -137,19 +140,19 @@ class App {
 
                 progressText.innerText = "解压资源，请稍候☕️..";
 
-                VisitorSpriteLoader.load((e: any) => {
-                    if(e){
-                        console.error(`创建模特精灵失败 ${e}`);
-                    }
-                    loading.style.display = "none";
+                // VisitorSpriteLoader.load((e: any) => {
+                //     if(e){
+                //         console.error(`创建模特精灵失败 ${e}`);
+                //     }
+                //     loading.style.display = "none";
 
-                });
+                // });
             }
         },
 
         err => {
 
-            alert(`加载资源失败,请刷新重试!(${err})`);
+            alert(`加载资源失败,请刷新重试!(${JSON.stringify(err)})`);
         }
     );
 

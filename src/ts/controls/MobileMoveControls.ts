@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 15:29:27
+ * @Last Modified time: 2020-01-12 15:59:42
  */
 
 
@@ -18,7 +18,6 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import { Direction } from './Direction';
 import {ControlMap} from './ControlMap';
 import { World } from '../World';
 import { Collision } from './Collision';
@@ -38,15 +37,6 @@ export class MobileMoveControls implements IControls {
         this.domElement = domElement;
         
         this.object = object;
-        
-        if (Direction.isLandscape()) {
-
-            // https://github.com/lh2lyc/ForceLandscape
-            this.domElement.classList.add("canvas-rotation");
-            this.domElement.style.width = `${window.innerHeight}`;
-            this.domElement.style.height = `${window.innerWidth}`;
-            
-        }
 
     }
 

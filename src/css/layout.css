@@ -1,0 +1,25 @@
+/* https://www.w3school.com.cn/cssref/pr_transform.asp */
+/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-origin */
+/* https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform-function/rotate */
+/* https://developer.mozilla.org/zh-CN/docs/Web/API/Element/className */
+
+#app{
+    width: 100%;
+    height: 100%;
+}
+
+/* 水平布局 */
+.app-horizontal{
+    transform-origin: left top;
+    transform: rotate(90deg);   
+    -webkit-transform:rotate(90deg); 
+    margin-left: 100%;
+}
+
+/* 垂直布局 */
+.app-vertical{
+    transform-origin: left top;
+    transform: rotate(-90deg);   
+    -webkit-transform:rotate(-90deg); 
+    margin-left: 0px;
+}

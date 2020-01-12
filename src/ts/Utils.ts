@@ -2,13 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:52 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 15:33:09
+ * @Last Modified time: 2020-01-12 16:01:37
  */
 
 import * as THREE from 'three';
-import { Direction } from './controls/Direction';
 import { World } from './World';
-import { Const } from '../business/Const';
+import { Const } from './Const';
 
 class Utils {
 
@@ -108,51 +107,6 @@ class Utils {
     }
 
  
-
-    static setRendererSize(renderer: THREE.WebGLRenderer) {
-
-        let w = window.innerWidth;
-        let h = window.innerHeight;
-
-        if (this.isMobile() && Direction.isLandscape()) {
-
-            w = window.innerHeight;
-            h = window.innerWidth;
-
-        }
-
-        renderer.setSize(w, h);
-
-    }
-
-
-    static setCameraAspect(camera: THREE.PerspectiveCamera) {
-
-        let aspect = window.innerWidth / window.innerHeight;
-
-        if (this.isMobile() && Direction.isLandscape()) {
-
-            aspect = window.innerHeight / window.innerWidth;
-        }
-
-        camera.aspect = aspect;
-        camera.updateProjectionMatrix();
-    }
-
-    static setCameraFOV(camera: THREE.PerspectiveCamera) {
-
-        let fov: number = 70; // for PC
-
-        if (this.isMobile()) {
-
-            fov = Direction.isPortrait() ? 78 : 66;
-        }
-
-        camera.fov = fov;
-        camera.updateProjectionMatrix();
-    }
-
-
     static getSize(object: THREE.Object3D): THREE.Vector3 {
 
         const box3 = new THREE.Box3();

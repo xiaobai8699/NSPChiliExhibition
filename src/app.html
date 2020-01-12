@@ -5,46 +5,62 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link type="text/css" rel="stylesheet" href="./css/app.css">
-    <link type="text/css" rel="stylesheet" href="./css/mapcontrol.css">
+    <!-- <link type="text/css" rel="stylesheet" href="./css/mapcontrol.css"> -->
     <link type="text/css" rel="stylesheet" href="./css/loading.css">
     <link type="text/css" rel="stylesheet" href="./css/canvas.css">
     <link type="text/css" rel="stylesheet" href="./css/labels.css">
     <link type="text/css" rel="stylesheet" href="./css/product.css">
     <link type="text/css" rel="stylesheet" href="./css/kepu.css">
 
+    <style>
+        #app {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-
-    <video id="video" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false"  muted="muted" loop >
+    <video id="video" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false" muted="muted"
+        loop>
         <source type="video/mp4" src="./asset/video/nsp.mp4">
     </video>
 
-    <div id="loading">
-        <div id="pogress-out">
-            <!-- <div id="progres-fill"></div> -->
+    <div id="app">
+        <div id="loading">
+            <div id="pogress-out">
+                <!-- <div id="progres-fill"></div> -->
+            </div>
+            <div id="progress-text"></div>
         </div>
-        <div id="progress-text"></div>
+
+
+        <div id="labels">
+            <div id="tips"></div>
+        </div>
+
+        <canvas id="canvas" tabindex="1"></canvas>
+
+        <div id="product-container">
+            <div id="product-page">
+                <canvas id="product-canvas"></canvas>
+                <div id="product-intro">南山婆油辣椒🌶️ 新品上市 <span
+                        style="color:red;font-size: 25px;font-weight: bolder;">1元</span>抢购</div>
+                <div id="product-buy">我要购买</div>
+                <img id="prodcut-close" class="close-btn"
+                    src="https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/close.png" />
+            </div>
+        </div>
+
+        <div id="kepu">
+            <div id="kepu-close">关闭</div>
+            <div id="kepu-content">
+                <span style="z-index: -1; position: absolute; color: white;">请稍候...</span>
+            </div>
+        </div>
     </div>
 
-
-    <div id="labels">
-        <div id="tips"></div>
-    </div>
-
-    <canvas id="canvas" tabindex="1"></canvas>
     <script src="./app.js"></script>
-
-    <div id="product-container">
-        <div id="product-page">
-            <canvas id="product-canvas"></canvas>
-            <div id="product-intro">南山婆油辣椒🌶️ 新品上市 <span
-                    style="color:red;font-size: 25px;font-weight: bolder;">1元</span>抢购</div>
-            <div id="product-buy">我要购买</div>
-            <img id="prodcut-close" class="close-btn"
-                src="https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/close.png" />
-        </div>
-    </div>
 
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
     <script>
@@ -66,22 +82,22 @@
                 function buy(e) {
 
                     const name = buyBtn.getAttribute("nspname");
-                    if(name == undefined) return;
+                    if (name == undefined) return;
 
-                    const largeArr = ["LJJ2","LJJ4"];
-                    const smallArr = ["LJJ1","LJJ3","64mmA016", "64mmB016", "64mmC016"];
+                    const largeArr = ["LJJ2", "LJJ4"];
+                    const smallArr = ["LJJ1", "LJJ3", "64mmA016", "64mmB016", "64mmC016"];
 
                     let url;
-                    if(largeArr.indexOf(name)){
+                    if (largeArr.indexOf(name)) {
 
                         url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f65cbeb63b7e82b888dd&isSeckill=1";
                     }
 
-                    else if(smallArr.indexOf(name)) {
+                    else if (smallArr.indexOf(name)) {
                         url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f716beb63b7e82b888df&isSeckill=1";
                     }
 
-                    if(url) {
+                    if (url) {
 
                         wx.miniProgram.navigateTo({ url: url })
                     }
@@ -101,12 +117,7 @@
         })();
     </script>
 
-    <div id="kepu">
-        <div id="kepu-close">关闭</div>
-        <div id="kepu-content">
-            <span style="z-index: -1; position: absolute; color: white;">请稍候...</span>
-        </div>
-    </div>
+
 </body>
 
 </html>

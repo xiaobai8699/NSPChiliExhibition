@@ -10,7 +10,7 @@
 
 
  import * as THREE from 'three';
- import {World} from '../World';
+ import {World} from './World';
 
 let labelInstance: Labels;
 

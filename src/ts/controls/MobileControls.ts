@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:11 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 11:50:32
+ * @Last Modified time: 2020-01-12 15:57:35
  */
 
 
@@ -20,7 +20,7 @@ export class MobileControls implements IControls {
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
-        this.rControl = new MobileRotateControls(object, domElement);
+        this.rControl = MobileRotateControls.x();
 
         this.mControl = new MobileMoveControls(object, domElement);
     }

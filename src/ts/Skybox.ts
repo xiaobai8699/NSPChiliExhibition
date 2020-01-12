@@ -6,8 +6,8 @@
  */
 
 import * as THREE from 'three';
-import { World } from '../World';
-import { Const } from '../../business/Const';
+import { World } from './World';
+import { Const } from './Const';
 
  export class Skybox {
 

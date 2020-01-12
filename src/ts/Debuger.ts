@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 18:34:40
+ * @Last Modified time: 2020-01-12 16:13:32
  */
 
 // https://github.com/mrdoob/stats.js
@@ -12,11 +12,11 @@ import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
 import * as THREE from 'three';
 import {World} from './World';
-import {Video} from './core/Video';
+import {Video} from './Video';
 
 let debugerInstance: Debuger = null;
 
-let enableDebuger: boolean = true;
+let enableDebuger: boolean = false;
 
 export class Debuger {
 

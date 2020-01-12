@@ -8,8 +8,8 @@
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
 
 import * as THREE from 'three';
-import { Utils } from '../common/Utils';
-import { World } from '../common/World';
+import { Utils } from './Utils';
+import { World } from './World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector2, Vector3 } from 'three';
 import {Chili} from './Chili';

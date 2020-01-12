@@ -9,8 +9,8 @@
 //https://threejsfundamentals.org/threejs/lessons/threejs-canvas-textures.html
 
 import * as THREE from 'three';
-import { Utils } from '../common/Utils';
-import { World } from '../common/World';
+import { Utils } from './Utils';
+import { World } from './World';
 import { Const } from './Const';
 
 let visitorInstance: Visitor = null;

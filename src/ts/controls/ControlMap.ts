@@ -2,14 +2,16 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 17:52:35 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 10:12:58
+ * @Last Modified time: 2020-01-12 15:41:35
  */
+
+import '../../css/mapcontrol.css';
 
 let controlMapInstance: ControlMap = null;
 
 export enum ControlMapLayout {
-    Landscape,  //横屏
-    Portrait    //竖屏
+    Landscape = 0,  //横屏
+    Portrait  = 1   //竖屏
 }
 
 export class ControlMap {
@@ -40,8 +42,7 @@ export class ControlMap {
         this.map.setAttribute("id", "map-control");
         this.map.classList.add("map-control");
         this.map.classList.add("map-control-portrait");
-        const cls = this.layout == ControlMapLayout.Landscape ? "map-control-landscape" : "map-control-portrait";
-        this.map.classList.add(cls);
+        this.updateLayout();
 
         this.map.addEventListener('touchstart', this.onTouchStart, false);
         this.map.addEventListener('touchmove', this.onTouchMove, false);
@@ -59,6 +60,18 @@ export class ControlMap {
 
     }
 
+
+    updateLayout = (layout?:ControlMapLayout) => {
+        this.layout = layout != undefined ? layout : ControlMapLayout.Landscape;
+       
+        const l = "map-control-landscape";
+        const p = "map-control-portrait";
+        const cls = this.layout == ControlMapLayout.Landscape ? l: p;
+
+        this.map.classList.remove(l);
+        this.map.classList.remove(p);
+        this.map.classList.add(cls);
+    }
 
     onTouchStart = (e: TouchEvent) => {
 

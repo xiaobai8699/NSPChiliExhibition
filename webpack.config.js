@@ -1,6 +1,6 @@
 const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const {MiniCssExtractPlugin} = require("mini-css-extract-plugin");
+const { MiniCssExtractPlugin } = require("mini-css-extract-plugin");
 
 var config = {
   // mode: "development",
@@ -18,8 +18,8 @@ var config = {
     contentBase: "./dist",
     index: "app.html",
     host: "0.0.0.0",
-    disableHostCheck:true,
-    useLocalIp:true
+    disableHostCheck: true,
+    useLocalIp: true
   },
 
   resolve: {
@@ -28,7 +28,6 @@ var config = {
   },
 
   module: {
-
     rules: [
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
@@ -36,8 +35,9 @@ var config = {
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 
+      //CSS
+      { test: /\.css$/, use: [{loader:"style-loader"}, {loader:"css-loader"}] }
     ]
-
   },
 
   plugins: [
@@ -49,14 +49,11 @@ var config = {
       }
     ]),
 
-    new CleanWebpackPlugin(),
-
-
+    new CleanWebpackPlugin()
   ]
 };
 
 module.exports = (env, argv) => {
-  
   if (argv.mode == "development") {
     // Enable sourcemaps for debugging webpack's output.
     config.devtool = "source-map";

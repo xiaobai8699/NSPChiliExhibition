@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:18 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2019-12-30 17:12:48
+ * @Last Modified time: 2020-01-12 15:56:28
  */
 
 
@@ -13,24 +13,37 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import { Direction } from './Direction';
+import {LayoutEnum} from '../Layout';
+import {World} from '../World';
 
+let mrcInstance: MobileRotateControls;
 
 export class MobileRotateControls implements IControls {
 
+    direction: LayoutEnum = LayoutEnum.Horizontal;
+    
     object: THREE.Camera;
 
     domElement: HTMLElement;
 
-    constructor(object: THREE.Camera, domElement?: HTMLElement) {
+    static x(): MobileRotateControls {
+        mrcInstance = mrcInstance || new MobileRotateControls();
+        return mrcInstance;
+    }
+
+    constructor() {
         
-        this.domElement = domElement;
-        this.object = object;
+        this.domElement = World.x().renderer.domElement;
+        this.object = World.x().camera;
 
         this.domElement.addEventListener('touchstart', this.onTouchStart, false);
         this.domElement.addEventListener('touchmove', this.onTouchMove, false);
         this.domElement.addEventListener('touchend', this.onTouchEnd, false);
 
+    }
+
+    updateDirection = (dir:LayoutEnum) => {
+        this.direction = dir;
     }
 
     lastX: number;
@@ -85,12 +98,10 @@ export class MobileRotateControls implements IControls {
         
         if (this.isDrag) {
 
-            let distance =  Direction.isLandscape()? this.yDistance : this.xDistance;
+            let distance = (this.direction == LayoutEnum.Horizontal ? this.yDistance : this.xDistance);
             const rad = THREE.Math.degToRad(distance * this.rotationSpeed);
             this.object.rotation.y = rad;
-
         }
-        
     }
 
     dispose = () => {

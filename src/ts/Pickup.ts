@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 13:06:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 14:20:05
+ * @Last Modified time: 2020-01-12 16:01:16
  */
 
 // 参考：
@@ -10,11 +10,12 @@
 
 
 import * as THREE from 'three';
-import { Utils } from '../Utils';
-import { World } from '../World';
-import { Product } from '../../business/Product';
-import {Chili} from '../../business/Chili';
-import { Kepu } from '../../business/Kepu';
+import { Utils } from './Utils';
+import { World } from './World';
+import { Product } from './Product';
+import {Chili} from './Chili';
+import { Kepu } from './Kepu';
+import {Layout, LayoutEnum} from './Layout';
 
 let pickupInstance: Pickup;
 
@@ -108,7 +109,7 @@ export class Pickup {
         // 屏幕坐标转世界坐标的推导过程:
         // http://note.youdao.com/noteshare?id=fa72f3c8ccacc54a8e7ad56fa4feba1a
         // https://zhuanlan.zhihu.com/p/90295867?utm_source=wechat_session&utm_medium=social&utm_oi=615939963313983488
-        if (Utils.isMobile()) {
+        if (Utils.isMobile() && Layout.x().layout == LayoutEnum.Horizontal) {
 
             pickPoint.x = ((2 * canvasPosition.y) - window.innerHeight) / window.innerHeight;
             pickPoint.y = ((2 * canvasPosition.x) - window.innerWidth) / window.innerWidth;

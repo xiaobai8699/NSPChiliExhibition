@@ -10,9 +10,9 @@
 // https://www.google.com/search?sxsrf=ACYBGNSWYbUUOlnNjrq-USPBftDSpPX1Kw%3A1576825687684&source=hp&ei=V3P8XYydJ5iSr7wP-tWggAE&q=can+video+autoplay+on+mobile&oq=video+can%27t+autoplay&gs_l=psy-ab.1.6.0i13i30j0i13i5i30l2j0i8i13i30l5.2832.15948..24624...4.0..0.195.3646.0j22......0....1..gws-wiz.....10..35i362i39j0j0i10j0i13j0i10i30j0i19j0i12i30i19j0i12i10i30i19j33i160.1-ba9bWx3VU
 
 import * as THREE from 'three';
-import {ControlMap} from '../controls/ControlMap';
-import { World } from '../World';
-import { Utils } from '../Utils';
+import {ControlMap} from './controls/ControlMap';
+import { World } from './World';
+import { Utils } from './Utils';
 
 let videoInstance: Video = null;
 

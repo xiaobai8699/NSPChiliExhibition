@@ -7,7 +7,7 @@
 
 
 import * as THREE from 'three';
-import { World } from '../../common/World';
+import { World } from './World';
 
 export class FixMaterial {
 
