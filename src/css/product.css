@@ -13,7 +13,7 @@
     visibility: hidden;
 }
 
-#product-page {
+.product-page {
     position: relative;
     display: flex;
     align-items: center;
@@ -26,6 +26,16 @@
     border-top-left-radius: 35px;
     border-bottom-right-radius: 35px;
     overflow: hidden;
+}
+
+.product-page-horizontal{
+    height: 90%;
+    width: 40%;
+}
+
+.product-page-vertical{
+    height: 50%;
+    width: 80%;
 }
 
 #product-canvas {
@@ -62,4 +72,21 @@
     right: 8px;
     width: 30px;
     height: 30px;
+}
+
+
+/* 水平布局 */
+.product-horizontal{
+    transform-origin: left top;
+    transform: rotate(90deg);   
+    -webkit-transform:rotate(90deg); 
+    margin-left: 100%;
+}
+
+/* 垂直布局 */
+.product-vertical{
+    transform-origin: left top;
+    transform: rotate(-90deg);   
+    -webkit-transform:rotate(-90deg); 
+    margin-left: 0px;
 }

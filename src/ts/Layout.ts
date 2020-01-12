@@ -2,10 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-12 13:42:03 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 16:41:30
+ * @Last Modified time: 2020-01-12 17:23:39
  */
 
 import '../css/layout.css';
+import '../css/product.css';
+
 import * as THREE from 'three'; 
 import {World} from './World';
 import {Utils} from './Utils';
@@ -55,7 +57,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
             this.vertical();
         }else {
 
-             this.horizontal();
+             this.vertical();
         }
     }
 
@@ -68,6 +70,10 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
             this.app.classList.remove('app-horizontal');
             this.app.classList.add('app-vertical');
         }
+
+        let product: HTMLCanvasElement = document.querySelector("#product-page");
+        product.classList.remove("product-page-horizontal");
+        product.classList.add("product-page-vertical");
 
         this.app.style.width  = `${window.innerWidth}`;
         this.app.style.height = `${window.innerHeight}`;
@@ -98,6 +104,10 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         this.canvas.style.width = `${window.innerHeight}`;
         this.canvas.style.height = `${window.innerWidth}`;
 
+        let product: HTMLCanvasElement = document.querySelector("#product-page");
+        product.classList.remove("product-page-vertical");
+        product.classList.add("product-page-horizontal");
+
         this.setupRenderSize();
         this.setupCameraAspect();
         this.setupCameraFov();
@@ -109,6 +119,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
     }
 
     setupRenderSize = () => {
+
         let w = window.innerWidth;
         let h = window.innerHeight;
 
@@ -120,7 +131,6 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         }
 
         this.renderer.setSize(w,h);
-
     }
 
     setupCameraAspect = () => {

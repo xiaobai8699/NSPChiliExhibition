@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 13:44:45
+ * @Last Modified time: 2020-01-12 17:13:29
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
@@ -11,7 +11,6 @@ import * as THREE from 'three';
 import { Utils } from './Utils';
 import { World } from './World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { Vector2, Vector3 } from 'three';
 import {Chili} from './Chili';
 
 let productInstance: Product;
