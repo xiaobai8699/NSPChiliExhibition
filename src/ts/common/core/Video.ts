@@ -88,7 +88,7 @@ export class Video {
         //在安卓机上，如果不是在小程序内，则不启用视频播放功能。因为腾讯X5浏览器的限制，导致只能全屏幕播放视频。见:
          //https://www.cnblogs.com/macliu/p/10956824.html
         //https://www.cnblogs.com/-867259206/p/10864479.html
-        if(Utils.isAndroid() && Utils.inWxMiniApp() == false){
+        if(!Utils.isInAndroidAndWxMiniApp()){
             return;
         }
 

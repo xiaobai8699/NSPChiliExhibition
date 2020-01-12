@@ -14,7 +14,7 @@ enum RotationDirectionEnum {
 
 export class Direction {
 
-    static direction: RotationDirectionEnum = RotationDirectionEnum.Portrait;
+    static direction: RotationDirectionEnum = RotationDirectionEnum.Landscape;
 
     static setLandscape(){
         this.direction = RotationDirectionEnum.Landscape;

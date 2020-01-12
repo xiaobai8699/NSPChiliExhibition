@@ -21,8 +21,8 @@ import { Visitor } from './business/Visitor';
 import { Const } from './business/Const';
 import { Debuger } from './common/Debuger';
 import { Chili } from './business/Chili';
-import {FixMaterial} from './business/fix/FixMaterial';
-import {VisitorSpriteLoader} from './business/Visitor';
+import { FixMaterial } from './business/fix/FixMaterial';
+import { VisitorSpriteLoader } from './business/Visitor';
 
 class App {
 
@@ -41,7 +41,7 @@ class App {
         Pickup.x();
 
         Debuger.x();
-        
+
         this.clock = new THREE.Clock();
 
     }
@@ -54,12 +54,9 @@ class App {
 
         Lights.addLights();
 
-          Visitor.x().newAllVisitors();
+        Visitor.x().newAllVisitors();
 
-        if (Utils.isPc()) {
-
-            Audio.play();
-        }
+        Audio.play();
 
         Video.x();
 
@@ -98,7 +95,7 @@ class App {
 (function main() {
 
     const loading: HTMLElement = document.querySelector("#loading");
-    const progress: HTMLElement = document.querySelector("#progres-fill");
+    // const progress: HTMLElement = document.querySelector("#progres-fill");
     const progressText: HTMLElement = document.querySelector("#progress-text");
 
     const loader = new GLTFLoader();
@@ -116,7 +113,7 @@ class App {
             try {
                 const app = new App();
                 app.run(glft);
-                //loading.style.display = "none";
+                loading.style.display = "none";
             }
             catch (e) {
                 console.error(e);
@@ -128,7 +125,7 @@ class App {
 
             let percent = (xhr.loaded / xhr.total) * 100;
 
-            progress.style.left = `${percent}%`;
+            // progress.style.left = `${percent}%`;
 
             const M = 1048576;
             let total = (xhr.total / M).toFixed(2);
@@ -140,7 +137,7 @@ class App {
 
                 progressText.innerText = "解压资源，请稍候☕️..";
 
-                VisitorSpriteLoader.load((e:any) => {
+                VisitorSpriteLoader.load((e: any) => {
                     console.error(`创建模特精灵失败 ${e}`);
                     loading.style.display = "none";
 

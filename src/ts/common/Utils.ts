@@ -60,6 +60,10 @@ class Utils {
         return this.inWxMiniAppCache;
     }
     
+    static isInAndroidAndWxMiniApp(){
+        return this.isAndroid() && this.inWxMiniApp();
+    }
+
     static isPc(): boolean {
         return !Utils.isMobile();
     }

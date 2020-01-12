@@ -47,7 +47,7 @@ export class World {
         this.camera.far = 64;
         Utils.setCameraFOV(this.camera);
         Utils.setCameraAspect(this.camera);
-        this.camera.position.set(0,1.7,26);
+        this.camera.position.set(0,1.7,23);
         this.scene.add(this.camera);
 
     }
