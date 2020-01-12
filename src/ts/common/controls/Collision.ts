@@ -17,14 +17,38 @@ export class Collision {
 
     rayCaster: THREE.Raycaster;
 
-    // 模特小姐
-    models: Set<string>;
+    //特检测对象集合
+    objects: Array<any> = [];
 
     constructor() {
 
         this.rayCaster = new THREE.Raycaster();
 
-        this.models = new Set(["people024A","people025A", "people026A"]);
+        if (Utils.isMobile()) {
+            //手机端只检测围墙和门
+            ["paint_07A01",
+                "metal_gold_04A01",
+                "metal_gold_04A02",
+                "metal_gold_04A03",
+                "metal_gold_04A04",
+                "metal_gold_04A05",
+                "metal_gold_04A06",
+                "metal_gold_04A07",
+                "b01Agrass02",
+                "b01Agrass03",
+                "b01Agrass04",
+                "b01Agrass05"
+            ].forEach(name => {
+
+                const obj = World.x().scene.getObjectByName(name);
+                if (obj) {
+                    this.objects.push(obj);
+                }
+            });
+
+        } else {
+            this.objects = World.x().scene.children;
+        }
     }
 
     static x(): Collision {
@@ -34,10 +58,10 @@ export class Collision {
 
     }
 
-     detect= (moveForward = false, moveBackward = false, moveLeft = false, moveRight = false): boolean => {
+    detect = (moveForward = false, moveBackward = false, moveLeft = false, moveRight = false): boolean => {
 
         //不移动就不检测
-        if ((moveForward  || moveLeft || moveRight ||  moveBackward) == false) {
+        if ((moveForward || moveLeft || moveRight || moveBackward) == false) {
             return;
         }
 
@@ -76,18 +100,8 @@ export class Collision {
 
         this.rayCaster.set(origin, direction);
 
-        let objects:any = null;
-        if(Utils.isMobile()){
-            //手机端只检测围墙
-            objects = [World.x().scene.getObjectByName("paint_07A01")];
+        const intersectedObjects = this.rayCaster.intersectObjects(this.objects, true);
 
-        }else {
-
-            objects = World.x().scene.children;
-        }
-
-        const intersectedObjects = this.rayCaster.intersectObjects(objects, true);
-        
         if (intersectedObjects.length > 0) {
 
             for (let i = 0; i < intersectedObjects.length; i++) {
@@ -99,7 +113,7 @@ export class Collision {
 
             return false;
 
-        } 
+        }
 
         return false;
     }
