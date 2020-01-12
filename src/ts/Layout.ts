@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-12 13:42:03 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 17:23:39
+ * @Last Modified time: 2020-01-12 17:53:05
  */
 
 import '../css/layout.css';
@@ -13,6 +13,7 @@ import {World} from './World';
 import {Utils} from './Utils';
 import {ControlMap,ControlMapLayout} from './controls/ControlMap';
 import { MobileRotateControls } from './controls/MobileRotateControls';
+import {Product} from './Product';
 
 export enum LayoutDirection{
     Horizontal = 0,  //横屏
@@ -25,7 +26,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
 
  export class Layout {
     
-    layout: LayoutDirection;
+    layout: LayoutDirection = LayoutDirection.Horizontal;
 
     app: HTMLDivElement;
 
@@ -57,8 +58,19 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
             this.vertical();
         }else {
 
-             this.vertical();
+             this.horizontal();
         }
+
+        // const s =  this;
+        // setInterval(()=>{
+        //     if(s.layout == LayoutDirection.Horizontal ){
+        //         s.layout = LayoutDirection.Vertical;
+        //         this.vertical();
+        //     }else {
+        //         s.layout = LayoutDirection.Horizontal;
+        //         this.horizontal();
+        //     }
+        // },3000);
     }
 
     vertical = () =>{
@@ -107,7 +119,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         let product: HTMLCanvasElement = document.querySelector("#product-page");
         product.classList.remove("product-page-vertical");
         product.classList.add("product-page-horizontal");
-
+        
         this.setupRenderSize();
         this.setupCameraAspect();
         this.setupCameraFov();

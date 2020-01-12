@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 08:49:51 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 17:13:29
+ * @Last Modified time: 2020-01-12 17:46:14
  */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
@@ -191,4 +191,5 @@ export class Product {
         document.querySelector("#prodcut-close").addEventListener("touchstart", this.hide, false);
 
     }
+    
 }
