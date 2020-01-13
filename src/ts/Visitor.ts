@@ -56,8 +56,8 @@ export class Visitor {
             this.staticVisitors.add(visitor);
         });
 
+        //xiong qi
         const self = this;
-
         new THREE.TextureLoader().load(
             Const.staticVisitorUrl("xiong2"),
 
