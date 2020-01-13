@@ -16,7 +16,7 @@ import { Const } from './Const';
 let visitorInstance: Visitor = null;
 
 const spriteSize = 512;
-const spriteNameArr = ["people022A", "people023A", "people024A", "people025A", "people026A"];
+const spriteNameArr:Array<string> = ["people022A", "people023A", "people024A", "people025A", "people026A"];
 
 export class Visitor {
 
@@ -38,6 +38,10 @@ export class Visitor {
     newAllVisitors = () => {
         this.getStaticVisitors();
         this.newAllVisitorsSprites();
+
+        VisitorDownloader.start((e:any)=>{
+
+        });
     }
 
     getStaticVisitors = () => {
@@ -52,6 +56,15 @@ export class Visitor {
             this.staticVisitors.add(visitor);
         });
 
+        const self = this;
+
+        new THREE.TextureLoader().load(
+            Const.staticVisitorUrl("xiong2"),
+
+            function (texture) {
+                self.newTransparentMesh("people01A", texture);
+            }
+        );
     }
 
     sprites = new Set<VisitorSprite>();
@@ -168,7 +181,7 @@ class VisitorSprite {
 
 
     draw = () => {
-        const sprites = VisitorSpriteLoader.memoryCache[this.textureName];
+        const sprites = VisitorDownloader.memoryCache.get(this.textureName);
         if(!sprites){
             return;
         }
@@ -263,6 +276,97 @@ export class VisitorSpriteLoader {
             }
         );
 
+    }
+
+}
+
+
+export class VisitorDownloader {
+
+  static memoryCache = new Map();
+
+   static start = (callback:Function) =>{
+
+        const mapArr = new Map();
+
+        for(let i = 1; i <= 5;i++){
+            const arr:Array<string> = [];
+
+            for(let j = 1; j <= 46; j++){
+                const name = `VisitorSprite${i}_${j}`;
+                arr.push(name);
+            }
+
+            const key:any = spriteNameArr[i-1];
+            mapArr.set(key, arr);
+        }
+
+
+        let counter = 0;
+
+        mapArr.forEach((v,k)=>{
+            VisitorDownloader.download(v,k,function(image:ImageBitmap, err:any){
+                console.log(`[VisitorDownloader]: ${k} finished`);
+                if(image){
+                    VisitorDownloader.memoryCache.set(k,image);
+                    counter++;
+                    if(counter == mapArr.size){
+                        if(callback){
+                            callback();
+                        }
+                    }
+                }else {
+                    if(callback){
+                        callback(err);
+                    }
+                }
+            });
+        });
+    }
+
+   static download = (nameArr:Array<string>, key:string, callback:Function) => {
+
+        const promiseArr:Array<any> = [];
+
+        nameArr.forEach( name => {
+
+            const promise = new Promise((res, rej) => {
+
+                // 注意：safari浏览不支持createbitimage方法，不能使用ImageBitmapLoader
+                var loader = new THREE.ImageLoader();
+
+                loader.load(
+
+                    Const.dynamicVisitorUrl(name),
+
+                    function (imageBitmap) {
+                        res(imageBitmap);
+                    },
+
+                    undefined,
+
+                    function (err) {
+                        console.log(`[VisitorDownloader]: ERR:${err}`);
+                        rej(err);
+                    }
+                );
+
+            });
+
+
+            promiseArr.push(promise);
+        });
+
+        Promise.all(promiseArr)
+        .then(imageArr =>{
+            if(callback){
+                callback(imageArr, undefined);
+            }
+        })
+        .catch(err => {
+            callback(undefined, err);
+        });
+        
     }
 
 }

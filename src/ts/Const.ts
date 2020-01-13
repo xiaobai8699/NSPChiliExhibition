@@ -17,7 +17,7 @@ export class Const {
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = './asset/model/nsp.glb';/*`${Const.osspath}model/nsp.glb`*/;
+    static readonly modelUrl: string = /*'./asset/model/nsp.glb';*/`${Const.osspath}model/nsp.glb`;
     
     static staticVisitorUrl(name: string): string {
 
@@ -28,7 +28,9 @@ export class Const {
 
     static dynamicVisitorUrl(name: string) {
 
-        return `${this.osspath}image/visitor/dynamic/${name}.png`;
+        //return `${this.osspath}image/visitor/dynamic/${name}.png`;
+        // return `./asset/image/visitor/dynamic/big/${name}.png`;
+        return `${this.osspath}image/visitor/dynamic/bigsize/${name}.png`;
 
     }
 

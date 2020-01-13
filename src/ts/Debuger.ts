@@ -16,7 +16,7 @@ import {Video} from './Video';
 
 let debugerInstance: Debuger = null;
 
-let enableDebuger: boolean = true;
+let enableDebuger: boolean = false;
 
 export class Debuger {
 
