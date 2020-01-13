@@ -17,7 +17,7 @@ export class Const {
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = /*'./asset/model/nsp.glb';*/`${Const.osspath}model/nsp.glb`;
+    static readonly modelUrl: string = /*'./asset/model/nsp_fbx.glb';*/`${Const.osspath}model/nsp.glb`;
     
     static staticVisitorUrl(name: string): string {
 
