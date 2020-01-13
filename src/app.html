@@ -84,18 +84,19 @@
 
                     const name = buyBtn.getAttribute("nspname");
                     if (name == undefined) return;
-
-                    const largeArr = ["LJJ2", "LJJ4"];
-                    const smallArr = ["LJJ1", "LJJ3", "64mmA016", "64mmB016", "64mmC016"];
+                   
+                    const smallArr = ["LJJ2", "LJJ4"];
+                    const largeArr = ["LJJ1", "LJJ3", "64mmA016", "64mmB016", "64mmC016"];
 
                     let url;
-                    if (largeArr.indexOf(name)) {
+                    if (smallArr.indexOf(name) > -1) {
+                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f716beb63b7e82b888df&isSeckill=1";
 
-                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f65cbeb63b7e82b888dd&isSeckill=1";
                     }
 
-                    else if (smallArr.indexOf(name)) {
-                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f716beb63b7e82b888df&isSeckill=1";
+                    else if (largeArr.indexOf(name) > -1) {
+                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f65cbeb63b7e82b888dd&isSeckill=1";
+
                     }
 
                     if (url) {

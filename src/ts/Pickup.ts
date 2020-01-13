@@ -68,6 +68,8 @@ export class Pickup {
 
             Product.x().show(name);
             Kepu.x().show(name);
+
+            console.log(`[Pickup] ${name}`);
         } 
     }
 
