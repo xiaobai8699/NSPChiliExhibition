@@ -28,6 +28,8 @@ export class Audio {
         if(Utils.isAndroid()){
             if(!Utils.inWxMiniApp()){
 
+                return;
+                
                 const listener = new THREE.AudioListener();
                 World.x().camera.add(listener);
         
