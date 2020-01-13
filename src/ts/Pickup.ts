@@ -13,9 +13,9 @@ import * as THREE from 'three';
 import { Utils } from './Utils';
 import { World } from './World';
 import { Product } from './Product';
-import {Chili} from './Chili';
+import { Chili } from './Chili';
 import { Kepu } from './Kepu';
-import {Layout, LayoutDirection} from './Layout';
+import { Layout, LayoutDirection } from './Layout';
 
 let pickupInstance: Pickup;
 
@@ -55,7 +55,7 @@ export class Pickup {
         this.raycaster.setFromCamera(normalizedPosition, this.camera);
 
         // 计算物体和射线的焦点
-        const objects = [...Chili.x().rotatedBottles,...Kepu.x().objects];
+        const objects = [...Chili.x().rotatedBottles, ...Kepu.x().objects];
         const intersectedObjects = this.raycaster.intersectObjects(objects, true);
 
         if (intersectedObjects.length > 0) {
@@ -66,11 +66,12 @@ export class Pickup {
 
             const name = obj.parent.name ? obj.parent.name : obj.name;
 
-            Product.x().show(name);
-            Kepu.x().show(name);
-
-            console.log(`[Pickup] ${name}`);
-        } 
+            if (this.pickedObject.distance < 20) {
+                Product.x().show(name);
+                Kepu.x().show(name);
+            }
+            console.log(`[Pickup] name:${name} distance:${this.pickedObject.distance}`);
+        }
     }
 
     getCanvasRelativePosition = (event: MouseEvent | TouchEvent) => {
