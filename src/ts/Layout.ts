@@ -61,16 +61,6 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
              this.horizontal();
         }
 
-        // const s =  this;
-        // setInterval(()=>{
-        //     if(s.layout == LayoutDirection.Horizontal ){
-        //         s.layout = LayoutDirection.Vertical;
-        //         this.vertical();
-        //     }else {
-        //         s.layout = LayoutDirection.Horizontal;
-        //         this.horizontal();
-        //     }
-        // },3000);
     }
 
     vertical = () =>{
@@ -80,7 +70,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         if(this.app.classList.contains('app-horizontal')){
 
             this.app.classList.remove('app-horizontal');
-            this.app.classList.add('app-vertical');
+            //this.app.classList.add('app-vertical');
         }
 
         let product: HTMLCanvasElement = document.querySelector("#product-page");
@@ -107,7 +97,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
 
         this.layout = LayoutDirection.Horizontal;
         
-        this.app.classList.remove('app-vertical');
+       // this.app.classList.remove('app-vertical');
         this.app.classList.add('app-horizontal');
 
         this.app.style.width  = `${window.innerHeight}`;
