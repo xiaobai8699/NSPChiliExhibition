@@ -143,6 +143,12 @@ export class Product {
             return;
         }
 
+        if(name == "LJJ2" || name == "LJJ4"){ //小瓶辣椒
+            document.querySelector("#product-price").innerHTML = "0.18元";
+        }else {
+            document.querySelector("#product-price").innerHTML = "0.98元";
+        }
+
         var buyBtn = document.querySelector("#product-buy");
         buyBtn.setAttribute('nspname',name);
 
