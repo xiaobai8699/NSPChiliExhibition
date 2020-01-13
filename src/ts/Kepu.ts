@@ -74,7 +74,9 @@ export class Kepu {
                     kepuContentDiv.style.visibility = "visible";
                     kepuClose.style.visibility = "visible";
                 }
-                image.src = Const.kepuUrl("mamadeweidao");
+
+                const name = Utils.isMobile() ? "mamadeweidao_mobile" : "mamadeweidao_pc";
+                image.src = Const.kepuUrl(name);
             }
 
 
