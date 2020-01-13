@@ -22,7 +22,6 @@ import { Const } from './Const';
 import { Debuger } from './Debuger';
 import { Chili } from './Chili';
 import { FixMaterial } from './FixMaterial';
-import { VisitorSpriteLoader } from './Visitor';
 import { Layout } from './Layout';
 
 class App {
@@ -140,13 +139,6 @@ class App {
 
                 progressText.innerText = "解压资源，请稍候☕️..";
 
-                // VisitorSpriteLoader.load((e: any) => {
-                //     if(e){
-                //         console.error(`创建模特精灵失败 ${e}`);
-                //     }
-                //     loading.style.display = "none";
-
-                // });
             }
         },
 
