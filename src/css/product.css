@@ -29,7 +29,7 @@
 }
 
 .product-page-horizontal{
-    height: 95%;
+    height: 90%;
     width: 40%;
 }
 
@@ -40,30 +40,26 @@
 
 #product-canvas {
     width: 100%;
-    height: 70%;
+    height: 75%;
     background: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/product_page_bg.png') no-repeat center center;
     background-size: cover;
 }
 
-#product-intro,#product-buy {
+#product-intro {
     text-align: center;
     width: 100%;
-    padding-top:10px;
-    padding-bottom: 5px;
+    height: 15%;
     background: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/product_page_bg.png') no-repeat center center;
 }
 
 #product-buy{
-    background-image: url("");
+    min-height: 10%;;
+    width: 100%;
     background-color: rgb(171, 0, 15);
     font-size: 22px;
-    padding-bottom: 10px;
-}
-
-.product-buy-disable {
-
-    background-color: rgb(125, 124, 124);
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close-btn {
@@ -72,6 +68,7 @@
     right: 8px;
     width: 30px;
     height: 30px;
+    z-index: 1;
 }
 
 
@@ -81,12 +78,4 @@
     transform: rotate(90deg);   
     -webkit-transform:rotate(90deg); 
     margin-left: 100%;
-}
-
-/* 垂直布局 */
-.product-vertical{
-    transform-origin: left top;
-    transform: rotate(-90deg);   
-    -webkit-transform:rotate(-90deg); 
-    margin-left: 0px;
 }
