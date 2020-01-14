@@ -25,6 +25,7 @@ export class Video {
 
     constructor() {
 
+        this.newVideoElement();
         this.newVideoMesh();
 
         const canvas = document.querySelector("#canvas");
@@ -44,12 +45,21 @@ export class Video {
         return videoInstance;
     }
 
+    newVideoElement = () => {
+        const video = document.createElement('video');
+        video.setAttribute("id","video");
+        video.volume = 1;
+        video.loop = true;
+        video.src = "./asset/video/nsp.mp4";
+        video.setAttribute("playsinline","true");
+        video.setAttribute("x5-video-player-type","h5");
+        video.style.display = "none";
+        document.body.appendChild(video);
+    }
+
     newVideoMesh = () => {
 
         this.video = document.querySelector("#video");
-        // this.video.addEventListener("ended", this.end, false);
-        this.video.muted = false;
-        this.video.volume = 1;
 
         const texure: THREE.VideoTexture = new THREE.VideoTexture(this.video);
         texure.needsUpdate = true;
