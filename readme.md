@@ -6,7 +6,8 @@
 - npm run start 
 
 # 如何导出glTF文件
-3Dmax可使用[BabylonJS plugin](https://doc.babylonjs.com/resources/3dsmax#how-to-install-the-3ds-max-plugin)导出glTF。更多导出工具请参考[glTF官方列出的工具](https://github.com/KhronosGroup/glTF#converters-importers-and-exporters)
+- [glTF Tutorial](https://github.com/KhronosGroup/glTF-Tutorials/blob/master/gltfTutorial/README.md)
+- 3Dmax可使用[BabylonJS plugin](https://doc.babylonjs.com/resources/3dsmax#how-to-install-the-3ds-max-plugin)导出glTF。更多导出工具请参考[glTF官方列出的工具](https://github.com/KhronosGroup/glTF#converters-importers-and-exporters)
 
 # 如何优化模型文件
 [官方给出很多工具](https://github.com/KhronosGroup/glTF#optimizers),我主要使用官方提供[glTF Pipeline](https://github.com/AnalyticalGraphicsInc/gltf-pipeline)这个工具将glTF转为glb并进行模型文件的压缩。
