@@ -29,7 +29,7 @@
 }
 
 .product-page-horizontal{
-    height: 90%;
+    height: 95%;
     width: 40%;
 }
 
@@ -40,7 +40,7 @@
 
 #product-canvas {
     width: 100%;
-    height: 100%;
+    height: 70%;
     background: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/product_page_bg.png') no-repeat center center;
     background-size: cover;
 }
