@@ -12,6 +12,9 @@
 # 如何优化模型文件
 [官方给出很多工具](https://github.com/KhronosGroup/glTF#optimizers),我主要使用官方提供[glTF Pipeline](https://github.com/AnalyticalGraphicsInc/gltf-pipeline)这个工具将glTF转为glb并进行模型文件的压缩。
 
+# 如何验证和查看glTF
+推荐使用vscode的插件[glTF Tools](https://marketplace.visualstudio.com/items?itemName=cesium.gltf-vscode)
+
 常用命令（其他用法请参考[官方的github库](https://github.com/AnalyticalGraphicsInc/gltf-pipeline)):
 > gltf-pipeline -i model.gltf -o model.glb -d
 
