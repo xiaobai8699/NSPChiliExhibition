@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 15:42:32
+ * @Last Modified time: 2020-01-15 14:10:41
  */
 
 
@@ -22,7 +22,9 @@ import { Const } from './Const';
 import { Debuger } from './Debuger';
 import { Chili } from './Chili';
 import { FixMaterial } from './FixMaterial';
+import {FixModel} from './FixModel';
 import { Layout } from './Layout';
+
 
 class App {
 
@@ -50,6 +52,8 @@ class App {
 
         World.x().scene.add(gltf.scene);
 
+        FixModel.do();
+        
         FixMaterial.do();
 
         Lights.addLights();
@@ -113,6 +117,7 @@ class App {
         glft => {
 
             try {
+               // console.log(Utils.dumpObject(glft.scene).join('\n'));
                 const app = new App();
                 app.run(glft);
                 loading.style.display = "none";
