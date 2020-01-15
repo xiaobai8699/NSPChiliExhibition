@@ -2,30 +2,30 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-12 13:42:03 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 17:53:05
+ * @Last Modified time: 2020-01-15 16:55:33
  */
 
 import '../css/layout.css';
 import '../css/product.css';
 
-import * as THREE from 'three'; 
-import {World} from './World';
-import {Utils} from './Utils';
-import {ControlMap,ControlMapLayout} from './controls/ControlMap';
+import * as THREE from 'three';
+import { World } from './World';
+import { Utils } from './Utils';
+import { ControlMap, ControlMapLayout } from './controls/ControlMap';
 import { MobileRotateControls } from './controls/MobileRotateControls';
-import {Product} from './Product';
+import { Product } from './Product';
 
-export enum LayoutDirection{
+export enum LayoutDirection {
     Horizontal = 0,  //横屏
-    Vertical   = 1   //竖屏
+    Vertical = 1   //竖屏
 }
- 
-let layoutInstance:Layout = null;
+
+let layoutInstance: Layout = null;
 
 const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
 
- export class Layout {
-    
+export class Layout {
+
     layout: LayoutDirection = LayoutDirection.Horizontal;
 
     app: HTMLDivElement;
@@ -37,37 +37,44 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
     renderer: THREE.WebGLRenderer;
 
 
-    static x():Layout {
+    static x(): Layout {
 
         layoutInstance = layoutInstance || new Layout();
         return layoutInstance;
     }
 
-    constructor(){
+    constructor() {
 
         this.camera = World.x().camera;
         this.renderer = World.x().renderer;
 
-        
+
         this.app = document.querySelector("#app");
         this.canvas = document.querySelector("#canvas");
 
         window.addEventListener("resize", this.onWindowResize, false);
 
-        if(Utils.isPc()){
+        if (Utils.isPc()) {
             this.vertical();
-        }else {
+        } else {
 
-             this.horizontal();
+            this.vertical();
         }
 
+        if (Utils.isMobile()) {
+            document.querySelector("#rotate_button").addEventListener("click", this.rotate, false);
+        }
     }
 
-    vertical = () =>{
+    rotate = () => {
+        this.layout == LayoutDirection.Vertical ? this.horizontal() : this.vertical();
+    }
+
+    vertical = () => {
 
         this.layout = LayoutDirection.Vertical;
 
-        if(this.app.classList.contains('app-horizontal')){
+        if (this.app.classList.contains('app-horizontal')) {
 
             this.app.classList.remove('app-horizontal');
             //this.app.classList.add('app-vertical');
@@ -77,30 +84,30 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         product.classList.remove("product-page-horizontal");
         product.classList.add("product-page-vertical");
 
-        this.app.style.width  = `${window.innerWidth}`;
+        this.app.style.width = `${window.innerWidth}`;
         this.app.style.height = `${window.innerHeight}`;
 
-        this.canvas.style.width  = `${window.innerWidth}`;
+        this.canvas.style.width = `${window.innerWidth}`;
         this.canvas.style.height = `${window.innerHeight}`;
 
         this.setupRenderSize();
         this.setupCameraAspect();
         this.setupCameraFov();
 
-        if(Utils.isMobile()){
+        if (Utils.isMobile()) {
             ControlMap.x().updateLayout(ControlMapLayout.Portrait);
             MobileRotateControls.x().updateDirection(LayoutDirection.Vertical);
         }
     }
 
-    horizontal = () =>{
+    horizontal = () => {
 
         this.layout = LayoutDirection.Horizontal;
-        
-       // this.app.classList.remove('app-vertical');
+
+        // this.app.classList.remove('app-vertical');
         this.app.classList.add('app-horizontal');
 
-        this.app.style.width  = `${window.innerHeight}`;
+        this.app.style.width = `${window.innerHeight}`;
         this.app.style.height = `${window.innerWidth}`;
 
         this.canvas.style.width = `${window.innerHeight}`;
@@ -109,12 +116,12 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         let product: HTMLCanvasElement = document.querySelector("#product-page");
         product.classList.remove("product-page-vertical");
         product.classList.add("product-page-horizontal");
-        
+
         this.setupRenderSize();
         this.setupCameraAspect();
         this.setupCameraFov();
 
-        if(Utils.isMobile()){
+        if (Utils.isMobile()) {
             ControlMap.x().updateLayout(ControlMapLayout.Landscape);
             MobileRotateControls.x().updateDirection(LayoutDirection.Horizontal);
         }
@@ -125,14 +132,14 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         let w = window.innerWidth;
         let h = window.innerHeight;
 
-        if(Utils.isMobile()){
-             if(this.layout == LayoutDirection.Horizontal){
-                 w = window.innerHeight;
-                 h = window.innerWidth;
-             }
+        if (Utils.isMobile()) {
+            if (this.layout == LayoutDirection.Horizontal) {
+                w = window.innerHeight;
+                h = window.innerWidth;
+            }
         }
 
-        this.renderer.setSize(w,h);
+        this.renderer.setSize(w, h);
     }
 
     setupCameraAspect = () => {
@@ -147,7 +154,7 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
 
     setupCameraFov = () => {
 
-        let fov: number = 70; 
+        let fov: number = 70;
         if (Utils.isMobile()) {
             fov = (this.layout == LayoutDirection.Vertical) ? 78 : 59;
         }
@@ -155,9 +162,9 @@ const LayoutChangeEvent = "LiHong_LayoutChangeEvent";
         this.camera.updateProjectionMatrix();
     }
 
-    onWindowResize = () =>{
+    onWindowResize = () => {
 
         this.setupRenderSize();
         this.setupCameraAspect();
     }
- }
+}

@@ -1,0 +1,11 @@
+
+#rotate_button{
+    background-image: url(https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/setting/roate.png);
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+}
