@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-15 14:04:14 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-15 14:52:51
+ * @Last Modified time: 2020-01-15 16:33:12
  */
 
 import * as THREE from 'three';
@@ -17,6 +17,7 @@ export class FixModel {
 
     static do() {
 
+        return;
         const loader = new GLTFLoader();
 
         const dracoLoader = new DRACOLoader();
@@ -25,15 +26,24 @@ export class FixModel {
 
         loader.load(
 
-            "./asset/model/64mmB016.glb",
+            "./asset/model/chili_bottles.glb",
 
             glft => {
                 function fix(name: string) {
-                    
-                    const old: THREE.Object3D = World.x().scene.getObjectByName(name);
-                    const newer: THREE.Object3D = glft.scene.getObjectByName(name);
-                    newer.scale.set(0.01, 0.01, 0.01);
 
+                    const old: THREE.Object3D = World.x().scene.getObjectByName(name);
+                    if(!old) {
+                        console.error(`[FixModel.ts] old: ${name} not found`);
+                        return;
+                    }
+
+                    const newer: THREE.Object3D = glft.scene.getObjectByName(name);
+                    if(!newer){
+                        console.error(`[FixModel.ts] newer: ${name} not found`);
+                        return;
+                    }
+
+                    //newer.scale.set(0.01, 0.01, 0.01);
                     old.getWorldPosition(newer.position);
                     old.parent.add(newer);
                     old.parent.remove(old);
@@ -41,10 +51,11 @@ export class FixModel {
                     Chili.x().rotatedBottles.push(newer);
                 }
 
-                ["64mmB016"].forEach(name => {
+                const nameArr = ["64mmB016", "64mmA016", "64mmC016", "LJJ1", "LJJ2", "LJJ3", "LJJ4", "32mmC032", "32mmA032", "32mmB032"];
+                nameArr.forEach(name => {
                     fix(name);
                 });
- 
+
                 Chili.x().setMaterialTransparent();
             },
 
