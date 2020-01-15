@@ -2,23 +2,25 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-30 17:50:19 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 16:08:46
+ * @Last Modified time: 2020-01-15 16:34:53
  */
 
 export class Const {
 
-    static readonly osspath: string = "https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/";
+    static readonly devMode = false;
+
+    static readonly osspath: string = Const.devMode? "./asset/" : "https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/";
 
     static readonly nspLogName: string = "logo_D";
 
     static readonly audioUrl: string = `${Const.osspath}audio/plws.mp3`;
 
-    static readonly videoUrl: string = /*'./asset/video/nsp.mp4';*/`${Const.osspath}video/nsp.mp4`;
+    static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = /*'./asset/model/nsp_fbx.glb';*/`${Const.osspath}model/nsp.glb`;
-    
+    static readonly modelUrl: string = `${Const.osspath}model/nsp.glb`;
+
     static staticVisitorUrl(name: string): string {
 
         return `${this.osspath}image/visitor/static/${name}.png`;
@@ -28,8 +30,6 @@ export class Const {
 
     static dynamicVisitorUrl(name: string) {
 
-        //return `${this.osspath}image/visitor/dynamic/${name}.png`;
-        // return `./asset/image/visitor/dynamic/big/${name}.png`;
         return `${this.osspath}image/visitor/dynamic/bigsize/${name}.png`;
 
     }
