@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-12 13:42:03 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-15 16:55:33
+ * @Last Modified time: 2020-01-15 17:01:13
  */
 
 import '../css/layout.css';
@@ -58,7 +58,7 @@ export class Layout {
             this.vertical();
         } else {
 
-            this.vertical();
+            this.horizontal();
         }
 
         if (Utils.isMobile()) {
