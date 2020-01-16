@@ -7,14 +7,14 @@
 
 import '../../css/mapcontrol.css';
 
-let controlMapInstance: ControlMap = null;
+let controlMapInstance: VirtualJoystick = null;
 
 export enum ControlMapLayout {
     Landscape = 0,  //横屏
     Portrait  = 1   //竖屏
 }
 
-export class ControlMap {
+export class VirtualJoystick {
 
     map: HTMLDivElement = null;
 
@@ -25,8 +25,8 @@ export class ControlMap {
     pointInitOffsetTop: number;
     pointInitOffsetLeft: number;
 
-    static x(): ControlMap {
-        controlMapInstance = controlMapInstance || new ControlMap();
+    static x(): VirtualJoystick {
+        controlMapInstance = controlMapInstance || new VirtualJoystick();
         return controlMapInstance;
     }
 

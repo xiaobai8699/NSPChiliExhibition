@@ -18,7 +18,7 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import {ControlMap} from './ControlMap';
+import {VirtualJoystick} from './VirtualJoystick';
 import { World } from '../World';
 import { Collision } from './Collision';
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -32,7 +32,7 @@ export class MobileMoveControls implements IControls {
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
-        ControlMap.x();
+        VirtualJoystick.x();
         
         this.domElement = domElement;
         
@@ -46,28 +46,28 @@ export class MobileMoveControls implements IControls {
     update = (delta: number) => {
 
         let isCollision = Collision.x().detect(
-            ControlMap.x().moveForward, 
-            ControlMap.x().moveBackward, 
-            ControlMap.x().moveLeft, 
-            ControlMap.x().moveRight);
+            VirtualJoystick.x().moveForward, 
+            VirtualJoystick.x().moveBackward, 
+            VirtualJoystick.x().moveLeft, 
+            VirtualJoystick.x().moveRight);
 
         if (isCollision) {
             return;
         }
           
-        if (ControlMap.x().moveForward) {
+        if (VirtualJoystick.x().moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);
         }
 
-        if (ControlMap.x().moveBackward) {
+        if (VirtualJoystick.x().moveBackward) {
             this.object.translateZ(this.moveSpeed * delta);
         }
 
-        if (ControlMap.x().moveLeft) {
+        if (VirtualJoystick.x().moveLeft) {
                  this.object.translateX(-this.moveSpeed * delta);
         }
 
-        if (ControlMap.x().moveRight) {
+        if (VirtualJoystick.x().moveRight) {
                  this.object.translateX(this.moveSpeed * delta);
         }
     }
