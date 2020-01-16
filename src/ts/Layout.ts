@@ -48,22 +48,15 @@ export class Layout {
         this.camera = World.x().camera;
         this.renderer = World.x().renderer;
 
-
         this.app = document.querySelector("#app");
         this.canvas = document.querySelector("#canvas");
 
         window.addEventListener("resize", this.onWindowResize, false);
 
-        if (Utils.isPc()) {
-            this.vertical();
-        } else {
+        Utils.isPc() ? this.vertical(): this.horizontal();
 
-            this.horizontal();
-        }
-
-        if (Utils.isMobile()) {
-            document.querySelector("#rotate_button").addEventListener("click", this.rotate, false);
-        }
+        const rotateButton: HTMLDivElement = document.querySelector("#rotate_button");
+        Utils.isPc() ? rotateButton.style.display = "none" : rotateButton.addEventListener("click", this.rotate, false);
     }
 
     rotate = () => {
