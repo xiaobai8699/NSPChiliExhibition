@@ -13,6 +13,7 @@ import * as THREE from 'three';
 import {ControlMap} from './controls/ControlMap';
 import { World } from './World';
 import { Utils } from './Utils';
+import { Const } from './Const';
 
 let videoInstance: Video = null;
 
@@ -50,7 +51,8 @@ export class Video {
         video.setAttribute("id","video");
         video.volume = 1;
         video.loop = true;
-        video.src = "./asset/video/nsp.mp4";
+        video.crossOrigin = "anonymous";
+        video.src = Const.videoUrl;
         video.setAttribute("playsinline","true");
         video.setAttribute("x5-video-player-type","h5");
         video.style.display = "none";

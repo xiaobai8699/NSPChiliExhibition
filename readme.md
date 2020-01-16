@@ -18,6 +18,9 @@
 常用命令（其他用法请参考[官方的github库](https://github.com/AnalyticalGraphicsInc/gltf-pipeline)):
 > gltf-pipeline -i model.gltf -o model.glb -d
 
+# 坑
+- video标签存在跨域播放的问题。所以视频地址需要与项目地址在相同域名下。否则导致域名不能播放
+
 # 使用Typescript
 本项目使用typescript作为开发语言，下面是如何在vscode中配置使用typescript的链接
 - [配置webpack使用TypeScript](https://www.tslang.cn/docs/handbook/react-&-webpack.html)

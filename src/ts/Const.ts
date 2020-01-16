@@ -15,7 +15,7 @@ export class Const {
 
     static readonly audioUrl: string = `${Const.osspath}audio/plws.mp3`;
 
-    static readonly videoUrl: string = `${Const.osspath}video/nsp.mp4`;
+    static readonly videoUrl: string = `./asset/video/nsp.mp4`; //注意：video标签会存在跨域播放的问题，视频须放在我们自己的服务器上
 
     static readonly logoUrl: string = `${Const.osspath}image/others/nsplog.png`;
 
