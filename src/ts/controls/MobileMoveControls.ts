@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-16 18:19:49
+ * @Last Modified time: 2020-01-17 14:29:37
  */
 
 
@@ -50,11 +50,12 @@ export class MobileMoveControls implements IControls {
     update = (delta: number) => {
 
         if(!this.dir || !this.player){
+
             this.player = World.x().scene.getObjectByName("yy");
             const c:Vector3 = World.x().camera.position;
             const p:Vector3 = this.player.position;
             this.dir = new Vector3().subVectors(c,p);
-            console.log(`c:${JSON.stringify(c)} p:${JSON.stringify(p)} dir:${JSON.stringify(this.dir)}`);
+            
         }
 
         let isCollision = Collision.x().detect(
@@ -75,24 +76,6 @@ export class MobileMoveControls implements IControls {
             const v:Vector3 = new Vector3().addVectors(p,this.dir);
             World.x().camera.position.copy(v);
             World.x().camera.lookAt(this.player.position);
-        }
-       
-        return;
-
-        if (VirtualJoystick.x().moveForward) {
-            this.object.translateZ(-this.moveSpeed * delta);
-        }
-
-        if (VirtualJoystick.x().moveBackward) {
-            this.object.translateZ(this.moveSpeed * delta);
-        }
-
-        if (VirtualJoystick.x().moveLeft) {
-            this.object.translateX(-this.moveSpeed * delta);
-        }
-
-        if (VirtualJoystick.x().moveRight) {
-            this.object.translateX(this.moveSpeed * delta);
         }
     }
 
