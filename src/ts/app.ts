@@ -2,13 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-15 14:10:41
+ * @Last Modified time: 2020-01-17 13:54:22
  */
 
 
 import * as THREE from 'three';
-import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Controls } from './controls/Controls';
 import { Pickup } from './Pickup';
 import { LED } from './LED';
@@ -22,56 +21,50 @@ import { Const } from './Const';
 import { Debuger } from './Debuger';
 import { Chili } from './Chili';
 import { FixMaterial } from './FixMaterial';
-import {FixModel} from './FixModel';
+import { FixModel } from './FixModel';
 import { Layout } from './Layout';
-
+import { Hero } from './Hero';
+import { ThreeUtils } from './ThreeUtils';
+import { Nsp as ModelNsp } from './models/Nsp';
 
 class App {
 
     clock: THREE.Clock;
 
-    loader: GLTFLoader;
+    run = () => {
 
-    constructor() {
-
-        THREE.Cache.enabled = true;
-        
         World.x();
-
+        Layout.x();
         Controls.x();
-
         Pickup.x();
-
         Debuger.x();
 
-        this.clock = new THREE.Clock();
+        ModelNsp.load(this.didLoadMainScene);
 
+        const mat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+        const geo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(0, 0, 15);
+        mesh.name = "yy";
+        mesh.visible = false;
+        World.x().scene.add(mesh);
     }
 
-    run = (gltf: GLTF) => {
+
+    didLoadMainScene = (gltf: GLTF) => {
 
         World.x().scene.add(gltf.scene);
-
         FixModel.do();
-        
         FixMaterial.do();
-
         Lights.addLights();
-
         Visitor.x().newAllVisitors();
-
         Audio.play();
-
         Video.x();
 
-        Layout.x();
-
+        this.clock = new THREE.Clock();
         World.x().renderer.setAnimationLoop(this.animationLoop);
 
     }
-
-    lowestFps: number = 1 / 12;
-    hasTips: boolean = false;
 
     animationLoop = () => {
 
@@ -82,13 +75,9 @@ class App {
             let delta = this.clock.getDelta();
 
             LED.update();
-
             Chili.x().update(delta);
-
             Controls.x().update(delta);
-
             Debuger.x().update(delta);
-
             Visitor.x().update(delta);
 
         }
@@ -98,62 +87,8 @@ class App {
 }
 
 
-(function main() {
-
-    const loading: HTMLElement = document.querySelector("#loading");
-    // const progress: HTMLElement = document.querySelector("#progres-fill");
-    const progressText: HTMLElement = document.querySelector("#progress-text");
-
-    const loader = new GLTFLoader();
-
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('./ts/draco/');
-    loader.setDRACOLoader(dracoLoader);
-
-    loader.load(
-
-        Const.modelUrl,
-
-        glft => {
-
-            try {
-               // console.log(Utils.dumpObject(glft.scene).join('\n'));
-                const app = new App();
-                app.run(glft);
-                loading.style.display = "none";
-            }
-            catch (e) {
-                console.error(e);
-                alert(`应用异常, 请联系管理员!(${e})`);
-            }
-        },
-
-        xhr => {
-
-            let percent = (xhr.loaded / xhr.total) * 100;
-
-            // progress.style.left = `${percent}%`;
-
-            const M = 1048576;
-            let total = (xhr.total / M).toFixed(2);
-            let loaded = (xhr.loaded / M).toFixed(2);
-
-            progressText.innerText = `载入资源 ${percent.toFixed(2)}% (${total}M / ${loaded}M)`;
-
-            if (percent >= 100) {
-
-                progressText.innerText = "解压资源，请稍候☕️..";
-
-            }
-        },
-
-        err => {
-
-            alert(`加载资源失败,请刷新重试!(${JSON.stringify(err)})`);
-        }
-    );
-
-})();
+const app = new App();
+app.run();
 
 
 
