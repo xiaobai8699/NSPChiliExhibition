@@ -2,14 +2,15 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 21:16:17
+ * @Last Modified time: 2020-01-17 10:57:31
  */
 
 
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import { Collision } from './Collision';
+import { Collision } from './Collision';    
+import {FirstPersonControls} from 'three/examples/jsm/controls/FirstPersonControls';
 
 // 参考实现:
 // https://zhuanlan.zhihu.com/p/40881782

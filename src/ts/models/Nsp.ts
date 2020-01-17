@@ -2,14 +2,13 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-17 11:57:01 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 13:49:28
+ * @Last Modified time: 2020-01-17 13:57:19
  */
 
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { World } from '../World';
-import { ThreeUtils } from '../ThreeUtils';
-import { Model } from './Model';
-import {Const} from '../Const';
+import { ThreeUtils } from '../utils/ThreeUtils';
+import {Resource} from '../config/Resource';
 
 export class Nsp  {
 
@@ -24,7 +23,7 @@ export class Nsp  {
 
             success(gltf);
             loading.style.display = "none";
-            
+
         }
 
         const p = function (progress: any) {
@@ -47,7 +46,7 @@ export class Nsp  {
 
         }
 
-        ThreeUtils.loadModel(Const.modelUrl, { c, p, e });
+        ThreeUtils.loadModel(Resource.modelUrl, { c, p, e });
 
     }
 }

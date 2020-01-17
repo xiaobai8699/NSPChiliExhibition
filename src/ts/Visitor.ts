@@ -9,9 +9,9 @@
 //https://threejsfundamentals.org/threejs/lessons/threejs-canvas-textures.html
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
+import { Utils } from './utils/Utils';
 import { World } from './World';
-import { Const } from './Const';
+import { Resource } from './config/Resource';
 
 let visitorInstance: Visitor = null;
 
@@ -59,7 +59,7 @@ export class Visitor {
         //xiong qi
         const self = this;
         new THREE.TextureLoader().load(
-            Const.staticVisitorUrl("xiong2"),
+            Resource.staticVisitorUrl("xiong2"),
 
             function (texture) {
                 self.newTransparentMesh("people01A", texture);
@@ -241,7 +241,7 @@ export class VisitorSpriteLoader {
 
         loader.load(
 
-            Const.dynamicVisitorUrl(imageName),
+            Resource.dynamicVisitorUrl(imageName),
 
             (image) => {
 
@@ -337,7 +337,7 @@ export class VisitorDownloader {
 
                 loader.load(
 
-                    Const.dynamicVisitorUrl(name),
+                    Resource.dynamicVisitorUrl(name),
 
                     function (imageBitmap) {
                         res(imageBitmap);

@@ -7,7 +7,7 @@
 
 import * as THREE from 'three';
 import { World } from './World';
-import { Const } from './Const';
+import { Resource } from './config/Resource';
 
  export class Skybox {
 
@@ -17,12 +17,12 @@ import { Const } from './Const';
 
         const texture = loader.load(
             [
-               Const.skyboxUrl('px'), 
-               Const.skyboxUrl('nx'), 
-               Const.skyboxUrl('py'),
-               Const.skyboxUrl('ny'),
-               Const.skyboxUrl('pz'),
-               Const.skyboxUrl('nz') 
+               Resource.skyboxUrl('px'), 
+               Resource.skyboxUrl('nx'), 
+               Resource.skyboxUrl('py'),
+               Resource.skyboxUrl('ny'),
+               Resource.skyboxUrl('pz'),
+               Resource.skyboxUrl('nz') 
             ]
         );
 

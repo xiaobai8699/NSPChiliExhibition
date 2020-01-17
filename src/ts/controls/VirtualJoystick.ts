@@ -2,14 +2,14 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 17:52:35 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 16:38:05
+ * @Last Modified time: 2020-01-16 16:59:15
  */
 
 import '../../css/mapcontrol.css';
 
 let controlMapInstance: VirtualJoystick = null;
 
-export enum ControlMapLayout {
+export enum VirtualJoystickLayout {
     Landscape = 0,  //横屏
     Portrait  = 1   //竖屏
 }
@@ -20,10 +20,12 @@ export class VirtualJoystick {
 
     point: HTMLDivElement = null;
 
-    layout: ControlMapLayout = ControlMapLayout.Landscape;
+    layout: VirtualJoystickLayout = VirtualJoystickLayout.Landscape;
 
     pointInitOffsetTop: number;
     pointInitOffsetLeft: number;
+
+    isDrag: boolean = false;
 
     static x(): VirtualJoystick {
         controlMapInstance = controlMapInstance || new VirtualJoystick();
@@ -61,12 +63,12 @@ export class VirtualJoystick {
     }
 
 
-    updateLayout = (layout?:ControlMapLayout) => {
-        this.layout = layout != undefined ? layout : ControlMapLayout.Landscape;
+    updateLayout = (layout?:VirtualJoystickLayout) => {
+        this.layout = layout != undefined ? layout : VirtualJoystickLayout.Landscape;
        
         const l = "map-control-landscape";
         const p = "map-control-portrait";
-        const cls = this.layout == ControlMapLayout.Landscape ? l: p;
+        const cls = this.layout == VirtualJoystickLayout.Landscape ? l: p;
 
         this.map.classList.remove(l);
         this.map.classList.remove(p);
@@ -78,6 +80,7 @@ export class VirtualJoystick {
         e.preventDefault();
         e.stopPropagation();
 
+        this.isDrag = true;
     }
 
 
@@ -167,7 +170,7 @@ export class VirtualJoystick {
 
         //8、 判断角度范围确定移动的方向
 
-        let isLandscape = (this.layout == ControlMapLayout.Landscape);
+        let isLandscape = (this.layout == VirtualJoystickLayout.Landscape);
 
         if (this.angle > 45 && this.angle < 135) {
             isLandscape ? this.moveLeft = true : this.moveForward = true;
@@ -200,6 +203,9 @@ export class VirtualJoystick {
 
     reset = () => {
 
+        this.isDrag = false;
+        this.angle = 0;
+        
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;

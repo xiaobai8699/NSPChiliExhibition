@@ -2,12 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-28 09:05:57 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 16:44:29
+ * @Last Modified time: 2020-01-16 17:40:31
  */
 
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
+import { Utils } from './utils/Utils';
 
 let world: World;
 
@@ -44,7 +44,7 @@ export class World {
         this.camera = new THREE.PerspectiveCamera();
         this.camera.near = 0.1;
         this.camera.far = 64;
-        this.camera.position.set(0,1.7,23);
+        this.camera.position.set(0,1.7,20);
         this.scene.add(this.camera);
 
     }

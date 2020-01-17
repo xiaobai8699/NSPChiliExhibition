@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-12 15:59:42
+ * @Last Modified time: 2020-01-16 18:19:49
  */
 
 
@@ -18,10 +18,11 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import {VirtualJoystick} from './VirtualJoystick';
+import { VirtualJoystick } from './VirtualJoystick';
 import { World } from '../World';
 import { Collision } from './Collision';
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
+import { Vector3 } from 'three';
 
 export class MobileMoveControls implements IControls {
 
@@ -29,32 +30,55 @@ export class MobileMoveControls implements IControls {
 
     domElement: HTMLElement;
 
-
+    dir:Vector3;
+    player: THREE.Object3D;
+    
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
         VirtualJoystick.x();
-        
+
         this.domElement = domElement;
-        
         this.object = object;
 
+       
     }
 
 
     moveSpeed: number = 2;
 
+
     update = (delta: number) => {
 
+        if(!this.dir || !this.player){
+            this.player = World.x().scene.getObjectByName("yy");
+            const c:Vector3 = World.x().camera.position;
+            const p:Vector3 = this.player.position;
+            this.dir = new Vector3().subVectors(c,p);
+            console.log(`c:${JSON.stringify(c)} p:${JSON.stringify(p)} dir:${JSON.stringify(this.dir)}`);
+        }
+
         let isCollision = Collision.x().detect(
-            VirtualJoystick.x().moveForward, 
-            VirtualJoystick.x().moveBackward, 
-            VirtualJoystick.x().moveLeft, 
+            VirtualJoystick.x().moveForward,
+            VirtualJoystick.x().moveBackward,
+            VirtualJoystick.x().moveLeft,
             VirtualJoystick.x().moveRight);
 
         if (isCollision) {
             return;
         }
-          
+
+        if (VirtualJoystick.x().isDrag) {
+            this.player.rotation.y = THREE.Math.degToRad(VirtualJoystick.x().angle);
+            this.player.translateZ(-this.moveSpeed * delta);
+
+            const p:Vector3 = this.player.position;
+            const v:Vector3 = new Vector3().addVectors(p,this.dir);
+            World.x().camera.position.copy(v);
+            World.x().camera.lookAt(this.player.position);
+        }
+       
+        return;
+
         if (VirtualJoystick.x().moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);
         }
@@ -64,11 +88,11 @@ export class MobileMoveControls implements IControls {
         }
 
         if (VirtualJoystick.x().moveLeft) {
-                 this.object.translateX(-this.moveSpeed * delta);
+            this.object.translateX(-this.moveSpeed * delta);
         }
 
         if (VirtualJoystick.x().moveRight) {
-                 this.object.translateX(this.moveSpeed * delta);
+            this.object.translateX(this.moveSpeed * delta);
         }
     }
 

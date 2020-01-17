@@ -10,12 +10,12 @@
 
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
+import { Utils } from './utils/Utils';
 import { World } from './World';
 import { Product } from './Product';
 import { Chili } from './Chili';
 import { Kepu } from './Kepu';
-import { Layout, LayoutDirection } from './Layout';
+import { Layout, LayoutDirection } from './config/Layout';
 
 let pickupInstance: Pickup;
 

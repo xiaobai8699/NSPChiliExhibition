@@ -9,7 +9,7 @@
 
 import * as THREE from 'three';
 import { World } from '../World';
-import { Utils } from '../Utils';
+import { Utils } from '../utils/Utils';
 
 let collisionInstance: Collision;
 

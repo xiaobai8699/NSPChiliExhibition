@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 13:54:22
+ * @Last Modified time: 2020-01-17 13:56:15
  */
 
 
@@ -14,17 +14,17 @@ import { LED } from './LED';
 import { Lights } from './Lights';
 import { Video } from './Video';
 import { World } from './World';
-import { Utils } from './Utils';
+import { Utils } from './utils/Utils';
 import { Audio } from './Audio';
 import { Visitor } from './Visitor';
-import { Const } from './Const';
-import { Debuger } from './Debuger';
+import { Resource } from './config/Resource';
+import { Debuger } from './config/Debuger';
 import { Chili } from './Chili';
-import { FixMaterial } from './FixMaterial';
-import { FixModel } from './FixModel';
-import { Layout } from './Layout';
-import { Hero } from './Hero';
-import { ThreeUtils } from './ThreeUtils';
+import { FixMaterial } from './fix/FixMaterial';
+import { FixModel } from './fix/FixModel';
+import { Layout } from './config/Layout';
+import { Hero } from './models/Hero';
+import { ThreeUtils } from './utils/ThreeUtils';
 import { Nsp as ModelNsp } from './models/Nsp';
 
 class App {

@@ -8,7 +8,7 @@
 // https://threejsfundamentals.org/threejs/lessons/threejs-multiple-scenes.html
 
 import * as THREE from 'three';
-import { Utils } from './Utils';
+import { Utils } from './utils/Utils';
 import { World } from './World';
 import { OrbitControls } from './controls/OrbitControls';
 import {Chili} from './Chili';

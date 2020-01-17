@@ -13,7 +13,7 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import {LayoutDirection} from '../Layout';
+import {LayoutDirection} from '../config/Layout';
 import {World} from '../World';
 
 let mrcInstance: MobileRotateControls;

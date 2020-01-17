@@ -8,8 +8,8 @@
 import * as THREE from 'three';
 import { Vector3, AudioLoader } from 'three';
 import {World} from './World';
-import { Const } from './Const';
-import { Utils } from './Utils';
+import { Resource } from './config/Resource';
+import { Utils } from './utils/Utils';
 
 let audioInstance: Audio;
 
@@ -37,7 +37,7 @@ export class Audio {
         
                 const audioLoader = new THREE.AudioLoader();
                 
-                audioLoader.load(Const.audioUrl, (buffer: any) =>{
+                audioLoader.load(Resource.audioUrl, (buffer: any) =>{
                     
                     sound.setBuffer(buffer);
                     sound.setRefDistance(20); // 距离声源10开始衰减
@@ -47,7 +47,7 @@ export class Audio {
         
                 });
         
-                const logMesh = World.x().scene.getObjectByName(Const.nspLogName);
+                const logMesh = World.x().scene.getObjectByName(Resource.nspLogName);
                 logMesh.add(sound);
             }
         }

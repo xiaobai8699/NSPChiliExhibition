@@ -2,12 +2,12 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:01:40 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-10 09:29:23
+ * @Last Modified time: 2020-01-17 08:36:34
  */
 
 
 import * as THREE from 'three';
-import { Debuger } from './Debuger';
+import { Debuger } from './config/Debuger';
 import { Object3D } from 'three';
 import { World } from './World';
 
@@ -44,6 +44,7 @@ export class Lights {
 
         //电视灯光
         {
+            return;
             var sLight = new THREE.SpotLight();
             sLight.color = new THREE.Color().setRGB(70 / 255, 70 / 255, 70 / 255);
             sLight.position.set(0.6, 5, -4);

@@ -12,8 +12,8 @@
 import * as THREE from 'three';
 import {VirtualJoystick} from './controls/VirtualJoystick';
 import { World } from './World';
-import { Utils } from './Utils';
-import { Const } from './Const';
+import { Utils } from './utils/Utils';
+import { Resource } from './config/Resource';
 
 let videoInstance: Video = null;
 
@@ -52,7 +52,7 @@ export class Video {
         video.volume = 1;
         video.loop = true;
         video.crossOrigin = "anonymous";
-        video.src = Const.videoUrl;
+        video.src = Resource.videoUrl;
         video.setAttribute("playsinline","true");
         video.setAttribute("x5-video-player-type","h5");
         video.style.display = "none";

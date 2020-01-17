@@ -7,8 +7,8 @@
 
 import * as THREE from 'three';
 import { World } from './World';
-import { Utils} from './Utils';
-import {Const } from './Const';
+import { Utils} from './utils/Utils';
+import {Resource } from './config/Resource';
 
 let kepuInstance: Kepu = null;
 
@@ -76,7 +76,7 @@ export class Kepu {
                 }
 
                 const name = Utils.isMobile() ? "mamadeweidao_mobile" : "mamadeweidao_pc";
-                image.src = Const.kepuUrl(name);
+                image.src = Resource.kepuUrl(name);
             }
 
 
@@ -98,7 +98,7 @@ export class Kepu {
                     kepuClose.style.visibility = "visible";
                 }
                 const name = Utils.isMobile() ? "kepu_mobile" : "kepu_pc";
-                image.src = Const.kepuUrl(name);
+                image.src = Resource.kepuUrl(name);
                 
             }
         }

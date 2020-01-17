@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-15 15:30:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-15 15:53:45
+ * @Last Modified time: 2020-01-17 14:03:26
  */
 
 
@@ -16,8 +16,8 @@ import {
 	Vector3
 } from "three";
 
-import {Layout, LayoutDirection} from '../Layout';
-import {Utils} from '../Utils';
+import {Layout, LayoutDirection} from '../config/Layout';
+import {Utils} from  '../utils/Utils';
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
 // Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
