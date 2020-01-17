@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:15 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 14:29:37
+ * @Last Modified time: 2020-01-17 17:51:54
  */
 
 
@@ -23,6 +23,8 @@ import { World } from '../World';
 import { Collision } from './Collision';
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Vector3 } from 'three';
+import {Config} from '../config/Config';
+import {Hero} from '../models/Hero';
 
 export class MobileMoveControls implements IControls {
 
@@ -31,7 +33,6 @@ export class MobileMoveControls implements IControls {
     domElement: HTMLElement;
 
     dir:Vector3;
-    player: THREE.Object3D;
     
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
@@ -39,8 +40,6 @@ export class MobileMoveControls implements IControls {
 
         this.domElement = domElement;
         this.object = object;
-
-       
     }
 
 
@@ -49,13 +48,13 @@ export class MobileMoveControls implements IControls {
 
     update = (delta: number) => {
 
-        if(!this.dir || !this.player){
+        if(!Hero.x().hero) return;
 
-            this.player = World.x().scene.getObjectByName("yy");
+        if(!this.dir){
             const c:Vector3 = World.x().camera.position;
-            const p:Vector3 = this.player.position;
+            const p:Vector3 = Hero.x().hero.position;
             this.dir = new Vector3().subVectors(c,p);
-            
+
         }
 
         let isCollision = Collision.x().detect(
@@ -69,13 +68,16 @@ export class MobileMoveControls implements IControls {
         }
 
         if (VirtualJoystick.x().isDrag) {
-            this.player.rotation.y = THREE.Math.degToRad(VirtualJoystick.x().angle);
-            this.player.translateZ(-this.moveSpeed * delta);
+            
+            const angle = Config.isLandscapeDisplay ? VirtualJoystick.x().angle: VirtualJoystick.x().angle;
+            Hero.x().hero.rotation.y = THREE.Math.degToRad(angle);
+            Hero.x().hero.translateZ(-this.moveSpeed * delta);
 
-            const p:Vector3 = this.player.position;
+            const p:Vector3 = Hero.x().hero.position;
             const v:Vector3 = new Vector3().addVectors(p,this.dir);
             World.x().camera.position.copy(v);
-            World.x().camera.lookAt(this.player.position);
+          //  World.x().camera.lookAt(Hero.x().hero.position);
+
         }
     }
 

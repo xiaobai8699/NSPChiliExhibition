@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-17 14:04:43 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 14:21:10
+ * @Last Modified time: 2020-01-17 17:35:02
  */
 
 
@@ -11,7 +11,7 @@
 
     static isDevelopmentMode = true;
 
-    static isLandscapeDisplay = false;
+    static isLandscapeDisplay = true;
     
     static onlyShowDebuggerFps = true;
  }

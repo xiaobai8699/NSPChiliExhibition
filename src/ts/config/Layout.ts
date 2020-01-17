@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-12 13:42:03 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 14:08:12
+ * @Last Modified time: 2020-01-17 14:44:19
  */
 
 import '../../css/layout.css';
@@ -64,7 +64,8 @@ export class Layout {
     }
 
     rotate = () => {
-        this.layout == LayoutDirection.Vertical ? this.horizontal() : this.vertical();
+        Config.isLandscapeDisplay = !Config.isLandscapeDisplay;
+        Config.isLandscapeDisplay ? this.horizontal() : this.vertical();
     }
 
     vertical = () => {

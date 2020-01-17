@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-08 17:52:35 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-16 16:59:15
+ * @Last Modified time: 2020-01-17 14:18:11
  */
 
 import '../../css/mapcontrol.css';
@@ -163,6 +163,8 @@ export class VirtualJoystick {
         else {
         }
 
+        console.log(`angle:${this.angle} x:${x} y: ${y}`);
+        
         this.moveForward = false;
         this.moveBackward = false;
         this.moveLeft = false;

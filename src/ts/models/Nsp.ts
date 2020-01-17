@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-17 11:57:01 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 13:57:19
+ * @Last Modified time: 2020-01-17 16:33:46
  */
 
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -19,9 +19,10 @@ export class Nsp  {
         const loading: HTMLElement = document.querySelector("#loading");
         const progressText: HTMLElement = document.querySelector("#progress-text");
 
-        const c = function (gltf: any) {
+        const c = function (gltf: GLTF) {
 
             success(gltf);
+            // gltf.scene.visible = false;
             loading.style.display = "none";
 
         }

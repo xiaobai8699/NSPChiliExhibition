@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-17 08:47:29 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 11:35:47
+ * @Last Modified time: 2020-01-17 16:46:37
  */
 
 import * as THREE from 'three';
@@ -13,8 +13,8 @@ export class ThreeUtils {
 
     static loadModel(name: string, notify: any, compress: boolean = true) {
 
-        if(notify == undefined) throw '[ThreeUtils] need notfiy argument';
-        if(!notify.c || !notify.e) throw '[ThreeUtils] need c,e funcation';
+        if (notify == undefined) throw '[ThreeUtils] need notfiy argument';
+        if (!notify.c || !notify.e) throw '[ThreeUtils] need c,e funcation';
 
         const loader = new GLTFLoader();
 
@@ -33,8 +33,8 @@ export class ThreeUtils {
 
     static cameraPositionToFit(camera: THREE.PerspectiveCamera, target: THREE.Object3D) {
 
-        if (camera == undefined)  throw '[ThreeUtils] need camera argument!';
-        if (target == undefined)  throw '[ThreeUtils] need target argument!';
+        if (camera == undefined) throw '[ThreeUtils] need camera argument!';
+        if (target == undefined) throw '[ThreeUtils] need target argument!';
 
         const box = new THREE.Box3().setFromObject(target);
         const distance = box.getSize(new THREE.Vector3()).length();
@@ -53,6 +53,25 @@ export class ThreeUtils {
         camera.updateProjectionMatrix();
 
         camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
+
+    }
+
+    static addCenterCoordinate(scene: THREE.Scene, center: THREE.Vector3, len: number) {
+
+        //添加中心点标志
+        let dirs = [];
+        dirs.push(new THREE.Vector3(1, 0, 0).normalize());
+        dirs.push(new THREE.Vector3(0, 1, 0).normalize());
+        dirs.push(new THREE.Vector3(0, 0, 1).normalize());
+
+        let colors:number[] = [];
+        colors.push(0xff0000);
+        colors.push(0x00ff00);
+        colors.push(0x0000ff);
+
+        for (let i = 0; i < 3; i++) {
+            scene.add(new THREE.ArrowHelper(dirs[i], center, len, colors[i]));
+        }
 
     }
 }

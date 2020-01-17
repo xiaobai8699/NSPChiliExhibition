@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:37 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 13:56:15
+ * @Last Modified time: 2020-01-17 17:07:41
  */
 
 
@@ -41,13 +41,6 @@ class App {
 
         ModelNsp.load(this.didLoadMainScene);
 
-        const mat = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-        const geo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(0, 0, 15);
-        mesh.name = "yy";
-        mesh.visible = false;
-        World.x().scene.add(mesh);
     }
 
 
@@ -60,6 +53,7 @@ class App {
         Visitor.x().newAllVisitors();
         Audio.play();
         Video.x();
+        Hero.x().load();
 
         this.clock = new THREE.Clock();
         World.x().renderer.setAnimationLoop(this.animationLoop);

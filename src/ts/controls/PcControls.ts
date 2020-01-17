@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-25 08:44:22 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 10:57:31
+ * @Last Modified time: 2020-01-17 17:04:11
  */
 
 
@@ -23,6 +23,7 @@ export class PcControls implements IControls {
 
     domElement: HTMLElement;
 
+    enable:boolean = true;
 
     constructor(object: THREE.Camera, domElement?: HTMLElement) {
 
@@ -54,6 +55,8 @@ export class PcControls implements IControls {
 
     onMouseDown = (e: MouseEvent) => {
 
+        if(!this.enable) return;
+        
         e.preventDefault();
         e.stopPropagation();
 
@@ -68,6 +71,8 @@ export class PcControls implements IControls {
     }
 
     onMouseMove = (e: MouseEvent) => {
+
+        if(!this.enable) return;
 
         e.preventDefault();
         e.stopPropagation();
@@ -149,15 +154,17 @@ export class PcControls implements IControls {
 
     update = (delta: number) => {
 
+        if(!this.enable) return;
+        
         if (this.isDrag) {
             this.object.rotation.y = THREE.Math.degToRad(this.xDelta * this.rotationSpeed);
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
         
-        let isCollision = Collision.x().detect(this.moveForward, this.moveBackward, this.moveLeft, this.moveRight);
-        if (isCollision) {
-            return;
-        }
+        // let isCollision = Collision.x().detect(this.moveForward, this.moveBackward, this.moveLeft, this.moveRight);
+        // if (isCollision) {
+        //     return;
+        // }
 
         if (this.moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);
