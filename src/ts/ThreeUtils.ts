@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2020-01-17 08:47:29 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 11:32:39
+ * @Last Modified time: 2020-01-17 11:35:47
  */
 
 import * as THREE from 'three';
@@ -47,7 +47,7 @@ export class ThreeUtils {
 
         camera.position.copy(direction.multiplyScalar(distance).add(boxCenter));
 
-        camera.near = 1;
+        camera.near = 0.1;
         camera.far = distance * 100;
 
         camera.updateProjectionMatrix();
