@@ -11,7 +11,7 @@ import '../css/product.css';
 import * as THREE from 'three';
 import { World } from './World';
 import { Utils } from './Utils';
-import { VirtualJoystick, ControlMapLayout } from './controls/VirtualJoystick';
+import { VirtualJoystick, VirtualJoystickLayout } from './controls/VirtualJoystick';
 import { MobileRotateControls } from './controls/MobileRotateControls';
 import { Product } from './Product';
 
@@ -88,7 +88,7 @@ export class Layout {
         this.setupCameraFov();
 
         if (Utils.isMobile()) {
-            VirtualJoystick.x().updateLayout(ControlMapLayout.Portrait);
+            VirtualJoystick.x().updateLayout(VirtualJoystickLayout.Portrait);
             MobileRotateControls.x().updateDirection(LayoutDirection.Vertical);
         }
     }
@@ -115,7 +115,7 @@ export class Layout {
         this.setupCameraFov();
 
         if (Utils.isMobile()) {
-            VirtualJoystick.x().updateLayout(ControlMapLayout.Landscape);
+            VirtualJoystick.x().updateLayout(VirtualJoystickLayout.Landscape);
             MobileRotateControls.x().updateDirection(LayoutDirection.Horizontal);
         }
     }
