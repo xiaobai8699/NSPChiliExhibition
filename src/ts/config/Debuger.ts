@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-26 13:50:04 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-17 14:09:59
+ * @Last Modified time: 2020-01-17 14:25:00
  */
 
 // https://github.com/mrdoob/stats.js
@@ -41,20 +41,17 @@ export class Debuger {
         this.stats.showPanel(0);
 
         if(this.enable) {
-
              document.body.appendChild(this.stats.dom);
-
         }
 
-        if(this.enable) {
+        if(this.enable && !Config.onlyShowDebuggerFps) {
 
           this.gui = new dat.GUI();
           this.lightFolder = this.gui.addFolder("Lights");
 
+          this.debugVideo();
+          this.debugCamera();
         }
-
-       // this.debugVideo();
-        this.debugCamera();
     }
 
     static x(): Debuger {
@@ -65,7 +62,7 @@ export class Debuger {
 
     debugAmbientLight = (light: THREE.AmbientLight) => {
 
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
 
@@ -104,7 +101,7 @@ export class Debuger {
 
     debugSpotLight = (spotLight: THREE.SpotLight, name:string) => {
 
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
 
@@ -202,7 +199,7 @@ export class Debuger {
 
     debugPointLight = (pointLight: THREE.PointLight, name:string) => {
 
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
 
@@ -302,7 +299,7 @@ export class Debuger {
 
     debugDirectionalLight= (directionalLight: THREE.DirectionalLight, name: string) => {
        
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
         
@@ -384,7 +381,7 @@ export class Debuger {
 
     debugVideo = ()=> {
 
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
 
@@ -415,7 +412,7 @@ export class Debuger {
 
     debugCamera = () => {
         
-        if(!this.enable) {
+        if(!this.enable || Config.onlyShowDebuggerFps) {
             return;
         }
         
