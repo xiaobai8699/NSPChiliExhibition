@@ -2,7 +2,7 @@
  * @Author: Li Hong (lh.work@qq.com) 
  * @Date: 2019-12-31 09:26:17 
  * @Last Modified by: Li Hong (lh.work@qq.com)
- * @Last Modified time: 2020-01-11 18:28:58
+ * @Last Modified time: 2020-01-17 14:33:24
  */
 
 //https://threejsfundamentals.org/threejs/lessons/threejs-textures.html
@@ -306,7 +306,7 @@ export class VisitorDownloader {
 
         mapArr.forEach((v,k)=>{
             VisitorDownloader.download(v,k,function(image:ImageBitmap, err:any){
-                console.log(`[VisitorDownloader]: ${k} finished`);
+                
                 if(image){
                     VisitorDownloader.memoryCache.set(k,image);
                     counter++;
