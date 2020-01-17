@@ -56,7 +56,7 @@ export class Layout {
         if(Utils.isPc()){
             this.vertical();
         }else {
-            Config.isLandscapeDispaly ? this.horizontal() : this.vertical();
+            Config.isLandscapeDisplay ? this.horizontal() : this.vertical();
         }
 
         const rotateButton: HTMLDivElement = document.querySelector("#rotate_button");
