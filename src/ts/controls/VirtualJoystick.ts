@@ -165,6 +165,8 @@ export class VirtualJoystick {
         }
 
         this.outputAngle = this.actualAngle;
+
+        //如果是竖屏，那么正前方应该是0度，但在单位圆内，正Y轴与单位圆的交点表示的角度为90度，所以这里需要减去90
         if(this.layout == VirtualJoystickLayout.Portrait){
             this.outputAngle -= 90;
         } 
