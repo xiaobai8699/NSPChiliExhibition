@@ -90,7 +90,8 @@ export class VirtualJoystick {
     moveLeft: boolean = false;
     moveRight: boolean = false;
 
-    angle: number = 0;
+    actualAngle: number = 0;
+    outputAngle: number = 0;
 
     onTouchMove = (e: TouchEvent) => {
 
@@ -142,28 +143,31 @@ export class VirtualJoystick {
 
         if (x > 0 && y > 0) {
 
-            this.angle = degree;
+            this.actualAngle = degree;
         }
 
         else if (x < 0 && y >= 0) {
 
-            this.angle = 180 - degree;
+            this.actualAngle = 180 - degree;
         }
 
         else if (x < 0 && y < 0) {
 
-            this.angle = 180 + degree;
+            this.actualAngle = 180 + degree;
         }
 
         else if (x >= 0 && y < 0) {
 
-            this.angle = 360 - degree;
+            this.actualAngle = 360 - degree;
         }
 
         else {
         }
 
-        console.log(`angle:${this.angle} x:${x} y: ${y}`);
+        this.outputAngle = this.actualAngle;
+        if(this.layout == VirtualJoystickLayout.Portrait){
+            this.outputAngle -= 90;
+        } 
         
         this.moveForward = false;
         this.moveBackward = false;
@@ -174,19 +178,19 @@ export class VirtualJoystick {
 
         let isLandscape = (this.layout == VirtualJoystickLayout.Landscape);
 
-        if (this.angle > 45 && this.angle < 135) {
+        if (this.actualAngle > 45 && this.actualAngle < 135) {
             isLandscape ? this.moveLeft = true : this.moveForward = true;
         }
 
-        else if (this.angle > 135 && this.angle < 225) {
+        else if (this.actualAngle > 135 && this.actualAngle < 225) {
             isLandscape ? this.moveBackward = true : this.moveLeft = true;
         }
 
-        else if (this.angle > 225 && this.angle < 315) {
+        else if (this.actualAngle > 225 && this.actualAngle < 315) {
            isLandscape ? this.moveRight = true : this.moveBackward = true;
         }
 
-        else if (this.angle > 315 || this.angle < 45) {
+        else if (this.actualAngle > 315 || this.actualAngle < 45) {
            isLandscape ? this.moveForward = true : this.moveRight = true;
         }
     }
@@ -206,7 +210,7 @@ export class VirtualJoystick {
     reset = () => {
 
         this.isDrag = false;
-        this.angle = 0;
+        this.actualAngle = 0;
         
         this.moveForward = false;
         this.moveBackward = false;
@@ -219,5 +223,9 @@ export class VirtualJoystick {
 
     isMoving = () => {
         return this.moveForward || this.moveLeft || this.moveRight || this.moveBackward;
+    }
+
+    show = () => {
+        this.map.style.visibility = "visible";
     }
 }
