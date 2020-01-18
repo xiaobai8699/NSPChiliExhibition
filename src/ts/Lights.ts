@@ -44,7 +44,7 @@ export class Lights {
 
         //电视灯光
         {
-            return;
+      
             var sLight = new THREE.SpotLight();
             sLight.color = new THREE.Color().setRGB(70 / 255, 70 / 255, 70 / 255);
             sLight.position.set(0.6, 5, -4);

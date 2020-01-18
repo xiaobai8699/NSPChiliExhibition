@@ -11,7 +11,8 @@
 
     static isDevelopmentMode = true;
 
-    static isLandscapeDisplay = true;
+    static isLandscapeDisplay = false;
     
-    static onlyShowDebuggerFps = true;
+    static onlyShowDebuggerFps = false;
+    
  }

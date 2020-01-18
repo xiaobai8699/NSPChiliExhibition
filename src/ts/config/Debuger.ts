@@ -49,8 +49,8 @@ export class Debuger {
           this.gui = new dat.GUI();
           this.lightFolder = this.gui.addFolder("Lights");
 
-          this.debugVideo();
           this.debugCamera();
+
         }
     }
 
@@ -379,34 +379,6 @@ export class Debuger {
 
     }
 
-    debugVideo = ()=> {
-
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
-
-        const video: HTMLVideoElement = document.querySelector("#video");
-        video.volume = 1.0;
-        video.muted = false;
-
-        const controls = {
-
-            play:function(){
-                Video.x().play();
-              
-            },
-
-            pause:function(){
-                Video.x().end();
-            }
-        }
-
-        const floder: dat.GUI = this.gui.addFolder("Video");
-        
-        floder.add(controls, "play");
-        floder.add(controls, "pause");
-
-    }
 
     cameraHelper: THREE.CameraHelper;;
 
@@ -482,6 +454,49 @@ export class Debuger {
       
     }
     
+    debugTransform = (object: THREE.Object3D) => {
+
+        const controls = {
+
+            px: object.position.x,
+            py: object.position.y,
+            pz: object.position.z,
+            rx: object.rotation.x,
+            ry: object.rotation.y,
+            rz: object.rotation.z,
+            sx: object.scale.x,
+            sy: object.scale.y,
+            sz: object.scale.z
+
+        };
+
+        const floder: dat.GUI = this.gui.addFolder("Transform");
+
+        floder.add(controls, "px",-50,50).onChange(e=>{
+            object.position.x = e;
+        });
+
+        floder.add(controls, "py",-50,50).onChange(e=>{
+            object.position.y = e;
+        });
+
+        floder.add(controls, "pz",-50,50).onChange(e=>{
+            object.position.z = e;
+        });
+
+        floder.add(controls, "rx",-360,360).onChange(e=>{
+            object.rotation.x = THREE.Math.degToRad(e);
+        });
+
+        floder.add(controls, "ry",-360,360).onChange(e=>{
+            object.rotation.y = THREE.Math.degToRad(e);
+        });
+
+        floder.add(controls, "rz",-360,360).onChange(e=>{
+            object.rotation.z = THREE.Math.degToRad(e);
+        });
+    }
+
     update = (delta: number) => {
 
         if(!this.enable) {

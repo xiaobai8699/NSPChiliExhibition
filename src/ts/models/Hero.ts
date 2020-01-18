@@ -9,7 +9,8 @@
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { World } from '../World';
 import { ThreeUtils } from '../utils/ThreeUtils';
-import { Box3, Vector3, Object3D } from 'three';
+import {Utils} from '../utils/Utils';
+import {Debuger} from '../config/Debuger';
 
 let heroInstance: Hero = null;
 
@@ -22,7 +23,19 @@ export class Hero {
 
     hero:THREE.Object3D;
 
+    constructor(){
+        this.hero = new THREE.Object3D();
+        this.hero.position.set(0,0,15);
+        World.x().scene.add(this.hero);
+
+        Debuger.x().debugTransform(this.hero);
+    }
+
     load = () => {
+
+        if(Utils.isPc()){
+            return;
+        }
 
         const self = this;
 
@@ -33,16 +46,8 @@ export class Hero {
             root.position.set(0, 0.2,0);
             root.rotateY(THREE.Math.degToRad(180));
 
-            const box = new THREE.Box3().setFromObject(root);
-            const size = box.getSize(new Vector3());
+            self.hero.add(root);
 
-            const o = new Object3D();
-            o.add(root);
-            o.position.set(0,0,15);
-            o.add(root);
-
-            World.x().scene.add(o);
-            self.hero = o;
         }
 
         const p = function (progress: ProgressEvent) {

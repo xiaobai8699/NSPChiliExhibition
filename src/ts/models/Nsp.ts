@@ -9,6 +9,7 @@ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { World } from '../World';
 import { ThreeUtils } from '../utils/ThreeUtils';
 import {Resource} from '../config/Resource';
+import {VirtualJoystick} from '../controls/VirtualJoystick';
 
 export class Nsp  {
 
@@ -24,7 +25,7 @@ export class Nsp  {
             success(gltf);
             // gltf.scene.visible = false;
             loading.style.display = "none";
-
+            VirtualJoystick.x().show();
         }
 
         const p = function (progress: any) {

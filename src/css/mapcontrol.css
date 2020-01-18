@@ -22,7 +22,7 @@
     /* https://developer.mozilla.org/zh-CN/docs/Web/CSS/visibility */
     /* https://css-tricks.com/forums/topic/is-display-none-the-right-way-to-hide-an-element/ */
     /* 不能使用display:none隐藏元素，这样会将元素从文档流中删除 */
-    /* visibility:hidden; */
+    visibility:hidden;
 }
 
 /* 横屏时方向盘的位置 */
