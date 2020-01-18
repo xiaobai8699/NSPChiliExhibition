@@ -60,11 +60,13 @@ export class Debuger {
     }
 
 
+    disableDataGUI = ()=>{
+        return (!this.enable || Config.onlyShowDebuggerFps);
+    }
+
     debugAmbientLight = (light: THREE.AmbientLight) => {
 
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
+        if(this.disableDataGUI()) return;
 
         const floder: dat.GUI = this.lightFolder.addFolder("AmbientLight");
         
@@ -101,9 +103,7 @@ export class Debuger {
 
     debugSpotLight = (spotLight: THREE.SpotLight, name:string) => {
 
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
+        if(this.disableDataGUI()) return;
 
         const self = this;
 
@@ -199,9 +199,7 @@ export class Debuger {
 
     debugPointLight = (pointLight: THREE.PointLight, name:string) => {
 
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
+        if(this.disableDataGUI()) return;
 
         const self = this;
 
@@ -299,9 +297,7 @@ export class Debuger {
 
     debugDirectionalLight= (directionalLight: THREE.DirectionalLight, name: string) => {
        
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
+        if(this.disableDataGUI()) return;
         
         const self = this;
 
@@ -384,9 +380,7 @@ export class Debuger {
 
     debugCamera = () => {
         
-        if(!this.enable || Config.onlyShowDebuggerFps) {
-            return;
-        }
+        if(this.disableDataGUI()) return;
         
         const controls = {
 
@@ -455,6 +449,8 @@ export class Debuger {
     }
     
     debugTransform = (object: THREE.Object3D) => {
+
+        if(this.disableDataGUI()) return;
 
         const controls = {
 
