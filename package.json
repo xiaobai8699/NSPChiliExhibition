@@ -2,7 +2,7 @@
   "name": "nspchiliexhibition",
   "version": "1.0.0",
   "description": "",
-  "main": "NSPApp.js",
+  "main": "app.ts",
   "scripts": {
     "build-test": "webpack --mode=development",
     "build-production": "webpack --mode=production",
