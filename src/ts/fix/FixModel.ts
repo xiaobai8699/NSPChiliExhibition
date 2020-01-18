@@ -17,7 +17,6 @@ export class FixModel {
 
     static do() {
 
-        return;
         const loader = new GLTFLoader();
 
         const dracoLoader = new DRACOLoader();

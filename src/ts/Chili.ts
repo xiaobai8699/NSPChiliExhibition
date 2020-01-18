@@ -67,7 +67,7 @@ export class Chili {
 
         this.rotatedBottles.forEach( (obj: THREE.Object3D) => {
 
-            obj.rotation.z += (delta*0.5)
+            obj.rotation.y += (delta*0.5)
        });
 
     }
