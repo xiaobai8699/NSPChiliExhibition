@@ -2,12 +2,16 @@ const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { MiniCssExtractPlugin } = require("mini-css-extract-plugin");
 
-var config = {
-  // mode: "development",
 
-  mode: "production",
+module.exports =  {
+  
+   mode: "development",
+
+  //mode: "production",
 
   entry: "./src/ts/App.ts",
+
+  devtool: "source-map",
 
   output: {
     filename: "app.js",
@@ -51,13 +55,4 @@ var config = {
 
     new CleanWebpackPlugin()
   ]
-};
-
-module.exports = (env, argv) => {
-  if (argv.mode == "development") {
-    // Enable sourcemaps for debugging webpack's output.
-    config.devtool = "source-map";
-  }
-
-  return config;
 };
