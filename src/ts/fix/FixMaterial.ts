@@ -84,11 +84,8 @@ people026A01`;
         if (obj.type == "Mesh") {
             const mesh: THREE.Mesh = <THREE.Mesh>obj;
             const mat: any = mesh.material;
-            if (mat) {
-                mat.transparent = true;
-                mat.side = THREE.FrontSide;
-                mat.depthTest = true;
-            }
+            mat.alphaTest = 0.5;
+            mat.metalness = 0.02;
         }
 
         obj.children.forEach(child => {
