@@ -117,14 +117,10 @@ export class Visitor {
         if (mesh) {
 
             const material = new THREE.MeshStandardMaterial({
-
                 map: texture,
-
-                transparent: true,
-
                 alphaTest: .5,
-
-                side: THREE.DoubleSide,
+                metalness:0.3,
+                // roughness:1.0
             });
 
             const size = Utils.getSize(mesh);
