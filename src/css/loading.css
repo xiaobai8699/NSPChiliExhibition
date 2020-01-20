@@ -11,11 +11,12 @@
 
 #pogress-out{
     position: relative;
-    width: 388px;
-    height: 448px;
-    background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/loading.jpg');
+    width: 331px;
+    height: 471px;
+    background-image: url('https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/others/nsp_logo_20200120.png');
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     padding: 0px;
 }
 
