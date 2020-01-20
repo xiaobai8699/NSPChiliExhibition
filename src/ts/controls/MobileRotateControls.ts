@@ -15,6 +15,7 @@ import * as THREE from 'three';
 import { IControls } from './IControls';
 import {LayoutDirection} from '../config/Layout';
 import {World} from '../World';
+import {Hero} from '../models/Hero';
 
 let mrcInstance: MobileRotateControls;
 
@@ -101,6 +102,7 @@ export class MobileRotateControls implements IControls {
             let distance = (this.direction == LayoutDirection.Horizontal ? this.yDistance : this.xDistance);
             const rad = THREE.Math.degToRad(distance * this.rotationSpeed);
             this.object.rotation.y = rad;
+            Hero.x().hero.rotation.y = rad;
         }
     }
 

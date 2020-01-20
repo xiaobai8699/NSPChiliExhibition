@@ -36,7 +36,6 @@ export class Video {
         if (Utils.isMobile()) {
             document.querySelector("#map-control").addEventListener("touchstart", this.touchPlay, false);
         }
-
     }
 
 
@@ -92,6 +91,8 @@ export class Video {
         if(this.notTouched){
             this.notTouched = false;
             this.play();
+            this.end();
+            console.log('Touch Play');
         }
     }
 
@@ -104,20 +105,20 @@ export class Video {
             return;
         }
 
-        if (this.video.paused) {
-            this.videoMesh.visible = true;
-            this.video.play();
-        }
+        this.videoMesh.visible = true;
+        this.video.play();
     }
 
 
     end = () => {
+        this.videoMesh.visible = false;
         this.video.pause();
+    }
 
-        // if (this.videoMesh) {
-        //     this.video.pause();
-        //     this.videoMesh.visible = false;
-        // }
+    update = (delta: number) => {
+
+       const distance = World.x().camera.position.distanceTo(this.videoMesh.position);
+       distance < 30 ? this.play() : this.end();
     }
 
     onKeyDown = (event: KeyboardEvent) => {

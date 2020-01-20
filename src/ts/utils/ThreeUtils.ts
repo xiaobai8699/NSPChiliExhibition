@@ -8,6 +8,7 @@
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { Vector3 } from 'three';
 
 export class ThreeUtils {
 
@@ -73,5 +74,15 @@ export class ThreeUtils {
             scene.add(new THREE.ArrowHelper(dirs[i], center, len, colors[i]));
         }
 
+    }
+
+
+    static addBoxBound(scene: THREE.Scene, target: THREE.Object3D) {
+
+        const box3 = new THREE.Box3().setFromObject(target);
+        const box3Helper = new THREE.Box3Helper(box3);
+        scene.add(box3Helper);
+
+        console.log(`size:${JSON.stringify(box3.getSize(new Vector3()))}`);
     }
 }

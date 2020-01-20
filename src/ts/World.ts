@@ -37,6 +37,7 @@ export class World {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
 
+        //(window as any).scene = this.scene;
     }
 
     initCamera = () => {

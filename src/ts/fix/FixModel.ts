@@ -6,12 +6,11 @@
  */
 
 import * as THREE from 'three';
-import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { World } from '../World';
-import { Utils } from '../utils/Utils';
-import { Vector3 } from 'three';
 import { Chili } from '../Chili';
+import {Resource} from '../config/Resource';
 
 export class FixModel {
 
@@ -25,7 +24,7 @@ export class FixModel {
 
         loader.load(
 
-            "./asset/model/chili_bottles.glb",
+            Resource.modelUrl("chili_bottles.glb"),
 
             glft => {
                 function fix(name: string) {
@@ -42,12 +41,13 @@ export class FixModel {
                         return;
                     }
 
-                    //newer.scale.set(0.01, 0.01, 0.01);
                     old.getWorldPosition(newer.position);
                     old.parent.add(newer);
                     old.parent.remove(old);
 
                     Chili.x().rotatedBottles.push(newer);
+
+                    FixModel.fixBlackBug();
                 }
 
                 const nameArr = ["64mmB016", "64mmA016", "64mmC016", "LJJ1", "LJJ2", "LJJ3", "LJJ4", "32mmC032", "32mmA032", "32mmB032"];
@@ -68,4 +68,14 @@ export class FixModel {
 
     }
 
+    //修复0.2版中新包装瓶顶部出现黑色块的bug
+    static fixBlackBug(){
+       ["LJJ3_1_instance_1","LJJ3_1_instance_0","LJJ2_1_instance_0"].forEach(function(name){
+        const mesh:THREE.Mesh = <THREE.Mesh>World.x().scene.getObjectByName(name);
+        if(mesh){
+            (mesh.material as any).metalness = 0.1;
+        }
+       }); 
+     
+    }
 }

@@ -9,10 +9,10 @@
 
  export class Config {
 
-    static isDevelopmentMode = true;
+    static isDevelopmentMode = false;
 
-    static isLandscapeDisplay = false;
+    static isLandscapeDisplay = true;
     
-    static onlyShowDebuggerFps = false;
+    static onlyShowDebuggerFps = true;
     
  }

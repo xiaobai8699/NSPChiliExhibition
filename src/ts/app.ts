@@ -14,18 +14,21 @@ import { LED } from './LED';
 import { Lights } from './Lights';
 import { Video } from './Video';
 import { World } from './World';
-import { Utils } from './utils/Utils';
 import { Audio } from './Audio';
 import { Visitor } from './Visitor';
-import { Resource } from './config/Resource';
 import { Debuger } from './config/Debuger';
 import { Chili } from './Chili';
 import { FixMaterial } from './fix/FixMaterial';
 import { FixModel } from './fix/FixModel';
 import { Layout } from './config/Layout';
 import { Hero } from './models/Hero';
-import { ThreeUtils } from './utils/ThreeUtils';
 import { Nsp as ModelNsp } from './models/Nsp';
+
+import {Scene as scene } from 'three';
+
+//https://github.com/jeromeetienne/threejs-inspector
+(window as any).scene= scene;
+window.THREE = THREE;
 
 class App {
 
@@ -73,7 +76,7 @@ class App {
             Controls.x().update(delta);
             Debuger.x().update(delta);
             Visitor.x().update(delta);
-
+            Video.x().update(delta);
         }
         Debuger.x().stats.end();
 

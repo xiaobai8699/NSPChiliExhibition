@@ -35,9 +35,8 @@
         <div id="product-container">
             <div id="product-page" class="product-page">
                 <canvas id="product-canvas" ></canvas>
-                <div id="product-intro">南山婆油辣椒🌶️ 新品上市 <span id="product-price"
-                        style="color:red;font-size: 25px;font-weight: bolder;">1元</span>抢购</div>
-                <div id="product-buy">来晚啦，活动已结束!</div>
+                <div id="product-intro">南山婆油辣椒🌶️ 新品上市</div>
+                <div id="product-buy">立即购买</div>
                 <img id="prodcut-close" class="close-btn"
                     src="https://3dapp.oss-cn-shenzhen.aliyuncs.com/NspChiliExhibition/image/product/close.png" />
             </div>
@@ -73,7 +72,6 @@
 
                 function buy(e) {
               
-                    return;
                     const name = buyBtn.getAttribute("nspname");
                     if (name == undefined) return;
                    
@@ -82,12 +80,12 @@
 
                     let url;
                     if (smallArr.indexOf(name) > -1) {
-                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f716beb63b7e82b888df&isSeckill=1";
+                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e1822dbbeb63b7e82b88a1b";
 
                     }
 
                     else if (largeArr.indexOf(name) > -1) {
-                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e16f65cbeb63b7e82b888dd&isSeckill=1";
+                        url = "/pages/goods/goodsDetail/goodsDetail?id=5e1abedbee3896212a112854";
 
                     }
 

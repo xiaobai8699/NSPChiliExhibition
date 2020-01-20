@@ -161,10 +161,10 @@ export class PcControls implements IControls {
             // this.object.rotation.x = THREE.Math.degToRad(this.yDelta);
         }
         
-        // let isCollision = Collision.x().detect(this.moveForward, this.moveBackward, this.moveLeft, this.moveRight);
-        // if (isCollision) {
-        //     return;
-        // }
+        let isCollision = Collision.x().detect(this.moveForward, this.moveBackward, this.moveLeft, this.moveRight);
+        if (isCollision) {
+            return;
+        }
 
         if (this.moveForward) {
             this.object.translateZ(-this.moveSpeed * delta);

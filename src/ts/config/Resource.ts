@@ -19,7 +19,10 @@ export class Resource {
 
     static readonly logoUrl: string = `${Resource.osspath}image/others/nsplog.png`;
 
-    static readonly modelUrl: string = `${Resource.osspath}model/nsp.glb`;
+
+    static modelUrl(name: string): string {
+        return `${Resource.osspath}model/${name}`
+    }
 
     static staticVisitorUrl(name: string): string {
 
@@ -27,7 +30,6 @@ export class Resource {
         
     }
     
-
     static dynamicVisitorUrl(name: string) {
 
         return `${this.osspath}image/visitor/dynamic/bigsize/${name}.png`;

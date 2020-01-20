@@ -18,14 +18,11 @@
 
 import * as THREE from 'three';
 import { IControls } from './IControls';
-import { VirtualJoystick, VirtualJoystickLayout } from './VirtualJoystick';
-import { World } from '../World';
+import { VirtualJoystick } from './VirtualJoystick';
 import { Collision } from './Collision';
-import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
-import { Vector3 } from 'three';
-import {Config} from '../config/Config';
 import {Hero} from '../models/Hero';
 import {CameraFollow} from './CameraFollow';
+import { World } from '../World';
 
 export class MobileMoveControls implements IControls {
 
@@ -40,7 +37,7 @@ export class MobileMoveControls implements IControls {
         this.domElement = domElement;
         this.object = object;
 
-        CameraFollow.x().set(this.object, Hero.x().hero);
+        // CameraFollow.x().set(this.object, Hero.x().hero);
     }
 
 
@@ -61,10 +58,25 @@ export class MobileMoveControls implements IControls {
             return;
         }
 
-        Hero.x().hero.rotation.y = THREE.Math.degToRad(VirtualJoystick.x().outputAngle);
-        Hero.x().hero.translateZ(-this.moveSpeed * delta);
+        // Hero.x().hero.rotation.y = THREE.Math.degToRad(VirtualJoystick.x().outputAngle);
+        // Hero.x().hero.translateZ(-this.moveSpeed * delta);
+        // CameraFollow.x().update();
 
-        CameraFollow.x().update();
+        if (VirtualJoystick.x().moveForward) {
+            this.object.translateZ(-this.moveSpeed * delta);
+        }
+
+        if (VirtualJoystick.x().moveBackward) {
+            this.object.translateZ(this.moveSpeed * delta);
+        }
+
+        if (VirtualJoystick.x().moveLeft) {
+                 this.object.translateX(-this.moveSpeed * delta);
+        }
+
+        if (VirtualJoystick.x().moveRight) {
+                 this.object.translateX(this.moveSpeed * delta);
+        }
     }
 
     dispose = () => {

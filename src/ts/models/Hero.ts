@@ -5,7 +5,7 @@
  * @Last Modified time: 2020-01-17 17:53:27
  */
 
- import * as THREE from 'three';
+import * as THREE from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { World } from '../World';
 import { ThreeUtils } from '../utils/ThreeUtils';
@@ -32,7 +32,8 @@ export class Hero {
     }
 
     load = () => {
-
+     
+        return;
         if(Utils.isPc()){
             return;
         }
@@ -42,12 +43,14 @@ export class Hero {
         const c = function (gltf: GLTF) {
 
             const root = gltf.scene;
-            root.scale.multiplyScalar(0.008);
+           // root.scale.multiplyScalar(0.008);
             root.position.set(0, 0.2,0);
-            root.rotateY(THREE.Math.degToRad(180));
+           // root.rotateY(THREE.Math.degToRad(180));
 
             self.hero.add(root);
 
+            // ThreeUtils.addBoxBound(World.x().scene, root);
+            // ThreeUtils.cameraPositionToFit(World.x().camera,root);
         }
 
         const p = function (progress: ProgressEvent) {
@@ -59,7 +62,7 @@ export class Hero {
 
         }
 
-        const name = './asset/model/sheep/scene.gltf';
+        const name = './asset/model/dwarf/scene.gltf';
         ThreeUtils.loadModel(name, { c, p, e });
 
     }

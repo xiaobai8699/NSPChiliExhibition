@@ -36,8 +36,8 @@ export class Chili {
         this.nameArr.forEach((name) => {
 
             const object: any = World.x().scene.getObjectByName(name);
-            if(object){
-                 this.rotatedBottles.push(object);
+            if (object) {
+                this.rotatedBottles.push(object);
             }
 
         });
@@ -53,7 +53,7 @@ export class Chili {
                 if (o.material.name == "pingshenA" || o.material.name == "32mmD_glass") {
 
                     o.material.transparent = true;
-                     o.material.opacity = 0.6;
+                    o.material.opacity = 0.6;
                     o.material.side = THREE.FrontSide;
                     o.material.stencilWrite = true;
                 }
@@ -61,14 +61,16 @@ export class Chili {
         });
     }
 
-    
+
     // 旋转辣椒瓶
     update = (delta: number) => {
 
-        this.rotatedBottles.forEach( (obj: THREE.Object3D) => {
+        //等待新瓶子模型加载替换旧瓶子后在转
+        if (this.rotatedBottles.length > 7) {
 
-            obj.rotation.y += (delta*0.5)
-       });
-
+            this.rotatedBottles.forEach((obj: THREE.Object3D) => {
+                obj.rotation.y += (delta * 0.5)
+            });
+        }
     }
 }

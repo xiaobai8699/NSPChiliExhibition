@@ -47,7 +47,6 @@ export class Pickup {
         return pickupInstance;
     }
 
-    pickedObject: THREE.Object3D | any;
 
     pick = (normalizedPosition: THREE.Vector2) => {
 
@@ -60,17 +59,19 @@ export class Pickup {
 
         if (intersectedObjects.length > 0) {
 
-            this.pickedObject = intersectedObjects[0];
+            const intersectedObject = intersectedObjects[0];
 
-            const obj: any = this.pickedObject.object;
+            const obj: any = intersectedObject.object;
 
             const name = obj.parent.name ? obj.parent.name : obj.name;
 
-            if (this.pickedObject.distance < 20) {
+            if (intersectedObject.distance < 20) {
                 Product.x().show(name);
                 Kepu.x().show(name);
             }
-            console.log(`[Pickup] name:${name} distance:${this.pickedObject.distance}`);
+
+            console.log(`[Pickup] name:${obj.name} type:${obj.type} distance:${intersectedObject.distance}`);
+
         }
     }
 

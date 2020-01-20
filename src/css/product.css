@@ -55,9 +55,9 @@
 #product-buy{
     min-height: 10%;;
     width: 100%;
-    /* background-color: rgb(171, 0, 15); */
-    /* font-size: 22px; */
-    background-color: gray;
+    background-color: rgb(171, 0, 15); 
+    font-size: 22px;
+    /* background-color: gray; */
     font-size: 16px;
     display: flex;
     align-items: center;

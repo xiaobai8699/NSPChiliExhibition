@@ -12,8 +12,8 @@ import * as dat from 'dat.gui';
 import * as Stats from 'stats.js';
 import * as THREE from 'three';
 import {World} from '../World';
-import {Video} from '../Video';
 import {Config} from './Config';
+
 
 let debugerInstance: Debuger = null;
 
