@@ -25,3 +25,7 @@
 本项目使用typescript作为开发语言，下面是如何在vscode中配置使用typescript的链接
 - [配置webpack使用TypeScript](https://www.tslang.cn/docs/handbook/react-&-webpack.html)
 - [TypeScript教程](https://www.tslang.cn/docs/home.html)
+
+# Three.js Inspector
+[Three.js Inspector 谷歌浏览器插件下载](https://chrome.google.com/webstore/detail/threejs-inspector/dnhjfclbfhcbcdfpjaeacomhbdfjbebi)
+[Three.js Inspector github仓库] (https://github.com/jeromeetienne/threejs-inspector)
