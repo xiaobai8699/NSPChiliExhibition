@@ -15,7 +15,7 @@ export class Resource {
 
     static readonly audioUrl: string = `${Resource.osspath}audio/plws.mp3`;
 
-    static readonly videoUrl: string = `./asset/video/nsp.mp4`; //注意：video标签会存在跨域播放的问题，视频须放在我们自己的服务器上
+    static readonly videoUrl: string = `${Resource.osspath}video/nsp_2020.01.20.mp4`; //注意：video标签会存在跨域播放的问题，视频须放在我们自己的服务器上
 
     static readonly logoUrl: string = `${Resource.osspath}image/others/nsplog.png`;
 

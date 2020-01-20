@@ -118,7 +118,13 @@ export class Video {
     update = (delta: number) => {
 
        const distance = World.x().camera.position.distanceTo(this.videoMesh.position);
-       distance < 30 ? this.play() : this.end();
+       if(distance < 30){
+           if(this.video.paused){
+               this.play();
+           }
+       }else {
+           this.end();
+       }
     }
 
     onKeyDown = (event: KeyboardEvent) => {
